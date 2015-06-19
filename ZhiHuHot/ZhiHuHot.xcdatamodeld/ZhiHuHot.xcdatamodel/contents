@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7701" systemVersion="14D136" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Date" representedClassName="Date" syncable="YES">
+        <attribute name="date" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="stories" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Story" inverseName="date" inverseEntity="Story" syncable="YES"/>
+        <relationship name="topStories" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TopStories" inverseName="tDate" inverseEntity="TopStories" syncable="YES"/>
+    </entity>
+    <entity name="Story" representedClassName="Story" syncable="YES">
+        <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="images" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="isRead" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="date" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Date" inverseName="stories" inverseEntity="Date" syncable="YES"/>
+    </entity>
+    <entity name="Theme" representedClassName="Theme" syncable="YES">
+        <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="thumbnail" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="themStories" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ThemeStory" inverseName="them" inverseEntity="ThemeStory" syncable="YES"/>
+    </entity>
+    <entity name="ThemeStory" representedClassName="ThemeStory" syncable="YES">
+        <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="images" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="isRead" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="them" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Theme" inverseName="themStories" inverseEntity="Theme" syncable="YES"/>
+    </entity>
+    <entity name="TopStories" syncable="YES">
+        <attribute name="date" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="image" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="tDate" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Date" inverseName="topStories" inverseEntity="Date" spotlightIndexingEnabled="YES" storedInTruthFile="YES" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Date" positionX="-171" positionY="-153" width="128" height="88"/>
+        <element name="Story" positionX="25" positionY="-63" width="128" height="118"/>
+        <element name="Theme" positionX="-209" positionY="90" width="128" height="103"/>
+        <element name="ThemeStory" positionX="18" positionY="84" width="128" height="118"/>
+        <element name="TopStories" positionX="16" positionY="-234" width="128" height="118"/>
+    </elements>
+</model>
