@@ -29,6 +29,7 @@
 		EAC288571B30459700390CFB /* ZhiHuHotTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EAC288561B30459700390CFB /* ZhiHuHotTests.m */; };
 		EADD2F0F1B33D56E0087C1CA /* NetClient.m in Sources */ = {isa = PBXBuildFile; fileRef = EADD2F0E1B33D56E0087C1CA /* NetClient.m */; };
 		EADD2F161B3417F40087C1CA /* AppHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = EADD2F151B3417F40087C1CA /* AppHelper.m */; };
+		EAFD51CF1B392F9B007307BE /* ListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EAFD51CE1B392F9B007307BE /* ListTableViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,6 +84,8 @@
 		EADD2F141B3417F40087C1CA /* AppHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppHelper.h; sourceTree = "<group>"; };
 		EADD2F151B3417F40087C1CA /* AppHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppHelper.m; sourceTree = "<group>"; };
 		EADD2F171B34191C0087C1CA /* Definitions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Definitions.h; sourceTree = "<group>"; };
+		EAFD51CD1B392F9B007307BE /* ListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListTableViewCell.h; sourceTree = "<group>"; };
+		EAFD51CE1B392F9B007307BE /* ListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListTableViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,6 +151,8 @@
 				EAA74F101B31BC4400EE9360 /* SubjectTableViewController.m */,
 				EA43A7001B369F7900FF3FF0 /* DailyTableSectionHeader.h */,
 				EA43A7011B369F7900FF3FF0 /* DailyTableSectionHeader.m */,
+				EAFD51CD1B392F9B007307BE /* ListTableViewCell.h */,
+				EAFD51CE1B392F9B007307BE /* ListTableViewCell.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -377,6 +382,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EAFD51CF1B392F9B007307BE /* ListTableViewCell.m in Sources */,
 				EAC288401B30459600390CFB /* ZhiHuHot.xcdatamodeld in Sources */,
 				EAC2883D1B30459600390CFB /* AppDelegate.m in Sources */,
 				EADD2F161B3417F40087C1CA /* AppHelper.m in Sources */,

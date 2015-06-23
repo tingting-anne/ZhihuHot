@@ -16,6 +16,7 @@
 #import "ContentViewController.h"
 #import "Definitions.h"
 #import "NetClient.h"
+#import "ListTableViewCell.h"
 
 @interface SubjectTableViewController ()
 
@@ -164,12 +165,18 @@
     ThemeStory *themeStory = [self.fetchedResultsController objectAtIndexPath:indexPath];
     NSString *imageURL = themeStory.images;
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"themeStoryCell" forIndexPath:indexPath];
+    ListTableViewCell* cell = nil;
     
     if (imageURL) {
+        
+        cell = [tableView dequeueReusableCellWithIdentifier:@"hasImageThemeCell" forIndexPath:indexPath];
+        
         [cell.imageView sd_setImageWithURL:[NSURL URLWithString:imageURL] placeholderImage:[UIImage imageNamed:@"placeholder"]];
     }
-    cell.textLabel.text = themeStory.title;
+    else{
+        cell = [tableView dequeueReusableCellWithIdentifier:@"themeCell" forIndexPath:indexPath];
+    }
+    cell.label.text = themeStory.title;
     
     return cell;
 }

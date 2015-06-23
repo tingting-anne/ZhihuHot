@@ -16,6 +16,7 @@
 #import "ContentViewController.h"
 #import "Definitions.h"
 #import "NetClient.h"
+#import "ListTableViewCell.h"
 
 #define HEIGHT_OF_SECTION_HEADER 30.0f
 
@@ -210,13 +211,18 @@
     
     Story *story = [self.fetchedResultsController objectAtIndexPath:indexPath];
     NSString *imageURL = story.images;
-    
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"storyCell" forIndexPath:indexPath];
+    ListTableViewCell *cell = nil;
     
     if (imageURL) {
+        
+        cell = [tableView dequeueReusableCellWithIdentifier:@"hasImageStoryCell" forIndexPath:indexPath];
+        
         [cell.imageView sd_setImageWithURL:[NSURL URLWithString:imageURL] placeholderImage:[UIImage imageNamed:@"placeholder"]];
     }
-    cell.textLabel.text = story.title;
+    else{
+        cell = [tableView dequeueReusableCellWithIdentifier:@"storyCell" forIndexPath:indexPath];
+    }
+    cell.label.text = story.title;
     
 //    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"storyCell" forIndexPath:indexPath];
 //    cell.textLabel.text = @"111";
