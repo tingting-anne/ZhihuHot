@@ -10,10 +10,14 @@
 #import "NetClient.h"
 #import "ContentHeaderView.h"
 #import <SDWebImage/UIImageView+WebCache.h>
+#import "LinkViewController.h"
 
 @interface ContentViewController()
-
+{
+    BOOL isFirstLoad;
+}
 @property(strong,nonatomic)NetClient* netClient;
+@property(strong,nonatomic)LinkViewController* linkViewController;
 
 -(void)loadDailyWebViewPart:(NSDictionary*) dic;
 -(void)loadThemeWebViewPart:(NSDictionary*) dic;
@@ -24,13 +28,15 @@
 
 -(void)awakeFromNib
 {
-    self.webView.delegate = self;
-    self.activity.hidesWhenStopped = YES;
     self.netClient = [[NetClient alloc] initWithManagedObjectContext:nil];
+    isFirstLoad = TRUE;
 }
 
 - (void)viewDidLoad{
     [super viewDidLoad];
+    
+    self.webView.delegate = self;//放在awakeFromNib中没有调用成功
+    self.activity.hidesWhenStopped = YES;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -65,8 +71,10 @@
     ContentHeaderView *headerView = [nibArray firstObject];
     
     // Setup header view
-    CGRect headerFrame = CGRectMake(self.webView.frame.origin.x, self.webView.frame.origin.y, self.webView.frame.size.width, 220);
+    CGRect headerFrame = CGRectMake(0, 0, self.webView.frame.size.width, 220);
     headerView.frame = headerFrame;
+    NSLog(@"%lf, %lf, %lf, %lf", self.view.frame.origin.x, self.view.frame.origin.y,
+          self.view.frame.size.width, self.view.frame.size.height);
     
     [headerView.imageView sd_setImageWithURL:[NSURL URLWithString:dic[@"image"]] placeholderImage:[UIImage imageNamed:@"placeholder"]];
     
@@ -77,12 +85,23 @@
 
 -(void)loadThemeWebViewPart:(NSDictionary *)dic
 {
-    
 }
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
-    return TRUE;
+    BOOL ret = TRUE;
+    if (isFirstLoad) {
+        isFirstLoad = FALSE;
+    }
+    else{
+        ret = FALSE;
+        
+        self.linkViewController = [[LinkViewController alloc] init];
+        self.linkViewController.url = request.URL;
+        
+        [self.navigationController pushViewController:self.linkViewController animated:YES];
+    }
+    return ret;
 }
 
 -(void)webViewDidStartLoad:(UIWebView *)webView

@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface LinkViewController : UIViewController
+@interface LinkViewController : UIViewController<UIWebViewDelegate>
+
+@property (weak, nonatomic) IBOutlet UIWebView *webView;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activity;
+@property (weak, nonatomic) NSURL* url;
 
 @end

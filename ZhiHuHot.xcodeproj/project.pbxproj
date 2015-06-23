@@ -32,6 +32,8 @@
 		EAFD51CF1B392F9B007307BE /* ListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EAFD51CE1B392F9B007307BE /* ListTableViewCell.m */; };
 		EAFD51D61B396D31007307BE /* ContentHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EAFD51D51B396D31007307BE /* ContentHeaderView.xib */; };
 		EAFD51D91B396D59007307BE /* ContentHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = EAFD51D81B396D59007307BE /* ContentHeaderView.m */; };
+		EAFD51DD1B39A6F1007307BE /* LinkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EAFD51DB1B39A6F1007307BE /* LinkViewController.m */; };
+		EAFD51DE1B39A6F1007307BE /* LinkViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EAFD51DC1B39A6F1007307BE /* LinkViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -91,6 +93,9 @@
 		EAFD51D51B396D31007307BE /* ContentHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContentHeaderView.xib; sourceTree = "<group>"; };
 		EAFD51D71B396D59007307BE /* ContentHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentHeaderView.h; sourceTree = "<group>"; };
 		EAFD51D81B396D59007307BE /* ContentHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContentHeaderView.m; sourceTree = "<group>"; };
+		EAFD51DA1B39A6F1007307BE /* LinkViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LinkViewController.h; sourceTree = "<group>"; };
+		EAFD51DB1B39A6F1007307BE /* LinkViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LinkViewController.m; sourceTree = "<group>"; };
+		EAFD51DC1B39A6F1007307BE /* LinkViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LinkViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -160,6 +165,8 @@
 				EAFD51CE1B392F9B007307BE /* ListTableViewCell.m */,
 				EAFD51D71B396D59007307BE /* ContentHeaderView.h */,
 				EAFD51D81B396D59007307BE /* ContentHeaderView.m */,
+				EAFD51DA1B39A6F1007307BE /* LinkViewController.h */,
+				EAFD51DB1B39A6F1007307BE /* LinkViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -193,6 +200,7 @@
 				EAC2883B1B30459600390CFB /* AppDelegate.h */,
 				EAC2883C1B30459600390CFB /* AppDelegate.m */,
 				EAC288471B30459700390CFB /* Images.xcassets */,
+				EAFD51DC1B39A6F1007307BE /* LinkViewController.xib */,
 				EAC288491B30459700390CFB /* LaunchScreen.xib */,
 				EAA74F0A1B31B9B300EE9360 /* Main.storyboard */,
 				EA43A6FE1B369A2700FF3FF0 /* DailyTableSectionHeader.xib */,
@@ -337,6 +345,7 @@
 			files = (
 				EAA74F0B1B31B9B300EE9360 /* Main.storyboard in Resources */,
 				EA43A6FF1B369A2700FF3FF0 /* DailyTableSectionHeader.xib in Resources */,
+				EAFD51DE1B39A6F1007307BE /* LinkViewController.xib in Resources */,
 				EAC2884B1B30459700390CFB /* LaunchScreen.xib in Resources */,
 				EABE31901B38FC730004BB69 /* Doc in Resources */,
 				EAC288481B30459700390CFB /* Images.xcassets in Resources */,
@@ -398,6 +407,7 @@
 				EA29D72F1B3315F2002DCCAF /* ThemeStory.m in Sources */,
 				EA29D7261B3315F1002DCCAF /* Story.m in Sources */,
 				EADD2F0F1B33D56E0087C1CA /* NetClient.m in Sources */,
+				EAFD51DD1B39A6F1007307BE /* LinkViewController.m in Sources */,
 				EA29D72C1B3315F2002DCCAF /* Theme.m in Sources */,
 				EAA74EFD1B31AF0D00EE9360 /* ContentViewController.m in Sources */,
 				EA29D7291B3315F2002DCCAF /* Date.m in Sources */,

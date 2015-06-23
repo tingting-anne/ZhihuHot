@@ -274,10 +274,10 @@
             </objects>
             <point key="canvasLocation" x="177" y="-318"/>
         </scene>
-        <!--内容-->
+        <!--Content View Controller-->
         <scene sceneID="wJ0-GW-I52">
             <objects>
-                <viewController title="内容" id="dyQ-Ef-3q2" customClass="ContentViewController" sceneMemberID="viewController">
+                <viewController id="dyQ-Ef-3q2" customClass="ContentViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="6MR-1u-wYX"/>
                         <viewControllerLayoutGuide type="bottom" id="0FH-ho-bld"/>
@@ -290,7 +290,7 @@
                                 <rect key="frame" x="290" y="322" width="20" height="20"/>
                             </activityIndicatorView>
                             <webView contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="osy-rY-80U">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="617"/>
+                                <rect key="frame" x="0.0" y="64" width="600" height="553"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </webView>
                         </subviews>
@@ -298,16 +298,15 @@
                         <constraints>
                             <constraint firstAttribute="centerX" secondItem="qgt-Wf-uw6" secondAttribute="centerX" id="PEb-Ld-sCX"/>
                             <constraint firstAttribute="trailing" secondItem="osy-rY-80U" secondAttribute="trailing" id="SV3-oC-wKP"/>
+                            <constraint firstItem="osy-rY-80U" firstAttribute="top" secondItem="a1Q-no-0PK" secondAttribute="top" constant="64" id="bLj-XU-Wqi"/>
                             <constraint firstAttribute="bottom" secondItem="osy-rY-80U" secondAttribute="bottom" id="cr0-jY-HmR"/>
                             <constraint firstAttribute="centerY" secondItem="osy-rY-80U" secondAttribute="centerY" id="iAX-xK-WI8"/>
-                            <constraint firstItem="osy-rY-80U" firstAttribute="top" secondItem="a1Q-no-0PK" secondAttribute="top" id="iKD-cu-7ND"/>
                             <constraint firstAttribute="centerX" secondItem="osy-rY-80U" secondAttribute="centerX" id="n5R-dk-EJW"/>
                             <constraint firstItem="osy-rY-80U" firstAttribute="leading" secondItem="a1Q-no-0PK" secondAttribute="leading" id="pUQ-il-Ybp"/>
                             <constraint firstAttribute="centerY" secondItem="qgt-Wf-uw6" secondAttribute="centerY" id="xRr-w6-KiL"/>
                         </constraints>
                     </view>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" id="dSf-hQ-5pX"/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
                     <connections>
                         <outlet property="activity" destination="qgt-Wf-uw6" id="xYy-lf-Ufz"/>
@@ -324,6 +323,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="nmB-XB-NcZ"/>
-        <segue reference="dWF-6J-WXD"/>
+        <segue reference="WlD-Bd-4y2"/>
     </inferredMetricsTieBreakers>
 </document>
