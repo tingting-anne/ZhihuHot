@@ -7,12 +7,75 @@
 //
 
 #import "DailyTableViewController.h"
+#import "AppDelegate.h"
+#import "AppHelper.h"
+#import "SWRevealViewController.h"
+#import "Story.h"
+#import <SDWebImage/UIImageView+WebCache.h>
+#import "DailyTableSectionHeader.h"
+#import "ContentViewController.h"
+#import "Definitions.h"
+#import "NetClient.h"
+
+#define HEIGHT_OF_SECTION_HEADER 30.0f
 
 @interface DailyTableViewController ()
+
+@property(strong,nonatomic)NSFetchedResultsController* fetchedResultsController;
+@property(strong,nonatomic)NSManagedObjectContext* managedObjectContext;
+@property(strong,nonatomic)NetClient* netClient;
+
+-(NSString *)headerStringFormateWithDate:(NSString *)dateString;
+-(void)updateLatestStories;
 
 @end
 
 @implementation DailyTableViewController
+
+-(void)awakeFromNib
+{
+    [super awakeFromNib];
+    
+    AppDelegate * appDelegate = [[UIApplication sharedApplication] delegate];
+    self.managedObjectContext = [appDelegate managedObjectContext];
+    
+    [self updateLatestStories];
+    
+    NSError *error;
+    BOOL success = [self.fetchedResultsController performFetch:&error];
+    if (!success){
+        NSLog(@"[%@ %@] performFetch: failed", NSStringFromClass([self class]), NSStringFromSelector(_cmd));
+    }
+    if (error) {
+        NSLog(@"[%@ %@] %@ (%@)", NSStringFromClass([self class]), NSStringFromSelector(_cmd), [error localizedDescription], [error localizedFailureReason]);
+    }
+    [self.tableView reloadData];
+}
+
+- (void)setManagedObjectContext:(NSManagedObjectContext *)managedObjectContext {
+    
+    _managedObjectContext = managedObjectContext;
+    self.netClient = [[NetClient alloc] initWithManagedObjectContext:self.managedObjectContext];
+    
+    if (_managedObjectContext == nil) {
+        NSLog(@"%s error managedObjectContext is nil", __FUNCTION__);
+        
+        self.fetchedResultsController = nil;
+    }
+    else
+    {
+        NSFetchRequest* request = [[NSFetchRequest alloc] init];
+        NSEntityDescription* entityDescription = [NSEntityDescription entityForName:@"Story" inManagedObjectContext:self.managedObjectContext];
+        [request setEntity:entityDescription];
+        
+        NSSortDescriptor *sortDescription = [[NSSortDescriptor alloc] initWithKey:@"id" ascending:NO];
+        [request setSortDescriptors:@[sortDescription]];
+        
+        self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:self.managedObjectContext sectionNameKeyPath:@"date.date" cacheName:nil];
+        
+        self.fetchedResultsController.delegate = self;
+    }
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -22,6 +85,12 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+//    self.menuBarButtonItem.target = self.revealViewController;//SWRevealViewController
+//    self.menuBarButtonItem.action = @selector(revealToggle:);
+    
+    //[self.view addGestureRecognizer:self.revealViewController.panGestureRecognizer];
+    //[self.view addGestureRecognizer:self.revealViewController.tapGestureRecognizer];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -29,29 +98,131 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - Table view data source
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    if(self.revealViewController){
+        self.menuBarButtonItem.target = self.revealViewController;//SWRevealViewController
+        self.menuBarButtonItem.action = @selector(revealToggle:);
+        
+        [self.view addGestureRecognizer:self.revealViewController.panGestureRecognizer];
+        [self.view addGestureRecognizer:self.revealViewController.tapGestureRecognizer];
+    }
+}
+
+
+-(void)updateLatestStories
+{
+    static NSDate* preDate = nil;
+    
+    NSTimeInterval interval = 0.0;
+    if(preDate == nil){
+        preDate = [NSDate date];
+        //interval = UPDATECONTENTINTERVAL;
+    }
+    else{
+        NSDate* current = [NSDate date];
+        interval = [current timeIntervalSinceDate:preDate];
+        preDate = current;
+    }
+    
+    if (interval >= UPDATECONTENTINTERVAL) {
+        [self.netClient downloadLatestStories];
+    }
+}
+
+-(NSString *)headerStringFormateWithDate:(NSString *)dateString
+{
+    if ([[AppHelper shareAppHelper] isValidDateString:dateString]) {
+        if ([[AppHelper shareAppHelper] isTodayWithDateString:dateString]) {
+            return @"今日";
+        }
+        
+        static NSDateFormatter *dateFormatter = nil;
+        
+        if (!dateFormatter)
+        {
+            dateFormatter = [[NSDateFormatter alloc] init];
+            dateFormatter.dateStyle = NSDateFormatterFullStyle;
+            dateFormatter.dateFormat = @"yyyyMMdd";
+            NSDate *date = [dateFormatter dateFromString:dateString];
+            
+            NSString *dateComponent = @"MMMd EEEE";
+            NSString *dateFormat = [NSDateFormatter dateFormatFromTemplate:dateComponent options:0 locale:[NSLocale currentLocale]];
+            [dateFormatter setDateFormat:dateFormat];
+            
+            return [dateFormatter stringFromDate:date];
+        }
+    }
+    return nil;
+}
+
+#pragma mark -Table view delegate
+
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    if (section == 0) {
+        return 0.0f;
+    }
+    else{
+        return HEIGHT_OF_SECTION_HEADER;
+    }
+        
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    if (section == 0) {
+        return nil;
+    }
+    
+    CGRect headerRect = {{0,0}, {self.tableView.frame.size.width, HEIGHT_OF_SECTION_HEADER}};
+    
+    NSArray *bundleSource = [[NSBundle mainBundle] loadNibNamed:@"DailyTableSectionHeader" owner:self options:nil];
+    DailyTableSectionHeader *sectionHeaderView = [bundleSource firstObject];
+    sectionHeaderView.frame = headerRect;
+    
+    NSString *dateString = [[[self.fetchedResultsController sections] objectAtIndex:section] name];
+    NSString *headerString = [self headerStringFormateWithDate:dateString];
+    sectionHeaderView.headerString.text = headerString;
+    
+    return sectionHeaderView;
+}
+
+#pragma mark - Table view data source delegate
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Potentially incomplete method implementation.
-    // Return the number of sections.
-    return 0;
+   return [[self.fetchedResultsController sections] count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete method implementation.
-    // Return the number of rows in the section.
-    return 0;
+    
+    NSInteger rows = 0;
+    if ([[self.fetchedResultsController sections] count] > 0) {
+        id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:section];
+        rows = [sectionInfo numberOfObjects];
+    }
+    return rows;
 }
 
-/*
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    // Configure the cell...
+    Story *story = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    NSString *imageURL = story.images;
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"storyCell" forIndexPath:indexPath];
+    
+    if (imageURL) {
+        [cell.imageView sd_setImageWithURL:[NSURL URLWithString:imageURL] placeholderImage:[UIImage imageNamed:@"placeholder"]];
+    }
+    cell.textLabel.text = story.title;
+    
+//    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"storyCell" forIndexPath:indexPath];
+//    cell.textLabel.text = @"111";
     
     return cell;
 }
-*/
 
 /*
 // Override to support conditional editing of the table view.
@@ -87,14 +258,79 @@
 }
 */
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    ContentViewController *contentViewController = segue.destinationViewController;
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
+    
+    Story *story = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    contentViewController.newsID = story.id;
 }
-*/
+
+#pragma mark - NSFetchedResultsControllerDelegate
+
+- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller
+{
+    [self.tableView beginUpdates];
+}
+
+- (void)controller:(NSFetchedResultsController *)controller
+  didChangeSection:(id <NSFetchedResultsSectionInfo>)sectionInfo
+           atIndex:(NSUInteger)sectionIndex
+     forChangeType:(NSFetchedResultsChangeType)type
+{
+    switch(type)
+    {
+        case NSFetchedResultsChangeInsert:
+            [self.tableView insertSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+            
+        case NSFetchedResultsChangeDelete:
+            [self.tableView deleteSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+        case NSFetchedResultsChangeMove:
+            [self.tableView deleteSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
+            [self.tableView insertSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+        case NSFetchedResultsChangeUpdate:
+            [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+    }
+}
+
+- (void)controller:(NSFetchedResultsController *)controller
+   didChangeObject:(id)anObject
+       atIndexPath:(NSIndexPath *)indexPath
+     forChangeType:(NSFetchedResultsChangeType)type
+      newIndexPath:(NSIndexPath *)newIndexPath
+{
+    switch(type)
+    {
+        case NSFetchedResultsChangeInsert:
+            [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+            
+        case NSFetchedResultsChangeDelete:
+            [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+            
+        case NSFetchedResultsChangeUpdate:
+            [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+            
+        case NSFetchedResultsChangeMove:
+            [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+    }
+}
+
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
+{
+    [self.tableView endUpdates];
+}
 
 @end

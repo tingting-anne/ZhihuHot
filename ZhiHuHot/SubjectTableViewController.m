@@ -7,12 +7,105 @@
 //
 
 #import "SubjectTableViewController.h"
+#import "AppDelegate.h"
+#import "AppHelper.h"
+#import "SWRevealViewController.h"
+#import "Theme.h"
+#import "ThemeStory.h"
+#import <SDWebImage/UIImageView+WebCache.h>
+#import "ContentViewController.h"
+#import "Definitions.h"
+#import "NetClient.h"
 
 @interface SubjectTableViewController ()
+
+@property(strong,nonatomic)NSFetchedResultsController* fetchedResultsController;
+@property(strong,nonatomic)NSManagedObjectContext* managedObjectContext;
+@property(strong, nonatomic)NetClient* netClient;
+
+-(void)updateThemeStories;
 
 @end
 
 @implementation SubjectTableViewController
+
+-(void)awakeFromNib
+{
+    [super awakeFromNib];
+    
+    AppDelegate * appDelegate = [[UIApplication sharedApplication] delegate];
+    self.managedObjectContext = [appDelegate managedObjectContext];
+    
+    self.netClient = [[NetClient alloc] initWithManagedObjectContext:self.managedObjectContext];
+}
+
+-(void)setThemeID:(NSNumber*)themeID
+{
+    _themeID = themeID;
+    
+    [self updateThemeStories];
+    
+    NSFetchRequest* request = [[NSFetchRequest alloc] init];
+    NSEntityDescription* entityDescription = [NSEntityDescription entityForName:@"ThemeStory" inManagedObjectContext:self.managedObjectContext];
+    [request setEntity:entityDescription];
+    
+    NSPredicate* predicate = [NSPredicate predicateWithFormat:[NSString stringWithFormat: @"them.id = %@", self.themeID]];
+    [request setPredicate:predicate];
+    
+    NSSortDescriptor *sortDescription = [[NSSortDescriptor alloc] initWithKey:@"id" ascending:NO];
+    [request setSortDescriptors:@[sortDescription]];
+    
+    self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:self.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
+    
+    self.fetchedResultsController.delegate = self;
+    
+    NSError *error;
+    BOOL success = [self.fetchedResultsController performFetch:&error];
+    if (!success) NSLog(@"[%@ %@] performFetch: failed", NSStringFromClass([self class]), NSStringFromSelector(_cmd));
+    if (error) {
+        NSLog(@"[%@ %@] %@ (%@)", NSStringFromClass([self class]), NSStringFromSelector(_cmd), [error localizedDescription], [error localizedFailureReason]);
+    }
+    [self.tableView reloadData];
+}
+
+-(void)updateThemeStories
+{
+    static NSMutableDictionary* themeUpdateDate = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        themeUpdateDate = [[NSMutableDictionary alloc] init];
+    });
+
+    NSTimeInterval interval = 0.0;
+    NSDate* preDate = [themeUpdateDate objectForKey:self.themeID];
+    
+    if(preDate == nil){
+        [themeUpdateDate setObject:[NSDate date] forKey:self.themeID];
+        interval = UPDATECONTENTINTERVAL;
+    }
+    else{
+        NSDate* current = [NSDate date];
+        interval = [current timeIntervalSinceDate:preDate];
+        preDate = current;
+    }
+    
+    if (interval >= UPDATECONTENTINTERVAL) {
+        [self.netClient downloadThemeStoriesWithThemeID:[self.themeID unsignedLongLongValue]];
+    }
+    
+}
+
+- (void)setManagedObjectContext:(NSManagedObjectContext *)managedObjectContext {
+    
+    _managedObjectContext = managedObjectContext;
+    
+    if (_managedObjectContext == nil) {
+        NSLog(@"%s error managedObjectContext is nil", __FUNCTION__);
+        
+        self.fetchedResultsController = nil;
+        abort();
+    }
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -22,6 +115,15 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+//    self.menuBarButtonItem.target = self.revealViewController;//SWRevealViewController
+//    self.menuBarButtonItem.action = @selector(revealToggle:);
+//
+//    
+//    if(self.revealViewController)
+//    {
+//        [self.view addGestureRecognizer:self.revealViewController.panGestureRecognizer];
+//    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -29,29 +131,48 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    if(self.revealViewController)
+    {
+        self.menuBarButtonItem.target = self.revealViewController;//SWRevealViewController
+        self.menuBarButtonItem.action = @selector(revealToggle:);
+
+        [self.view addGestureRecognizer:self.revealViewController.panGestureRecognizer];
+    }    
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Potentially incomplete method implementation.
-    // Return the number of sections.
-    return 0;
+    return [[self.fetchedResultsController sections] count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete method implementation.
-    // Return the number of rows in the section.
-    return 0;
+    NSInteger rows = 0;
+    if ([[self.fetchedResultsController sections] count] > 0) {
+        id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:section];
+        rows = [sectionInfo numberOfObjects];
+    }
+    return rows;
 }
 
-/*
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
     
-    // Configure the cell...
+    ThemeStory *themeStory = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    NSString *imageURL = themeStory.images;
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"themeStoryCell" forIndexPath:indexPath];
+    
+    if (imageURL) {
+        [cell.imageView sd_setImageWithURL:[NSURL URLWithString:imageURL] placeholderImage:[UIImage imageNamed:@"placeholder"]];
+    }
+    cell.textLabel.text = themeStory.title;
     
     return cell;
 }
-*/
 
 /*
 // Override to support conditional editing of the table view.
@@ -87,14 +208,78 @@
 }
 */
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    ContentViewController *contentViewController = segue.destinationViewController;
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
+    
+    ThemeStory *themeStory = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    contentViewController.newsID = themeStory.id;
 }
-*/
 
+#pragma mark - NSFetchedResultsControllerDelegate
+
+- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller
+{
+    [self.tableView beginUpdates];
+}
+
+- (void)controller:(NSFetchedResultsController *)controller
+  didChangeSection:(id <NSFetchedResultsSectionInfo>)sectionInfo
+           atIndex:(NSUInteger)sectionIndex
+     forChangeType:(NSFetchedResultsChangeType)type
+{
+    switch(type)
+    {
+        case NSFetchedResultsChangeInsert:
+            [self.tableView insertSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+            
+        case NSFetchedResultsChangeDelete:
+            [self.tableView deleteSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+        case NSFetchedResultsChangeMove:
+            [self.tableView deleteSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
+            [self.tableView insertSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+        case NSFetchedResultsChangeUpdate:
+            [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+    }
+}
+
+- (void)controller:(NSFetchedResultsController *)controller
+   didChangeObject:(id)anObject
+       atIndexPath:(NSIndexPath *)indexPath
+     forChangeType:(NSFetchedResultsChangeType)type
+      newIndexPath:(NSIndexPath *)newIndexPath
+{
+    switch(type)
+    {
+        case NSFetchedResultsChangeInsert:
+            [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+            
+        case NSFetchedResultsChangeDelete:
+            [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+            
+        case NSFetchedResultsChangeUpdate:
+            [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+            
+        case NSFetchedResultsChangeMove:
+            [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+    }
+}
+
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
+{
+    [self.tableView endUpdates];
+}
 @end

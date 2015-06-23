@@ -10,4 +10,6 @@
 
 @interface DailyTableSectionHeader : UIView
 
+@property (weak, nonatomic) IBOutlet UILabel *headerString;
+
 @end

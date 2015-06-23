@@ -13,11 +13,14 @@
 		EA29D7291B3315F2002DCCAF /* Date.m in Sources */ = {isa = PBXBuildFile; fileRef = EA29D7281B3315F2002DCCAF /* Date.m */; };
 		EA29D72C1B3315F2002DCCAF /* Theme.m in Sources */ = {isa = PBXBuildFile; fileRef = EA29D72B1B3315F2002DCCAF /* Theme.m */; };
 		EA29D72F1B3315F2002DCCAF /* ThemeStory.m in Sources */ = {isa = PBXBuildFile; fileRef = EA29D72E1B3315F2002DCCAF /* ThemeStory.m */; };
+		EA43A6FF1B369A2700FF3FF0 /* DailyTableSectionHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA43A6FE1B369A2700FF3FF0 /* DailyTableSectionHeader.xib */; };
+		EA43A7021B369F7900FF3FF0 /* DailyTableSectionHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = EA43A7011B369F7900FF3FF0 /* DailyTableSectionHeader.m */; };
 		EAA74EF41B31A7E100EE9360 /* MenuTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EAA74EF31B31A7E100EE9360 /* MenuTableViewController.m */; };
 		EAA74EFD1B31AF0D00EE9360 /* ContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EAA74EFC1B31AF0D00EE9360 /* ContentViewController.m */; };
 		EAA74F0B1B31B9B300EE9360 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EAA74F0A1B31B9B300EE9360 /* Main.storyboard */; };
 		EAA74F0E1B31BC1300EE9360 /* DailyTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EAA74F0D1B31BC1300EE9360 /* DailyTableViewController.m */; };
 		EAA74F111B31BC4400EE9360 /* SubjectTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EAA74F101B31BC4400EE9360 /* SubjectTableViewController.m */; };
+		EABE31901B38FC730004BB69 /* Doc in Resources */ = {isa = PBXBuildFile; fileRef = EABE318F1B38FC730004BB69 /* Doc */; };
 		EAC2883A1B30459600390CFB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EAC288391B30459600390CFB /* main.m */; };
 		EAC2883D1B30459600390CFB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EAC2883C1B30459600390CFB /* AppDelegate.m */; };
 		EAC288401B30459600390CFB /* ZhiHuHot.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = EAC2883E1B30459600390CFB /* ZhiHuHot.xcdatamodeld */; };
@@ -51,6 +54,9 @@
 		EA29D72B1B3315F2002DCCAF /* Theme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Theme.m; sourceTree = "<group>"; };
 		EA29D72D1B3315F2002DCCAF /* ThemeStory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThemeStory.h; sourceTree = "<group>"; };
 		EA29D72E1B3315F2002DCCAF /* ThemeStory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThemeStory.m; sourceTree = "<group>"; };
+		EA43A6FE1B369A2700FF3FF0 /* DailyTableSectionHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DailyTableSectionHeader.xib; sourceTree = "<group>"; };
+		EA43A7001B369F7900FF3FF0 /* DailyTableSectionHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DailyTableSectionHeader.h; sourceTree = "<group>"; };
+		EA43A7011B369F7900FF3FF0 /* DailyTableSectionHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DailyTableSectionHeader.m; sourceTree = "<group>"; };
 		EAA74EF21B31A7E100EE9360 /* MenuTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuTableViewController.h; sourceTree = "<group>"; };
 		EAA74EF31B31A7E100EE9360 /* MenuTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuTableViewController.m; sourceTree = "<group>"; };
 		EAA74EFB1B31AF0D00EE9360 /* ContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentViewController.h; sourceTree = "<group>"; };
@@ -60,6 +66,7 @@
 		EAA74F0D1B31BC1300EE9360 /* DailyTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DailyTableViewController.m; sourceTree = "<group>"; };
 		EAA74F0F1B31BC4400EE9360 /* SubjectTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubjectTableViewController.h; sourceTree = "<group>"; };
 		EAA74F101B31BC4400EE9360 /* SubjectTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubjectTableViewController.m; sourceTree = "<group>"; };
+		EABE318F1B38FC730004BB69 /* Doc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Doc; sourceTree = "<group>"; };
 		EAC288341B30459600390CFB /* ZhiHuHot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZhiHuHot.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EAC288381B30459600390CFB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EAC288391B30459600390CFB /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -139,6 +146,8 @@
 				EAA74F0D1B31BC1300EE9360 /* DailyTableViewController.m */,
 				EAA74F0F1B31BC4400EE9360 /* SubjectTableViewController.h */,
 				EAA74F101B31BC4400EE9360 /* SubjectTableViewController.m */,
+				EA43A7001B369F7900FF3FF0 /* DailyTableSectionHeader.h */,
+				EA43A7011B369F7900FF3FF0 /* DailyTableSectionHeader.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -146,6 +155,7 @@
 		EAC2882B1B30459600390CFB = {
 			isa = PBXGroup;
 			children = (
+				EABE318F1B38FC730004BB69 /* Doc */,
 				EAC288361B30459600390CFB /* ZhiHuHot */,
 				EAC288531B30459700390CFB /* ZhiHuHotTests */,
 				EAC288351B30459600390CFB /* Products */,
@@ -173,6 +183,7 @@
 				EAC288471B30459700390CFB /* Images.xcassets */,
 				EAC288491B30459700390CFB /* LaunchScreen.xib */,
 				EAA74F0A1B31B9B300EE9360 /* Main.storyboard */,
+				EA43A6FE1B369A2700FF3FF0 /* DailyTableSectionHeader.xib */,
 				EAC288371B30459600390CFB /* Supporting Files */,
 			);
 			path = ZhiHuHot;
@@ -312,7 +323,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				EAA74F0B1B31B9B300EE9360 /* Main.storyboard in Resources */,
+				EA43A6FF1B369A2700FF3FF0 /* DailyTableSectionHeader.xib in Resources */,
 				EAC2884B1B30459700390CFB /* LaunchScreen.xib in Resources */,
+				EABE31901B38FC730004BB69 /* Doc in Resources */,
 				EAC288481B30459700390CFB /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -375,6 +388,7 @@
 				EA29D7291B3315F2002DCCAF /* Date.m in Sources */,
 				EAC2883A1B30459600390CFB /* main.m in Sources */,
 				EAA74EF41B31A7E100EE9360 /* MenuTableViewController.m in Sources */,
+				EA43A7021B369F7900FF3FF0 /* DailyTableSectionHeader.m in Sources */,
 				EAA74F111B31BC4400EE9360 /* SubjectTableViewController.m in Sources */,
 				EAA74F0E1B31BC1300EE9360 /* DailyTableViewController.m in Sources */,
 			);
@@ -495,6 +509,8 @@
 			baseConfigurationReference = 602AD774374D7FD2A394DF34 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Wei Feng Hou (W5X736XVC4)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Wei Feng Hou (W5X736XVC4)";
 				INFOPLIST_FILE = ZhiHuHot/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -507,6 +523,7 @@
 			baseConfigurationReference = D2DB723098B3D2807A3403B1 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Wei Feng Hou (W5X736XVC4)";
 				INFOPLIST_FILE = ZhiHuHot/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";

@@ -11,7 +11,7 @@
 
 @interface NetClient : NSObject
 
-@property(readonly, retain)NSManagedObjectContext* context;
+@property(readonly, strong, nonatomic)NSManagedObjectContext* context;
 
 - (id)initWithManagedObjectContext:(NSManagedObjectContext*)context;
 
@@ -19,5 +19,6 @@
 - (BOOL)downloadBeforeDate:(NSString *)dateString;
 - (BOOL)downloadThemes;
 - (BOOL)downloadThemeStoriesWithThemeID:(NSUInteger)themeID;
+- (BOOL)downloadNewsDictionary:(NSDictionary **)dic WithNewsID:(NSUInteger)newsID;
 
 @end

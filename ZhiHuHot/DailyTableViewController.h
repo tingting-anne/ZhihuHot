@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreData/CoreData.h>
 
-@interface DailyTableViewController : UITableViewController
+@interface DailyTableViewController : UITableViewController<NSFetchedResultsControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *menuBarButtonItem;
 

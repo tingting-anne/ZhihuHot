@@ -13,5 +13,7 @@
 #define BEFORESTORIES       "http://news.at.zhihu.com/api/4/news/before/%@"
 #define THEMES              "http://news-at.zhihu.com/api/4/themes"
 #define THEMESTORIES        "http://news-at.zhihu.com/api/4/theme/%@"
+#define NEWSCONTENT         "http://news-at.zhihu.com/api/4/news/%@"
 
+#define UPDATECONTENTINTERVAL   10*60
 #endif

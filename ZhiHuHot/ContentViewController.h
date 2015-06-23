@@ -8,8 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ContentViewController : UIViewController
+@interface ContentViewController : UIViewController<UIWebViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIWebView *webView;
+@property (strong, nonatomic)NSNumber* newsID;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activity;
 
 @end

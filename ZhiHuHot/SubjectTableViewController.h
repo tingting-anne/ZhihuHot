@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreData/CoreData.h>
 
-@interface SubjectTableViewController : UITableViewController
+@interface SubjectTableViewController : UITableViewController<NSFetchedResultsControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *menuBarButtonItem;
+@property (strong, nonatomic) NSNumber* themeID;
 
 @end

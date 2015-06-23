@@ -33,8 +33,6 @@
 
 -(BOOL)getAndSaveStoriesWithUrl:(NSString *)urlString
 {
-    __block BOOL ret = FALSE;
-    
     AFHTTPSessionManager *smanager = [AFHTTPSessionManager manager];
     smanager.responseSerializer = [AFHTTPResponseSerializer serializer]; //告诉manager只下载原始数据, 不要解析数据
     NSDictionary *dict = @{@"format": @"json"};
@@ -49,15 +47,15 @@
             NSError *saveError = nil;
             [Story loadFromArray:storiesArray withDate:dateString intoManagedObjectContext:self.context];
             [self.context save:&saveError];
-            if (!saveError) {
-                ret = TRUE;
+            if (saveError) {
+                NSLog(@"%s context save error, error:%@",__FUNCTION__,saveError);
             }
         }];
     }failure:^(NSURLSessionDataTask *task, NSError *error) {
         NSLog(@"%s %@",__FUNCTION__,error);
     }];
     
-    return ret;
+    return TRUE;
 }
 
 - (BOOL)downloadLatestStories
@@ -80,7 +78,6 @@
 - (BOOL)downloadThemes
 {
     NSString *urlString = [NSString stringWithFormat:@"%s", THEMES];
-    __block BOOL ret = FALSE;
     
     AFHTTPSessionManager *smanager = [AFHTTPSessionManager manager];
     smanager.responseSerializer = [AFHTTPResponseSerializer serializer]; //告诉manager只下载原始数据, 不要解析数据
@@ -95,28 +92,29 @@
             NSError *saveError = nil;
             [Theme loadFromArray:themeArray intoManagedObjectContext:self.context];
             [self.context save:&saveError];
-            if (!saveError) {
-                ret = TRUE;
+            if (saveError) {
+                NSLog(@"%s context save error, error:%@",__FUNCTION__,saveError);
             }
         }];
     }failure:^(NSURLSessionDataTask *task, NSError *error) {
         NSLog(@"%s %@",__FUNCTION__,error);
     }];
     
-    return ret;
+    return TRUE;
 }
 
 - (BOOL)downloadThemeStoriesWithThemeID:(NSUInteger)themeID
 {
     NSString *urlString = [NSString stringWithFormat:[NSString stringWithFormat:@"%s", THEMESTORIES],
                            [NSNumber numberWithUnsignedLong:themeID]];
-    __block BOOL ret = FALSE;
     
     AFHTTPSessionManager *smanager = [AFHTTPSessionManager manager];
     smanager.responseSerializer = [AFHTTPResponseSerializer serializer]; //告诉manager只下载原始数据, 不要解析数据
     NSDictionary *dict = @{@"format": @"json"};
     [smanager GET:urlString parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
-        
+#ifdef DEBUG
+        NSLog(@"%s netclient ok", __FUNCTION__);
+#endif
         NSData *data = responseObject;
         NSDictionary* themeStoriesDictionary = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
         NSArray *themeStoriesArray = themeStoriesDictionary[@"stories"];
@@ -124,15 +122,38 @@
             NSError *saveError = nil;
             [ThemeStory loadFromArray:themeStoriesArray withThemeID:themeID intoManagedObjectContext:self.context];
             [self.context save:&saveError];
-            if (!saveError) {
-                ret = TRUE;
+            if (saveError) {
+                NSLog(@"%s context save error, error:%@",__FUNCTION__,saveError);
             }
+#ifdef DEBUG
+            else{
+                NSLog(@"netclient save ok");
+            }
+#endif
         }];
     }failure:^(NSURLSessionDataTask *task, NSError *error) {
         NSLog(@"%s %@",__FUNCTION__,error);
     }];
     
-    return ret;
+    return TRUE;
+}
+
+- (BOOL)downloadNewsDictionary:(NSDictionary **)dic WithNewsID:(NSUInteger)newsID
+{
+    NSString *urlString = [NSString stringWithFormat:[NSString stringWithFormat:@"%s", NEWSCONTENT],[NSNumber numberWithUnsignedLong:newsID]];
+    
+    AFHTTPSessionManager *smanager = [AFHTTPSessionManager manager];
+    smanager.responseSerializer = [AFHTTPResponseSerializer serializer]; //告诉manager只下载原始数据, 不要解析数据
+    NSDictionary *dict = @{@"format": @"json"};
+    [smanager GET:urlString parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
+        
+        NSData *data = responseObject;
+        *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+    }failure:^(NSURLSessionDataTask *task, NSError *error) {
+        NSLog(@"%s %@",__FUNCTION__,error);
+    }];
+    
+    return TRUE;
 }
 
 @end

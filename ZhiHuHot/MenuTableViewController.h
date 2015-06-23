@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreData/CoreData.h>
 
-@interface MenuTableViewController : UITableViewController
+@interface MenuTableViewController : UITableViewController<NSFetchedResultsControllerDelegate>
 
 @end
