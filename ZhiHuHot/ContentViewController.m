@@ -8,6 +8,17 @@
 
 #import "ContentViewController.h"
 #import "NetClient.h"
+#import "ContentHeaderView.h"
+#import <SDWebImage/UIImageView+WebCache.h>
+
+@interface ContentViewController()
+
+@property(strong,nonatomic)NetClient* netClient;
+
+-(void)loadDailyWebViewPart:(NSDictionary*) dic;
+-(void)loadThemeWebViewPart:(NSDictionary*) dic;
+
+@end
 
 @implementation ContentViewController
 
@@ -15,6 +26,7 @@
 {
     self.webView.delegate = self;
     self.activity.hidesWhenStopped = YES;
+    self.netClient = [[NetClient alloc] initWithManagedObjectContext:nil];
 }
 
 - (void)viewDidLoad{
@@ -28,11 +40,44 @@
 
 -(void)setNewsID:(NSNumber *)newsID
 {
-    NetClient* netClient = [[NetClient alloc] initWithManagedObjectContext:nil];
-    NSDictionary* dicInfo;
-    [netClient downloadNewsDictionary:&dicInfo WithNewsID:[newsID unsignedIntegerValue]];
-    NSString* css = dicInfo[@"css"][0];
-    [self.webView loadHTMLString:css baseURL:nil];
+    [self.activity startAnimating];
+    [self.netClient downloadWithNewsID:[newsID unsignedIntegerValue] success:^(NSDictionary* dic){
+        
+        NSString *htmlString = [NSString stringWithFormat:@"<html><head><link rel=\"stylesheet\" type=\"text/css\" href=%@ /></head><body>%@</body></html>", dic[@"css"][0], dic[@"body"]];
+        
+        [self.webView loadHTMLString:htmlString baseURL:nil];
+        
+        if (DAILY_STORY_CONTENT == self.contentType) {
+            [self loadDailyWebViewPart:dic];
+        }
+        else{
+            [self loadThemeWebViewPart:dic];
+        }
+        
+        [self.activity stopAnimating];
+        self.activity.hidden = YES;
+    }];
+}
+
+-(void)loadDailyWebViewPart:(NSDictionary *)dic
+{
+    NSArray *nibArray = [[NSBundle mainBundle] loadNibNamed:@"ContentHeaderView" owner:self options:nil];
+    ContentHeaderView *headerView = [nibArray firstObject];
+    
+    // Setup header view
+    CGRect headerFrame = CGRectMake(self.webView.frame.origin.x, self.webView.frame.origin.y, self.webView.frame.size.width, 220);
+    headerView.frame = headerFrame;
+    
+    [headerView.imageView sd_setImageWithURL:[NSURL URLWithString:dic[@"image"]] placeholderImage:[UIImage imageNamed:@"placeholder"]];
+    
+    headerView.titleLable.text = dic[@"title"];
+    headerView.imageSourceLabel.text = dic[@"image_source"];
+    [self.webView.scrollView addSubview:headerView];
+}
+
+-(void)loadThemeWebViewPart:(NSDictionary *)dic
+{
+    
 }
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType

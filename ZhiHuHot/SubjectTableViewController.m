@@ -171,12 +171,12 @@
         
         cell = [tableView dequeueReusableCellWithIdentifier:@"hasImageThemeCell" forIndexPath:indexPath];
         
-        [cell.imageView sd_setImageWithURL:[NSURL URLWithString:imageURL] placeholderImage:[UIImage imageNamed:@"placeholder"]];
+        [cell.customImageView sd_setImageWithURL:[NSURL URLWithString:imageURL] placeholderImage:[UIImage imageNamed:@"placeholder"]];
     }
     else{
         cell = [tableView dequeueReusableCellWithIdentifier:@"themeCell" forIndexPath:indexPath];
     }
-    cell.label.text = themeStory.title;
+    cell.customeLabel.text = themeStory.title;
     
     return cell;
 }
@@ -224,6 +224,7 @@
     NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
     
     ThemeStory *themeStory = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    contentViewController.contentType = THEME_STORY_CONTENT;
     contentViewController.newsID = themeStory.id;
 }
 

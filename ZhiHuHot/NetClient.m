@@ -138,7 +138,8 @@
     return TRUE;
 }
 
-- (BOOL)downloadNewsDictionary:(NSDictionary **)dic WithNewsID:(NSUInteger)newsID
+- (BOOL)downloadWithNewsID:(NSUInteger)newsID
+                   success:(void (^)(NSDictionary* dic))success
 {
     NSString *urlString = [NSString stringWithFormat:[NSString stringWithFormat:@"%s", NEWSCONTENT],[NSNumber numberWithUnsignedLong:newsID]];
     
@@ -148,7 +149,9 @@
     [smanager GET:urlString parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
         
         NSData *data = responseObject;
-        *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+        NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+        
+        success(dic);
     }failure:^(NSURLSessionDataTask *task, NSError *error) {
         NSLog(@"%s %@",__FUNCTION__,error);
     }];

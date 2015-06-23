@@ -15,5 +15,11 @@
 #define THEMESTORIES        "http://news-at.zhihu.com/api/4/theme/%@"
 #define NEWSCONTENT         "http://news-at.zhihu.com/api/4/news/%@"
 
-#define UPDATECONTENTINTERVAL   10*60
+#define UPDATECONTENTINTERVAL   10*60 //更新间隔
+
+typedef enum CONTENTTYPE{
+    DAILY_STORY_CONTENT,
+    THEME_STORY_CONTENT,
+}CONTENTTYPE;
+
 #endif

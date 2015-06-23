@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ContentHeaderViewController : UIViewController
+@interface ContentHeaderView : UIView
+
+@property (weak, nonatomic) IBOutlet UIImageView *imageView;
+@property (weak, nonatomic) IBOutlet UILabel *titleLable;
+@property (weak, nonatomic) IBOutlet UILabel *imageSourceLabel;
 
 @end

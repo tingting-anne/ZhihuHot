@@ -7,11 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Definitions.h"
 
 @interface ContentViewController : UIViewController<UIWebViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIWebView *webView;
 @property (strong, nonatomic)NSNumber* newsID;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activity;
+@property (nonatomic)CONTENTTYPE contentType;
 
 @end

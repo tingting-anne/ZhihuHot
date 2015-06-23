@@ -30,6 +30,8 @@
 		EADD2F0F1B33D56E0087C1CA /* NetClient.m in Sources */ = {isa = PBXBuildFile; fileRef = EADD2F0E1B33D56E0087C1CA /* NetClient.m */; };
 		EADD2F161B3417F40087C1CA /* AppHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = EADD2F151B3417F40087C1CA /* AppHelper.m */; };
 		EAFD51CF1B392F9B007307BE /* ListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EAFD51CE1B392F9B007307BE /* ListTableViewCell.m */; };
+		EAFD51D61B396D31007307BE /* ContentHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EAFD51D51B396D31007307BE /* ContentHeaderView.xib */; };
+		EAFD51D91B396D59007307BE /* ContentHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = EAFD51D81B396D59007307BE /* ContentHeaderView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -86,6 +88,9 @@
 		EADD2F171B34191C0087C1CA /* Definitions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Definitions.h; sourceTree = "<group>"; };
 		EAFD51CD1B392F9B007307BE /* ListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListTableViewCell.h; sourceTree = "<group>"; };
 		EAFD51CE1B392F9B007307BE /* ListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListTableViewCell.m; sourceTree = "<group>"; };
+		EAFD51D51B396D31007307BE /* ContentHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContentHeaderView.xib; sourceTree = "<group>"; };
+		EAFD51D71B396D59007307BE /* ContentHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentHeaderView.h; sourceTree = "<group>"; };
+		EAFD51D81B396D59007307BE /* ContentHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContentHeaderView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -153,6 +158,8 @@
 				EA43A7011B369F7900FF3FF0 /* DailyTableSectionHeader.m */,
 				EAFD51CD1B392F9B007307BE /* ListTableViewCell.h */,
 				EAFD51CE1B392F9B007307BE /* ListTableViewCell.m */,
+				EAFD51D71B396D59007307BE /* ContentHeaderView.h */,
+				EAFD51D81B396D59007307BE /* ContentHeaderView.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -189,6 +196,7 @@
 				EAC288491B30459700390CFB /* LaunchScreen.xib */,
 				EAA74F0A1B31B9B300EE9360 /* Main.storyboard */,
 				EA43A6FE1B369A2700FF3FF0 /* DailyTableSectionHeader.xib */,
+				EAFD51D51B396D31007307BE /* ContentHeaderView.xib */,
 				EAC288371B30459600390CFB /* Supporting Files */,
 			);
 			path = ZhiHuHot;
@@ -332,6 +340,7 @@
 				EAC2884B1B30459700390CFB /* LaunchScreen.xib in Resources */,
 				EABE31901B38FC730004BB69 /* Doc in Resources */,
 				EAC288481B30459700390CFB /* Images.xcassets in Resources */,
+				EAFD51D61B396D31007307BE /* ContentHeaderView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -393,6 +402,7 @@
 				EAA74EFD1B31AF0D00EE9360 /* ContentViewController.m in Sources */,
 				EA29D7291B3315F2002DCCAF /* Date.m in Sources */,
 				EAC2883A1B30459600390CFB /* main.m in Sources */,
+				EAFD51D91B396D59007307BE /* ContentHeaderView.m in Sources */,
 				EAA74EF41B31A7E100EE9360 /* MenuTableViewController.m in Sources */,
 				EA43A7021B369F7900FF3FF0 /* DailyTableSectionHeader.m in Sources */,
 				EAA74F111B31BC4400EE9360 /* SubjectTableViewController.m in Sources */,

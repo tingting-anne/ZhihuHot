@@ -19,6 +19,8 @@
 - (BOOL)downloadBeforeDate:(NSString *)dateString;
 - (BOOL)downloadThemes;
 - (BOOL)downloadThemeStoriesWithThemeID:(NSUInteger)themeID;
-- (BOOL)downloadNewsDictionary:(NSDictionary **)dic WithNewsID:(NSUInteger)newsID;
+
+- (BOOL)downloadWithNewsID:(NSUInteger)newsID
+                   success:(void (^)(NSDictionary* dic))success;
 
 @end

@@ -217,12 +217,12 @@
         
         cell = [tableView dequeueReusableCellWithIdentifier:@"hasImageStoryCell" forIndexPath:indexPath];
         
-        [cell.imageView sd_setImageWithURL:[NSURL URLWithString:imageURL] placeholderImage:[UIImage imageNamed:@"placeholder"]];
+        [cell.customImageView sd_setImageWithURL:[NSURL URLWithString:imageURL] placeholderImage:[UIImage imageNamed:@"placeholder"]];
     }
     else{
         cell = [tableView dequeueReusableCellWithIdentifier:@"storyCell" forIndexPath:indexPath];
     }
-    cell.label.text = story.title;
+    cell.customeLabel.text = story.title;
     
 //    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"storyCell" forIndexPath:indexPath];
 //    cell.textLabel.text = @"111";
@@ -269,11 +269,18 @@
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    ContentViewController *contentViewController = segue.destinationViewController;
-    NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
     
-    Story *story = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    contentViewController.newsID = story.id;
+    if ([segue.destinationViewController isKindOfClass:[ContentViewController class]]) {
+        ContentViewController *contentViewController = segue.destinationViewController;
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
+        
+        Story *story = [self.fetchedResultsController objectAtIndexPath:indexPath];
+        contentViewController.contentType = DAILY_STORY_CONTENT;
+        contentViewController.newsID = story.id;
+    }
+    else{
+        NSLog(@"%s error", __FUNCTION__);
+    }
 }
 
 #pragma mark - NSFetchedResultsControllerDelegate

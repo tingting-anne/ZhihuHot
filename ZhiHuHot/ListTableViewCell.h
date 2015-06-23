@@ -10,7 +10,8 @@
 
 @interface ListTableViewCell : UITableViewCell
 
-@property (weak, nonatomic) IBOutlet UILabel *label;
-@property (weak, nonatomic) IBOutlet UIImageView *imageView;
+@property (weak, nonatomic) IBOutlet UIImageView *customImageView;
+@property (weak, nonatomic) IBOutlet UILabel *customeLabel;
+
 
 @end
