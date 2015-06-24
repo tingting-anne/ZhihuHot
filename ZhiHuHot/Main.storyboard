@@ -208,7 +208,6 @@
                     <navigationItem key="navigationItem" title="今日热谈" id="Bto-83-3LA">
                         <barButtonItem key="leftBarButtonItem" image="sideMenu" id="opB-l8-pLg"/>
                     </navigationItem>
-                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="menuBarButtonItem" destination="opB-l8-pLg" id="VzN-Kq-Gic"/>
                     </connections>
@@ -322,6 +321,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="nmB-XB-NcZ"/>
-        <segue reference="dWF-6J-WXD"/>
+        <segue reference="WlD-Bd-4y2"/>
     </inferredMetricsTieBreakers>
 </document>

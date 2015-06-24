@@ -9,7 +9,7 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods-EGOTableViewPullRefresh.xcscheme</key>
+		<key>Pods-EGOTableViewPullRefreshAndLoadMore.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -32,27 +32,27 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>58528220C04CF25E1ED89EF3</key>
+		<key>14C363C565FCC7B1C1877826</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>ADD0FD5E6D091366C702A607</key>
+		<key>3B541EE690C1CBA0B87F2C20</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>D282566657A495F28079E9D1</key>
+		<key>81A29C57E585CF16934F7F60</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>E3BCE7ACCA055D23B9628A0D</key>
+		<key>E23283D2A02F81D29DBA5693</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>FE03DD5221A810F3E54F907F</key>
+		<key>F463AE5B61BCBB85D134AD0E</key>
 		<dict>
 			<key>primary</key>
 			<true/>

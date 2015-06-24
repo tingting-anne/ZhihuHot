@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
+#import "EGOTableViewPullRefreshAndLoadMore/EGORefreshTableHeaderView.h"
 
-@interface SubjectTableViewController : UITableViewController<NSFetchedResultsControllerDelegate>
+@interface SubjectTableViewController : UITableViewController<NSFetchedResultsControllerDelegate,EGORefreshTableHeaderDelegate>
 
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *menuBarButtonItem;
 @property (strong, nonatomic) NSNumber* themeID;

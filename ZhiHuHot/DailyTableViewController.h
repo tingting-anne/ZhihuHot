@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
-#import "EGOTableViewPullRefresh/EGORefreshTableHeaderView.h"
+#import "EGOTableViewPullRefreshAndLoadMore/EGORefreshTableHeaderView.h"
 
 @interface DailyTableViewController : UITableViewController<NSFetchedResultsControllerDelegate,EGORefreshTableHeaderDelegate>
 

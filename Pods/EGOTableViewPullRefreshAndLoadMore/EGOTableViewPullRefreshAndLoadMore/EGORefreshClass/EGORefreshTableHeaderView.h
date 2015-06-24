@@ -36,15 +36,12 @@ typedef enum{
 @protocol EGORefreshTableHeaderDelegate;
 @interface EGORefreshTableHeaderView : UIView {
 	
-	id _delegate;
 	EGOPullRefreshState _state;
 
 	UILabel *_lastUpdatedLabel;
 	UILabel *_statusLabel;
 	CALayer *_arrowImage;
 	UIActivityIndicatorView *_activityView;
-	
-
 }
 
 @property(nonatomic,assign) id <EGORefreshTableHeaderDelegate> delegate;
@@ -55,9 +52,10 @@ typedef enum{
 - (void)egoRefreshScrollViewDidScroll:(UIScrollView *)scrollView;
 - (void)egoRefreshScrollViewDidEndDragging:(UIScrollView *)scrollView;
 - (void)egoRefreshScrollViewDataSourceDidFinishedLoading:(UIScrollView *)scrollView;
+- (void)egoRefreshScrollViewDataSourceStartManualLoading:(UIScrollView *)scrollView;
 
 @end
-@protocol EGORefreshTableHeaderDelegate
+@protocol EGORefreshTableHeaderDelegate <NSObject>
 - (void)egoRefreshTableHeaderDidTriggerRefresh:(EGORefreshTableHeaderView*)view;
 - (BOOL)egoRefreshTableHeaderDataSourceIsLoading:(EGORefreshTableHeaderView*)view;
 @optional

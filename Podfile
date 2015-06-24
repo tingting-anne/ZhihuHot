@@ -5,6 +5,6 @@ platform :ios, '8.1'
 
 pod 'AFNetworking'
 pod 'SDWebImage'
-pod 'EGOTableViewPullRefresh',                    '~> 0.1.0'
+pod 'EGOTableViewPullRefreshAndLoadMore', '~> 1.0.4'
 pod 'SWRevealViewController'
 

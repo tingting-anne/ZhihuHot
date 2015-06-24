@@ -25,6 +25,11 @@
 {
     EGORefreshTableHeaderView *_refreshHeaderView;
     BOOL _reloading;
+    
+    //保存初始内容，EGOTableViewPullRefreshAndLoadMore执行完后要重新赋值，否则导航条会遮挡住表单元
+    //originContentInset[64,0,0,0] originContentOffset[0, -64]
+    CGPoint originContentOffset;
+    UIEdgeInsets originContentInset;
 }
 
 @property(strong,nonatomic)NSFetchedResultsController* fetchedResultsController;
@@ -135,6 +140,15 @@
     }
 }
 
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    originContentOffset = self.tableView.contentOffset;
+    originContentInset = self.tableView.contentInset;
+}
+
+#pragma mark -
 
 -(void)updateLatestStories
 {
@@ -191,7 +205,18 @@
         [_refreshHeaderView egoRefreshScrollViewDataSourceDidFinishedLoading:self.tableView];
         
         if(!error){
-            [self.tableView reloadData];
+            
+//            self.tableView.contentInset = UIEdgeInsetsMake(self.navigationController.navigationBar.frame.size.height+self.navigationController.navigationBar.frame.origin.y,0, 0, 0);
+//            
+//            CGPoint point;
+//            point.x = 0.0f;
+//            point.y = 0.0f - 64.0f;
+//            self.tableView.contentOffset = point;
+        
+            self.tableView.contentInset = originContentInset;
+            self.tableView.contentOffset = originContentOffset;
+            
+            //[self.tableView reloadData];
         }
         else{
 #ifdef DEBUG
@@ -247,6 +272,10 @@
         
         [self.netClient downloadBeforeDate:currentDateString withCompletionHandler:nil];
     }
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 90.0f;
 }
 
 #pragma mark - Table view data source delegate
@@ -409,13 +438,11 @@
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     
     [_refreshHeaderView egoRefreshScrollViewDidScroll:scrollView];
-    
 }
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
     
     [_refreshHeaderView egoRefreshScrollViewDidEndDragging:scrollView];
-    
 }
 
 #pragma mark EGORefreshTableHeaderDelegate Methods
