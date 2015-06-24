@@ -46,6 +46,7 @@
 
 -(void)setNewsID:(NSNumber *)newsID
 {
+    self.activity.hidden = NO;
     [self.activity startAnimating];
     
     [self.netClient downloadWithNewsID:[newsID unsignedIntegerValue] withCompletionHandler:^(NSDictionary* dic, NSError *error){
@@ -113,12 +114,14 @@
 
 -(void)webViewDidStartLoad:(UIWebView *)webView
 {
+    self.activity.hidden = NO;
     [self.activity startAnimating];
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
     [self.activity stopAnimating];
+    self.activity.hidden = YES;
 }
 
 @end

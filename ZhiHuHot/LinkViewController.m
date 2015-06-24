@@ -37,6 +37,7 @@
 
 -(void)webViewDidStartLoad:(UIWebView *)webView
 {
+    self.activity.hidden = NO;
     [self.activity startAnimating];
 }
 

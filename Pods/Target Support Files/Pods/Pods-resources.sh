@@ -57,6 +57,26 @@ install_resource()
       ;;
   esac
 }
+if [[ "$CONFIGURATION" == "Debug" ]]; then
+  install_resource "EGOTableViewPullRefresh/EGOTableViewPullRefresh/Resources/blackArrow.png"
+  install_resource "EGOTableViewPullRefresh/EGOTableViewPullRefresh/Resources/blackArrow@2x.png"
+  install_resource "EGOTableViewPullRefresh/EGOTableViewPullRefresh/Resources/blueArrow.png"
+  install_resource "EGOTableViewPullRefresh/EGOTableViewPullRefresh/Resources/blueArrow@2x.png"
+  install_resource "EGOTableViewPullRefresh/EGOTableViewPullRefresh/Resources/grayArrow.png"
+  install_resource "EGOTableViewPullRefresh/EGOTableViewPullRefresh/Resources/grayArrow@2x.png"
+  install_resource "EGOTableViewPullRefresh/EGOTableViewPullRefresh/Resources/whiteArrow.png"
+  install_resource "EGOTableViewPullRefresh/EGOTableViewPullRefresh/Resources/whiteArrow@2x.png"
+fi
+if [[ "$CONFIGURATION" == "Release" ]]; then
+  install_resource "EGOTableViewPullRefresh/EGOTableViewPullRefresh/Resources/blackArrow.png"
+  install_resource "EGOTableViewPullRefresh/EGOTableViewPullRefresh/Resources/blackArrow@2x.png"
+  install_resource "EGOTableViewPullRefresh/EGOTableViewPullRefresh/Resources/blueArrow.png"
+  install_resource "EGOTableViewPullRefresh/EGOTableViewPullRefresh/Resources/blueArrow@2x.png"
+  install_resource "EGOTableViewPullRefresh/EGOTableViewPullRefresh/Resources/grayArrow.png"
+  install_resource "EGOTableViewPullRefresh/EGOTableViewPullRefresh/Resources/grayArrow@2x.png"
+  install_resource "EGOTableViewPullRefresh/EGOTableViewPullRefresh/Resources/whiteArrow.png"
+  install_resource "EGOTableViewPullRefresh/EGOTableViewPullRefresh/Resources/whiteArrow@2x.png"
+fi
 
 rsync -avr --copy-links --no-relative --exclude '*/.svn/*' --files-from="$RESOURCES_TO_COPY" / "${CONFIGURATION_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}"
 if [[ "${ACTION}" == "install" ]]; then
