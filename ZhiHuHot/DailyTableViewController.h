@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
+#import "EGOTableViewPullRefresh/EGORefreshTableHeaderView.h"
 
-@interface DailyTableViewController : UITableViewController<NSFetchedResultsControllerDelegate>
+@interface DailyTableViewController : UITableViewController<NSFetchedResultsControllerDelegate,EGORefreshTableHeaderDelegate>
 
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *menuBarButtonItem;
 

@@ -19,13 +19,17 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
     NetClient *netClient = [[NetClient alloc] initWithManagedObjectContext:self.managedObjectContext];
-    if(![netClient downloadLatestStories]){
-        NSLog(@"ERROR downloadLatestStories : %s", __FUNCTION__);
-    }
+    [netClient downloadLatestStoriesWithCompletionHandler:^(NSError* error){
+        if (error) {
+            NSLog(@"ERROR downloadStories : %s", __FUNCTION__);
+        }
+    }];
     
-    if(![netClient downloadThemes]){
-        NSLog(@"ERROR downloadThemes : %s", __FUNCTION__);
-    }
+    [netClient downloadThemesWithCompletionHandler:^(NSError* error){
+        if (error) {
+            NSLog(@"ERROR downloadThemes : %s", __FUNCTION__);
+        }
+    }];
     
     return YES;
 }

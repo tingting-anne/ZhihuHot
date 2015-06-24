@@ -11,6 +11,7 @@
 #import "AppHelper.h"
 #import "SWRevealViewController.h"
 #import "Story.h"
+#import "Date.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "DailyTableSectionHeader.h"
 #import "ContentViewController.h"
@@ -21,6 +22,10 @@
 #define HEIGHT_OF_SECTION_HEADER 30.0f
 
 @interface DailyTableViewController ()
+{
+    EGORefreshTableHeaderView *_refreshHeaderView;
+    BOOL _reloading;
+}
 
 @property(strong,nonatomic)NSFetchedResultsController* fetchedResultsController;
 @property(strong,nonatomic)NSManagedObjectContext* managedObjectContext;
@@ -29,9 +34,13 @@
 -(NSString *)headerStringFormateWithDate:(NSString *)dateString;
 -(void)updateLatestStories;
 
+- (void)reloadTableViewDataSource;
+
 @end
 
 @implementation DailyTableViewController
+
+#pragma mark -
 
 -(void)awakeFromNib
 {
@@ -39,18 +48,6 @@
     
     AppDelegate * appDelegate = [[UIApplication sharedApplication] delegate];
     self.managedObjectContext = [appDelegate managedObjectContext];
-    
-    [self updateLatestStories];
-    
-    NSError *error;
-    BOOL success = [self.fetchedResultsController performFetch:&error];
-    if (!success){
-        NSLog(@"[%@ %@] performFetch: failed", NSStringFromClass([self class]), NSStringFromSelector(_cmd));
-    }
-    if (error) {
-        NSLog(@"[%@ %@] %@ (%@)", NSStringFromClass([self class]), NSStringFromSelector(_cmd), [error localizedDescription], [error localizedFailureReason]);
-    }
-    [self.tableView reloadData];
 }
 
 - (void)setManagedObjectContext:(NSManagedObjectContext *)managedObjectContext {
@@ -92,6 +89,32 @@
     
     //[self.view addGestureRecognizer:self.revealViewController.panGestureRecognizer];
     //[self.view addGestureRecognizer:self.revealViewController.tapGestureRecognizer];
+    
+    if (_refreshHeaderView == nil) {
+        
+        EGORefreshTableHeaderView *view = [[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0.0f, 0.0f - self.tableView.bounds.size.height, self.view.frame.size.width, self.tableView.bounds.size.height)];
+        
+//        NSLog(@"%lf, %lf, %lf, %lf, [%lf,%lf,%lf,%lf]", self.tableView.frame.origin.x,self.tableView.frame.origin.y, self.tableView.frame.size.height, self.view.frame.size.width,
+//              self.navigationController.navigationBar.frame.origin.x, self.navigationController.navigationBar.frame.origin.y,
+//             self.navigationController.navigationBar.frame.size.width, self.navigationController.navigationBar.frame.size.height);
+        
+        view.delegate = self;
+        [self.tableView addSubview:view];
+        _refreshHeaderView = view;
+        [_refreshHeaderView refreshLastUpdatedDate];
+    }
+    
+    [self updateLatestStories];
+    
+    NSError *error;
+    BOOL success = [self.fetchedResultsController performFetch:&error];
+    if (!success){
+        NSLog(@"[%@ %@] performFetch: failed", NSStringFromClass([self class]), NSStringFromSelector(_cmd));
+    }
+    if (error) {
+        NSLog(@"[%@ %@] %@ (%@)", NSStringFromClass([self class]), NSStringFromSelector(_cmd), [error localizedDescription], [error localizedFailureReason]);
+    }
+    [self.tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -129,7 +152,7 @@
     }
     
     if (interval >= UPDATECONTENTINTERVAL) {
-        [self.netClient downloadLatestStories];
+        [self.netClient downloadLatestStoriesWithCompletionHandler:nil];
     }
 }
 
@@ -158,6 +181,27 @@
     }
     return nil;
 }
+
+- (void)reloadTableViewDataSource{
+    _reloading = YES;
+    
+    [self.netClient downloadLatestStoriesWithCompletionHandler:^(NSError* error){
+        
+        _reloading = NO;
+        [_refreshHeaderView egoRefreshScrollViewDataSourceDidFinishedLoading:self.tableView];
+        
+        if(!error){
+            [self.tableView reloadData];
+        }
+        else{
+#ifdef DEBUG
+            UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Load content error" delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:nil, nil];
+            [alertView show];
+#endif
+        }
+    }];
+}
+
 
 #pragma mark -Table view delegate
 
@@ -189,6 +233,20 @@
     sectionHeaderView.headerString.text = headerString;
     
     return sectionHeaderView;
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSUInteger sectionNum = [self.fetchedResultsController.sections count];
+    id<NSFetchedResultsSectionInfo> sectionInfo = [self.fetchedResultsController.sections objectAtIndex:indexPath.section];
+    NSUInteger rowNumOfSection = sectionInfo.numberOfObjects;
+    if (indexPath.section == (sectionNum -1) && indexPath.row == (rowNumOfSection - 1)) {
+        
+        Story *story = [self.fetchedResultsController objectAtIndexPath:indexPath];
+        NSString *currentDateString = story.date.date;
+        
+        [self.netClient downloadBeforeDate:currentDateString withCompletionHandler:nil];
+    }
 }
 
 #pragma mark - Table view data source delegate
@@ -344,6 +402,40 @@
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
 {
     [self.tableView endUpdates];
+}
+
+#pragma mark UIScrollViewDelegate Methods
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    
+    [_refreshHeaderView egoRefreshScrollViewDidScroll:scrollView];
+    
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
+    
+    [_refreshHeaderView egoRefreshScrollViewDidEndDragging:scrollView];
+    
+}
+
+#pragma mark EGORefreshTableHeaderDelegate Methods
+//下拉到一定距离，手指放开时调用
+- (void)egoRefreshTableHeaderDidTriggerRefresh:(EGORefreshTableHeaderView*)view{
+    
+    [self reloadTableViewDataSource];
+}
+
+- (BOOL)egoRefreshTableHeaderDataSourceIsLoading:(EGORefreshTableHeaderView*)view{
+    
+    return _reloading; // should return if data source model is reloading
+    
+}
+
+//取得下拉刷新的时间
+- (NSDate*)egoRefreshTableHeaderDataSourceLastUpdated:(EGORefreshTableHeaderView*)view{
+    
+    return [NSDate date]; // should return date data source was last changed
+    
 }
 
 @end

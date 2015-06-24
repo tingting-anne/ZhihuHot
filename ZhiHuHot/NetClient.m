@@ -17,7 +17,7 @@
 
 @interface NetClient ()
 
--(BOOL)getAndSaveStoriesWithUrl:(NSString *)urlString;
+-(void)getAndSaveStoriesWithUrl:(NSString *)urlString withCompletionHandler:(void(^)(NSError *error))completionHandler;
 
 @end
 
@@ -31,7 +31,7 @@
     return self;
 }
 
--(BOOL)getAndSaveStoriesWithUrl:(NSString *)urlString
+-(void)getAndSaveStoriesWithUrl:(NSString *)urlString withCompletionHandler:(void(^)(NSError *error))completionHandler
 {
     AFHTTPSessionManager *smanager = [AFHTTPSessionManager manager];
     smanager.responseSerializer = [AFHTTPResponseSerializer serializer]; //告诉manager只下载原始数据, 不要解析数据
@@ -50,32 +50,43 @@
             if (saveError) {
                 NSLog(@"%s context save error, error:%@",__FUNCTION__,saveError);
             }
+            
+            if (completionHandler) {
+                completionHandler(saveError);
+            }
         }];
     }failure:^(NSURLSessionDataTask *task, NSError *error) {
         NSLog(@"%s %@",__FUNCTION__,error);
+        
+        if (completionHandler) {
+            completionHandler(error);
+        }
     }];
-    
-    return TRUE;
 }
 
-- (BOOL)downloadLatestStories
+- (void)downloadLatestStoriesWithCompletionHandler:(void(^)(NSError *error))completionHandler
 {
     NSString *urlString = [NSString stringWithFormat:@"%s", LATESTSTORIES];
-    return [self getAndSaveStoriesWithUrl:urlString];
+    [self getAndSaveStoriesWithUrl:urlString withCompletionHandler:completionHandler];
 }
 
-- (BOOL)downloadBeforeDate:(NSString *)dateString
+- (void)downloadBeforeDate:(NSString *)dateString withCompletionHandler:(void(^)(NSError *error))completionHandler
 {
     if (![[AppHelper shareAppHelper] isValidDateString:dateString]) {
         NSLog(@"%s not a valid date string", __FUNCTION__);
-        return FALSE;
+        NSError* error = [NSError errorWithDomain:ZHHErrorDomain code:ZHHInvalidDateString userInfo:nil];
+        
+        if (completionHandler) {
+            completionHandler(error);
+        }
     }
-    
-    NSString *urlString = [NSString stringWithFormat:[NSString stringWithFormat:@"%s", BEFORESTORIES], dateString];
-    return [self getAndSaveStoriesWithUrl:urlString];
+    else{
+        NSString *urlString = [NSString stringWithFormat:[NSString stringWithFormat:@"%s", BEFORESTORIES], dateString];
+        [self getAndSaveStoriesWithUrl:urlString withCompletionHandler:completionHandler];
+    }
 }
 
-- (BOOL)downloadThemes
+- (void)downloadThemesWithCompletionHandler:(void(^)(NSError *error))completionHandler
 {
     NSString *urlString = [NSString stringWithFormat:@"%s", THEMES];
     
@@ -95,15 +106,21 @@
             if (saveError) {
                 NSLog(@"%s context save error, error:%@",__FUNCTION__,saveError);
             }
+            
+            if (completionHandler) {
+                completionHandler(saveError);
+            }
         }];
     }failure:^(NSURLSessionDataTask *task, NSError *error) {
         NSLog(@"%s %@",__FUNCTION__,error);
+        
+        if (completionHandler) {
+            completionHandler(error);
+        }
     }];
-    
-    return TRUE;
 }
 
-- (BOOL)downloadThemeStoriesWithThemeID:(NSUInteger)themeID
+- (void)downloadThemeStoriesWithThemeID:(NSUInteger)themeID withCompletionHandler:(void(^)(NSError *error))completionHandler
 {
     NSString *urlString = [NSString stringWithFormat:[NSString stringWithFormat:@"%s", THEMESTORIES],
                            [NSNumber numberWithUnsignedLong:themeID]];
@@ -130,16 +147,20 @@
                 NSLog(@"netclient save ok");
             }
 #endif
+            if (completionHandler) {
+                completionHandler(saveError);
+            }
         }];
     }failure:^(NSURLSessionDataTask *task, NSError *error) {
         NSLog(@"%s %@",__FUNCTION__,error);
+        
+        if (completionHandler) {
+            completionHandler(error);
+        }
     }];
-    
-    return TRUE;
 }
 
-- (BOOL)downloadWithNewsID:(NSUInteger)newsID
-                   success:(void (^)(NSDictionary* dic))success
+- (void)downloadWithNewsID:(NSUInteger)newsID withCompletionHandler:(void(^)(NSDictionary* dic, NSError *error))completionHandler
 {
     NSString *urlString = [NSString stringWithFormat:[NSString stringWithFormat:@"%s", NEWSCONTENT],[NSNumber numberWithUnsignedLong:newsID]];
     
@@ -151,12 +172,17 @@
         NSData *data = responseObject;
         NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
         
-        success(dic);
+        if (completionHandler) {
+            completionHandler(dic, nil);
+        }
+        
     }failure:^(NSURLSessionDataTask *task, NSError *error) {
         NSLog(@"%s %@",__FUNCTION__,error);
+        
+        if (completionHandler) {
+            completionHandler(nil, error);
+        }
     }];
-    
-    return TRUE;
 }
 
 @end

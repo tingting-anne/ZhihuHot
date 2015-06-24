@@ -48,10 +48,16 @@
 
 -(void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
 {
+#ifdef DEBUG
     UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"错误" message:@"加载失败" delegate:nil cancelButtonTitle:@"取消" otherButtonTitles:nil, nil];
     
     [alert show];
+#endif
+    
+    [self.activity stopAnimating];
+    self.activity.hidden = YES;
 }
+
 /*
 #pragma mark - Navigation
 

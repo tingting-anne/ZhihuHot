@@ -15,12 +15,14 @@
 
 - (id)initWithManagedObjectContext:(NSManagedObjectContext*)context;
 
-- (BOOL)downloadLatestStories;
-- (BOOL)downloadBeforeDate:(NSString *)dateString;
-- (BOOL)downloadThemes;
-- (BOOL)downloadThemeStoriesWithThemeID:(NSUInteger)themeID;
+- (void)downloadLatestStoriesWithCompletionHandler:(void(^)(NSError *error))completionHandler;
 
-- (BOOL)downloadWithNewsID:(NSUInteger)newsID
-                   success:(void (^)(NSDictionary* dic))success;
+- (void)downloadBeforeDate:(NSString *)dateString withCompletionHandler:(void(^)(NSError *error))completionHandler;
+
+- (void)downloadThemesWithCompletionHandler:(void(^)(NSError *error))completionHandler;
+
+- (void)downloadThemeStoriesWithThemeID:(NSUInteger)themeID withCompletionHandler:(void(^)(NSError *error))completionHandler;
+
+- (void)downloadWithNewsID:(NSUInteger)newsID withCompletionHandler:(void(^)(NSDictionary* dic, NSError *error))completionHandler;
 
 @end

@@ -26,4 +26,10 @@ typedef enum CONTENTTYPE{
     THEME_STORY_CONTENT,
 }CONTENTTYPE;
 
+#define ZHHErrorDomain @"FakeZhihuDailyDomain"
+
+typedef enum : NSUInteger {
+    ZHHInvalidDateString,
+} ZHHError;
+
 #endif

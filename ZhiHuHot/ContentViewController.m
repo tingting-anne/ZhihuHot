@@ -47,7 +47,16 @@
 -(void)setNewsID:(NSNumber *)newsID
 {
     [self.activity startAnimating];
-    [self.netClient downloadWithNewsID:[newsID unsignedIntegerValue] success:^(NSDictionary* dic){
+    
+    [self.netClient downloadWithNewsID:[newsID unsignedIntegerValue] withCompletionHandler:^(NSDictionary* dic, NSError *error){
+        
+        if(error){
+#ifdef DEBUG
+            UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Load content error" delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:nil, nil];
+            [alertView show];
+#endif
+            return;
+        }
         
         NSString *htmlString = [NSString stringWithFormat:@"<html><head><link rel=\"stylesheet\" type=\"text/css\" href=%@ /></head><body>%@</body></html>", dic[@"css"][0], dic[@"body"]];
         

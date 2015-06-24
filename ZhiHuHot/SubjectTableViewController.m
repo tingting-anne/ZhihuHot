@@ -91,7 +91,7 @@
     }
     
     if (interval >= UPDATECONTENTINTERVAL) {
-        [self.netClient downloadThemeStoriesWithThemeID:[self.themeID unsignedLongLongValue]];
+        [self.netClient downloadThemeStoriesWithThemeID:[self.themeID unsignedLongLongValue] withCompletionHandler:nil];
     }
     
 }
@@ -143,6 +143,18 @@
 
         [self.view addGestureRecognizer:self.revealViewController.panGestureRecognizer];
     }    
+}
+
+#pragma mark - Table view delegate
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSUInteger sectionNum = [self.fetchedResultsController.sections count];
+    id<NSFetchedResultsSectionInfo> sectionInfo = [self.fetchedResultsController.sections objectAtIndex:indexPath.section];
+    NSUInteger rowNumOfSection = sectionInfo.numberOfObjects;
+    if (indexPath.section == (sectionNum -1) && indexPath.row == (rowNumOfSection - 1)) {
+        
+        [self.netClient downloadThemeStoriesWithThemeID:[self.themeID unsignedLongLongValue] withCompletionHandler:nil];
+    }
 }
 
 #pragma mark - Table view data source
