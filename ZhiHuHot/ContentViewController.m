@@ -73,9 +73,7 @@
     // Setup header view
     CGRect headerFrame = CGRectMake(0, 0, self.webView.frame.size.width, 220);
     headerView.frame = headerFrame;
-    NSLog(@"%lf, %lf, %lf, %lf", self.view.frame.origin.x, self.view.frame.origin.y,
-          self.view.frame.size.width, self.view.frame.size.height);
-    
+
     [headerView.imageView sd_setImageWithURL:[NSURL URLWithString:dic[@"image"]] placeholderImage:[UIImage imageNamed:@"placeholder"]];
     
     headerView.titleLable.text = dic[@"title"];
