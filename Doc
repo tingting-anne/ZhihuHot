@@ -1,2 +1,6 @@
 修改与优化：
 1、表单元中图片需要使用占位图片，否则会先刷新title,再刷新图片时会很慢。用占位符直接替换。
+2、修改EGOTableViewPullRefreshAndLoadMore实现，对每次拉动后的contentInsets和contentOffset重置，否则会有叠加；
+3、由于(NSPredicate *)predicateWithFormat:(NSString *)format,, ...中format写为[NSString format ...]导致date重复插入;
+4、- (void)setSortDescriptors:(NSArray *)sortDescriptors只设置根据id排序不会对section排序，导致在NSFetchedResultsController中是乱的，每次拉到最后一个单元时，其date是中间的一个时间，而context中已经存在，导致view不刷新；
+5、自动10分钟在用户操作相关内容时更新；
