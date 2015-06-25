@@ -22,11 +22,6 @@
 {
     EGORefreshTableHeaderView *_refreshHeaderView;
     BOOL _reloading;
-    
-    //保存初始内容，EGOTableViewPullRefreshAndLoadMore执行完后要重新赋值，否则导航条会遮挡住表单元
-    //originContentInset[64,0,0,0] originContentOffset[0, -64]
-    CGPoint originContentOffset;
-    UIEdgeInsets originContentInset;
 }
 @property(strong,nonatomic)NSFetchedResultsController* fetchedResultsController;
 @property(strong,nonatomic)NSManagedObjectContext* managedObjectContext;
@@ -59,7 +54,7 @@
     NSEntityDescription* entityDescription = [NSEntityDescription entityForName:@"ThemeStory" inManagedObjectContext:self.managedObjectContext];
     [request setEntity:entityDescription];
     
-    NSPredicate* predicate = [NSPredicate predicateWithFormat:[NSString stringWithFormat: @"them.id = %@", self.themeID]];
+    NSPredicate* predicate = [NSPredicate predicateWithFormat:@"them.id = %@", self.themeID];
     [request setPredicate:predicate];
     
     NSSortDescriptor *sortDescription = [[NSSortDescriptor alloc] initWithKey:@"id" ascending:NO];
@@ -126,17 +121,6 @@
         [_refreshHeaderView egoRefreshScrollViewDataSourceDidFinishedLoading:self.tableView];
         
         if(!error){
-            
-            //            self.tableView.contentInset = UIEdgeInsetsMake(self.navigationController.navigationBar.frame.size.height+self.navigationController.navigationBar.frame.origin.y,0, 0, 0);
-            //
-            //            CGPoint point;
-            //            point.x = 0.0f;
-            //            point.y = 0.0f - 64.0f;
-            //            self.tableView.contentOffset = point;
-            
-            self.tableView.contentInset = originContentInset;
-            self.tableView.contentOffset = originContentOffset;
-            
             //[self.tableView reloadData];
         }
         else{
@@ -199,8 +183,7 @@
 {
     [super viewDidAppear:animated];
     
-    originContentOffset = self.tableView.contentOffset;
-    originContentInset = self.tableView.contentInset;
+    [_refreshHeaderView setOriginContentOffset:self.tableView.contentOffset insets:self.tableView.contentInset];
 }
 
 #pragma mark - Table view delegate

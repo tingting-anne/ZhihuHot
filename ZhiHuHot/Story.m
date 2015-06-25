@@ -29,7 +29,7 @@
         NSEntityDescription* description = [NSEntityDescription entityForName:@"Story" inManagedObjectContext:context];
         [request setEntity:description];
         
-        NSPredicate* predicate = [NSPredicate predicateWithFormat:[NSString stringWithFormat: @"id = %@", dic[@"id"]]];
+        NSPredicate* predicate = [NSPredicate predicateWithFormat:@"id = %@", dic[@"id"]];
         [request setPredicate:predicate];
         
         NSError *error = nil;

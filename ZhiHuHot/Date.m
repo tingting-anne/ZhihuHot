@@ -27,9 +27,9 @@
     NSEntityDescription* description = [NSEntityDescription entityForName:@"Date" inManagedObjectContext:context];
     [request setEntity:description];
     
-    NSPredicate* predicte = [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"date = %@", dateString]];
+    NSPredicate* predicte = [NSPredicate predicateWithFormat:@"date = %@", dateString];
     [request setPredicate:predicte];
-    
+
     NSError* error = nil;
     NSArray* result = [context executeFetchRequest:request error:&error];
     if (!result || error || [result count] > 1) {
@@ -37,6 +37,8 @@
     } else if([result count] <= 0){
         date = [NSEntityDescription insertNewObjectForEntityForName:@"Date" inManagedObjectContext:context];
         date.date = dateString;
+    }else{
+         date = result.firstObject;
     }
     return date;
 }

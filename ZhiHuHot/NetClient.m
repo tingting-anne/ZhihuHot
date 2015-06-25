@@ -38,6 +38,7 @@
     NSDictionary *dict = @{@"format": @"json"};
     [smanager GET:urlString parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
         
+        //主线程
         NSData *data = responseObject;
         NSDictionary* storiesDictionary = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
         

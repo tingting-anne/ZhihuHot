@@ -7,6 +7,7 @@
 
 
 @interface LoadMoreTableFooterView (Private)
+
 - (void)setState:(PullLoadMoreState)aState;
 @end
 
@@ -171,8 +172,12 @@
         
 		[UIView beginAnimations:nil context:NULL];
 		[UIView setAnimationDuration:0.2];
-		scrollView.contentInset = UIEdgeInsetsMake(0.0f, 0.0f, 60.0f, 0.0f);
+        
+        originContentInset = scrollView.contentInset;
+		scrollView.contentInset = UIEdgeInsetsMake(0.0f, 0.0f, originContentInset.bottom + 60.0f, 0.0f);
 		[UIView commitAnimations];
+        
+        originContentOffset = scrollView.contentOffset;
 	}
 }
 
@@ -180,12 +185,20 @@
 	
 	[UIView beginAnimations:nil context:NULL];
 	[UIView setAnimationDuration:.3];
-	[scrollView setContentInset:UIEdgeInsetsMake(0.0f, 0.0f, 0.0f, 0.0f)];
+    
+//	[scrollView setContentInset:UIEdgeInsetsMake(0.0f, 0.0f, 0.0f, 0.0f)];
+
 	[UIView commitAnimations];
 	
 	[self setState:PullLoadMoreNormal];
-
+    
+    originContentOffset.y += 60.0f;
+    scrollView.contentOffset = originContentOffset;
+    scrollView.contentInset = originContentInset;
 }
 
-
+- (PullLoadMoreState)getState
+{
+    return _state;
+}
 @end

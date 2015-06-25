@@ -16,6 +16,8 @@ typedef enum{
 	UILabel *_statusLabel;
 	CALayer *_arrowImage;
 	UIActivityIndicatorView *_activityView;
+    CGPoint originContentOffset;
+    UIEdgeInsets originContentInset;
 }
 
 @property(nonatomic,assign) id <LoadMoreTableFooterDelegate> delegate;
@@ -25,6 +27,7 @@ typedef enum{
 - (void)loadMoreScrollViewDidScroll:(UIScrollView *)scrollView;
 - (void)loadMoreScrollViewDidEndDragging:(UIScrollView *)scrollView;
 - (void)loadMoreScrollViewDataSourceDidFinishedLoading:(UIScrollView *)scrollView;
+- (PullLoadMoreState)getState;
 
 @end
 

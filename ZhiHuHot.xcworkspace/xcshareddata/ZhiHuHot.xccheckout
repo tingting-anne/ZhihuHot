@@ -12,6 +12,8 @@
 	<dict>
 		<key>0428648E2C90033D1D16057DF8A619129FDADCDC</key>
 		<string>https://github.com/tingting-anne/ZhihuHot.git</string>
+		<key>AB54394D48986A3A90515E19101332C173219E53</key>
+		<string>https://github.com/JackShi/EGOTableViewPullRefreshAndLoadMore</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>ZhiHuHot.xcworkspace</string>
@@ -19,6 +21,8 @@
 	<dict>
 		<key>0428648E2C90033D1D16057DF8A619129FDADCDC</key>
 		<string>..</string>
+		<key>AB54394D48986A3A90515E19101332C173219E53</key>
+		<string>../../../learn_project/EGOTableViewPullRefreshAndLoadMore</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/tingting-anne/ZhihuHot.git</string>
@@ -28,6 +32,14 @@
 	<string>0428648E2C90033D1D16057DF8A619129FDADCDC</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>AB54394D48986A3A90515E19101332C173219E53</string>
+			<key>IDESourceControlWCCName</key>
+			<string>EGOTableViewPullRefreshAndLoadMore</string>
+		</dict>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>

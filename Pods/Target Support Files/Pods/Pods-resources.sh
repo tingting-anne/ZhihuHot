@@ -57,42 +57,6 @@ install_resource()
       ;;
   esac
 }
-if [[ "$CONFIGURATION" == "Debug" ]]; then
-  install_resource "EGOTableViewPullRefreshAndLoadMore/EGOTableViewPullRefreshAndLoadMore/Resources/blackArrow.png"
-  install_resource "EGOTableViewPullRefreshAndLoadMore/EGOTableViewPullRefreshAndLoadMore/Resources/blackArrow@2x.png"
-  install_resource "EGOTableViewPullRefreshAndLoadMore/EGOTableViewPullRefreshAndLoadMore/Resources/blackArrowLoadMore.png"
-  install_resource "EGOTableViewPullRefreshAndLoadMore/EGOTableViewPullRefreshAndLoadMore/Resources/blackArrowLoadMore@2x.png"
-  install_resource "EGOTableViewPullRefreshAndLoadMore/EGOTableViewPullRefreshAndLoadMore/Resources/blueArrow.png"
-  install_resource "EGOTableViewPullRefreshAndLoadMore/EGOTableViewPullRefreshAndLoadMore/Resources/blueArrow@2x.png"
-  install_resource "EGOTableViewPullRefreshAndLoadMore/EGOTableViewPullRefreshAndLoadMore/Resources/blueArrowLoadMore.png"
-  install_resource "EGOTableViewPullRefreshAndLoadMore/EGOTableViewPullRefreshAndLoadMore/Resources/blueArrowLoadMore@2x.png"
-  install_resource "EGOTableViewPullRefreshAndLoadMore/EGOTableViewPullRefreshAndLoadMore/Resources/grayArrow.png"
-  install_resource "EGOTableViewPullRefreshAndLoadMore/EGOTableViewPullRefreshAndLoadMore/Resources/grayArrow@2x.png"
-  install_resource "EGOTableViewPullRefreshAndLoadMore/EGOTableViewPullRefreshAndLoadMore/Resources/grayArrowLoadMore.png"
-  install_resource "EGOTableViewPullRefreshAndLoadMore/EGOTableViewPullRefreshAndLoadMore/Resources/grayArrowLoadMore@2x.png"
-  install_resource "EGOTableViewPullRefreshAndLoadMore/EGOTableViewPullRefreshAndLoadMore/Resources/whiteArrow.png"
-  install_resource "EGOTableViewPullRefreshAndLoadMore/EGOTableViewPullRefreshAndLoadMore/Resources/whiteArrow@2x.png"
-  install_resource "EGOTableViewPullRefreshAndLoadMore/EGOTableViewPullRefreshAndLoadMore/Resources/whiteArrowLoadMore.png"
-  install_resource "EGOTableViewPullRefreshAndLoadMore/EGOTableViewPullRefreshAndLoadMore/Resources/whiteArrowLoadMore@2x.png"
-fi
-if [[ "$CONFIGURATION" == "Release" ]]; then
-  install_resource "EGOTableViewPullRefreshAndLoadMore/EGOTableViewPullRefreshAndLoadMore/Resources/blackArrow.png"
-  install_resource "EGOTableViewPullRefreshAndLoadMore/EGOTableViewPullRefreshAndLoadMore/Resources/blackArrow@2x.png"
-  install_resource "EGOTableViewPullRefreshAndLoadMore/EGOTableViewPullRefreshAndLoadMore/Resources/blackArrowLoadMore.png"
-  install_resource "EGOTableViewPullRefreshAndLoadMore/EGOTableViewPullRefreshAndLoadMore/Resources/blackArrowLoadMore@2x.png"
-  install_resource "EGOTableViewPullRefreshAndLoadMore/EGOTableViewPullRefreshAndLoadMore/Resources/blueArrow.png"
-  install_resource "EGOTableViewPullRefreshAndLoadMore/EGOTableViewPullRefreshAndLoadMore/Resources/blueArrow@2x.png"
-  install_resource "EGOTableViewPullRefreshAndLoadMore/EGOTableViewPullRefreshAndLoadMore/Resources/blueArrowLoadMore.png"
-  install_resource "EGOTableViewPullRefreshAndLoadMore/EGOTableViewPullRefreshAndLoadMore/Resources/blueArrowLoadMore@2x.png"
-  install_resource "EGOTableViewPullRefreshAndLoadMore/EGOTableViewPullRefreshAndLoadMore/Resources/grayArrow.png"
-  install_resource "EGOTableViewPullRefreshAndLoadMore/EGOTableViewPullRefreshAndLoadMore/Resources/grayArrow@2x.png"
-  install_resource "EGOTableViewPullRefreshAndLoadMore/EGOTableViewPullRefreshAndLoadMore/Resources/grayArrowLoadMore.png"
-  install_resource "EGOTableViewPullRefreshAndLoadMore/EGOTableViewPullRefreshAndLoadMore/Resources/grayArrowLoadMore@2x.png"
-  install_resource "EGOTableViewPullRefreshAndLoadMore/EGOTableViewPullRefreshAndLoadMore/Resources/whiteArrow.png"
-  install_resource "EGOTableViewPullRefreshAndLoadMore/EGOTableViewPullRefreshAndLoadMore/Resources/whiteArrow@2x.png"
-  install_resource "EGOTableViewPullRefreshAndLoadMore/EGOTableViewPullRefreshAndLoadMore/Resources/whiteArrowLoadMore.png"
-  install_resource "EGOTableViewPullRefreshAndLoadMore/EGOTableViewPullRefreshAndLoadMore/Resources/whiteArrowLoadMore@2x.png"
-fi
 
 rsync -avr --copy-links --no-relative --exclude '*/.svn/*' --files-from="$RESOURCES_TO_COPY" / "${CONFIGURATION_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}"
 if [[ "${ACTION}" == "install" ]]; then

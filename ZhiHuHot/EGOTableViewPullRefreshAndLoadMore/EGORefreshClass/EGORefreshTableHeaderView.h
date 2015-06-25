@@ -42,6 +42,9 @@ typedef enum{
 	UILabel *_statusLabel;
 	CALayer *_arrowImage;
 	UIActivityIndicatorView *_activityView;
+    
+    CGPoint originContentOffset;
+    UIEdgeInsets originContentInset;
 }
 
 @property(nonatomic,assign) id <EGORefreshTableHeaderDelegate> delegate;
@@ -53,6 +56,8 @@ typedef enum{
 - (void)egoRefreshScrollViewDidEndDragging:(UIScrollView *)scrollView;
 - (void)egoRefreshScrollViewDataSourceDidFinishedLoading:(UIScrollView *)scrollView;
 - (void)egoRefreshScrollViewDataSourceStartManualLoading:(UIScrollView *)scrollView;
+- (void)setOriginContentOffset:(CGPoint) offset insets:(UIEdgeInsets)insets;
+- (EGOPullRefreshState)getState;
 
 @end
 @protocol EGORefreshTableHeaderDelegate <NSObject>

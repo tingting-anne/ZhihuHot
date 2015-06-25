@@ -192,9 +192,9 @@
 			[self setState:EGOOPullRefreshPulling];
 		}
 		
-		if (scrollView.contentInset.top != 0) {
-			scrollView.contentInset = UIEdgeInsetsZero;
-		}
+//		if (scrollView.contentInset.top != 0) {
+//			scrollView.contentInset = UIEdgeInsetsZero;
+//		}
 		
 	}
 	
@@ -216,7 +216,9 @@
 		[self setState:EGOOPullRefreshLoading];
 		[UIView beginAnimations:nil context:NULL];
 		[UIView setAnimationDuration:0.2];
-		scrollView.contentInset = UIEdgeInsetsMake(60.0f, 0.0f, 0.0f, 0.0f);
+        
+		scrollView.contentInset = UIEdgeInsetsMake(originContentInset.top + 60.0f, 0.0f, 0.0f, 0.0f);
+        
 		[UIView commitAnimations];
 		
 	}
@@ -227,11 +229,13 @@
 	
 	[UIView beginAnimations:nil context:NULL];
 	[UIView setAnimationDuration:.3];
-	[scrollView setContentInset:UIEdgeInsetsMake(0.0f, 0.0f, 0.0f, 0.0f)];
+	//[scrollView setContentInset:UIEdgeInsetsMake(0.0f, 0.0f, 0.0f, 0.0f)];
+    scrollView.contentOffset = originContentOffset;
+    scrollView.contentInset = originContentInset;
+    
 	[UIView commitAnimations];
 	
 	[self setState:EGOOPullRefreshNormal];
-
 }
 
 #pragma mark - Manually refresh view update
@@ -252,4 +256,14 @@
     }
 }
 
+- (void)setOriginContentOffset:(CGPoint) offset insets:(UIEdgeInsets)insets;
+{
+    originContentOffset = offset;
+    originContentInset = insets;
+}
+
+- (EGOPullRefreshState)getState
+{
+    return _state;
+}
 @end

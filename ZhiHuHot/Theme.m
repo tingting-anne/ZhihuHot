@@ -27,7 +27,7 @@
         Theme *theme = nil;
         
         NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Theme"];
-        request.predicate = [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"id = %@", themeDic[@"id"]]];
+        request.predicate = [NSPredicate predicateWithFormat:@"id = %@", themeDic[@"id"]];
         
         NSError *error;
         NSArray *resultArray = [context executeFetchRequest:request error:&error];
@@ -48,7 +48,7 @@
     Theme *theme = nil;
     
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Theme"];
-    request.predicate = [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"id = %lu", thmeID]];
+    request.predicate = [NSPredicate predicateWithFormat:@"id = %lu", thmeID];
     
     NSError *error;
     NSArray *resultArray = [context executeFetchRequest:request error:&error];

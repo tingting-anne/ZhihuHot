@@ -20,7 +20,6 @@ PODS:
   - AFNetworking/UIKit (2.5.4):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
-  - EGOTableViewPullRefreshAndLoadMore (1.0.4)
   - SDWebImage (3.7.2):
     - SDWebImage/Core (= 3.7.2)
   - SDWebImage/Core (3.7.2)
@@ -28,13 +27,11 @@ PODS:
 
 DEPENDENCIES:
   - AFNetworking
-  - EGOTableViewPullRefreshAndLoadMore (~> 1.0.4)
   - SDWebImage
   - SWRevealViewController
 
 SPEC CHECKSUMS:
   AFNetworking: 05edc0ac4c4c8cf57bcf4b84be5b0744b6d8e71e
-  EGOTableViewPullRefreshAndLoadMore: 118a0824590db042d42e08fcc442b93cebf15e73
   SDWebImage: 71b7cdc1d1721d6a82ed62889030225f2c249e29
   SWRevealViewController: 6d3fd97f70112fd7cef9de14df4260eacce4c63a
 

@@ -26,10 +26,16 @@
     EGORefreshTableHeaderView *_refreshHeaderView;
     BOOL _reloading;
     
-    //保存初始内容，EGOTableViewPullRefreshAndLoadMore执行完后要重新赋值，否则导航条会遮挡住表单元
-    //originContentInset[64,0,0,0] originContentOffset[0, -64]
-    CGPoint originContentOffset;
-    UIEdgeInsets originContentInset;
+//    //保存初始内容，EGOTableViewPullRefreshAndLoadMore执行完后要重新赋值，否则导航条会遮挡住表单元
+//    //originContentInset[64,0,0,0] originContentOffset[0, -64]
+    //CGPoint originContentOffset;
+    //UIEdgeInsets originContentInset;
+    
+    LoadMoreTableFooterView *loadMoreTableFooterView;
+    BOOL isLoadMoreing;
+    
+    BOOL lastCell;
+    NSString *currentDateString;
 }
 
 @property(strong,nonatomic)NSFetchedResultsController* fetchedResultsController;
@@ -38,8 +44,8 @@
 
 -(NSString *)headerStringFormateWithDate:(NSString *)dateString;
 -(void)updateLatestStories;
-
 - (void)reloadTableViewDataSource;
+- (void)resetMoreFrame;
 
 @end
 
@@ -53,6 +59,23 @@
     
     AppDelegate * appDelegate = [[UIApplication sharedApplication] delegate];
     self.managedObjectContext = [appDelegate managedObjectContext];
+    
+    if (_refreshHeaderView == nil) {
+        
+        EGORefreshTableHeaderView *view = [[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0.0f, 0.0f - self.tableView.bounds.size.height, self.view.frame.size.width, self.tableView.bounds.size.height)];
+        
+        view.delegate = self;
+        [self.tableView addSubview:view];
+        _refreshHeaderView = view;
+        [_refreshHeaderView refreshLastUpdatedDate];
+    }
+    
+    if (loadMoreTableFooterView == nil)
+    {
+        loadMoreTableFooterView = [[LoadMoreTableFooterView alloc] initWithFrame:CGRectMake(0.0f, self.tableView.bounds.size.height, self.view.frame.size.width, self.tableView.bounds.size.height)];
+        loadMoreTableFooterView.delegate = self;
+        [self.tableView addSubview:loadMoreTableFooterView];
+    }
 }
 
 - (void)setManagedObjectContext:(NSManagedObjectContext *)managedObjectContext {
@@ -71,8 +94,9 @@
         NSEntityDescription* entityDescription = [NSEntityDescription entityForName:@"Story" inManagedObjectContext:self.managedObjectContext];
         [request setEntity:entityDescription];
         
-        NSSortDescriptor *sortDescription = [[NSSortDescriptor alloc] initWithKey:@"id" ascending:NO];
-        [request setSortDescriptors:@[sortDescription]];
+        NSSortDescriptor *sortDate = [[NSSortDescriptor alloc] initWithKey:@"date.date" ascending:NO];
+        NSSortDescriptor *sortID = [[NSSortDescriptor alloc] initWithKey:@"id" ascending:NO];
+        [request setSortDescriptors:[NSArray arrayWithObjects:sortDate, sortID, nil]];
         
         self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:self.managedObjectContext sectionNameKeyPath:@"date.date" cacheName:nil];
         
@@ -83,6 +107,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+#ifdef DEBUG
+   // [self notification];
+#endif
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -94,20 +121,6 @@
     
     //[self.view addGestureRecognizer:self.revealViewController.panGestureRecognizer];
     //[self.view addGestureRecognizer:self.revealViewController.tapGestureRecognizer];
-    
-    if (_refreshHeaderView == nil) {
-        
-        EGORefreshTableHeaderView *view = [[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0.0f, 0.0f - self.tableView.bounds.size.height, self.view.frame.size.width, self.tableView.bounds.size.height)];
-        
-//        NSLog(@"%lf, %lf, %lf, %lf, [%lf,%lf,%lf,%lf]", self.tableView.frame.origin.x,self.tableView.frame.origin.y, self.tableView.frame.size.height, self.view.frame.size.width,
-//              self.navigationController.navigationBar.frame.origin.x, self.navigationController.navigationBar.frame.origin.y,
-//             self.navigationController.navigationBar.frame.size.width, self.navigationController.navigationBar.frame.size.height);
-        
-        view.delegate = self;
-        [self.tableView addSubview:view];
-        _refreshHeaderView = view;
-        [_refreshHeaderView refreshLastUpdatedDate];
-    }
     
     [self updateLatestStories];
     
@@ -138,17 +151,21 @@
         [self.view addGestureRecognizer:self.revealViewController.panGestureRecognizer];
         [self.view addGestureRecognizer:self.revealViewController.tapGestureRecognizer];
     }
+    
+    [_refreshHeaderView setOriginContentOffset:self.tableView.contentOffset insets:self.tableView.contentInset];
 }
 
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    
-    originContentOffset = self.tableView.contentOffset;
-    originContentInset = self.tableView.contentInset;
 }
 
 #pragma mark -
+
+- (void)resetMoreFrame
+{
+    loadMoreTableFooterView.frame = CGRectMake(0.0f, self.tableView.contentSize.height, self.view.frame.size.width, self.tableView.bounds.size.height);
+}
 
 -(void)updateLatestStories
 {
@@ -183,15 +200,15 @@
         {
             dateFormatter = [[NSDateFormatter alloc] init];
             dateFormatter.dateStyle = NSDateFormatterFullStyle;
-            dateFormatter.dateFormat = @"yyyyMMdd";
-            NSDate *date = [dateFormatter dateFromString:dateString];
-            
-            NSString *dateComponent = @"MMMd EEEE";
-            NSString *dateFormat = [NSDateFormatter dateFormatFromTemplate:dateComponent options:0 locale:[NSLocale currentLocale]];
-            [dateFormatter setDateFormat:dateFormat];
-            
-            return [dateFormatter stringFromDate:date];
         }
+        dateFormatter.dateFormat = @"yyyyMMdd";
+        NSDate *date = [dateFormatter dateFromString:dateString];
+        
+        NSString *dateComponent = @"MMMd EEEE";
+        NSString *dateFormat = [NSDateFormatter dateFormatFromTemplate:dateComponent options:0 locale:[NSLocale currentLocale]];
+        [dateFormatter setDateFormat:dateFormat];
+    
+        return [dateFormatter stringFromDate:date];
     }
     return nil;
 }
@@ -202,23 +219,10 @@
     [self.netClient downloadLatestStoriesWithCompletionHandler:^(NSError* error){
         
         _reloading = NO;
+        
         [_refreshHeaderView egoRefreshScrollViewDataSourceDidFinishedLoading:self.tableView];
         
-        if(!error){
-            
-//            self.tableView.contentInset = UIEdgeInsetsMake(self.navigationController.navigationBar.frame.size.height+self.navigationController.navigationBar.frame.origin.y,0, 0, 0);
-//            
-//            CGPoint point;
-//            point.x = 0.0f;
-//            point.y = 0.0f - 64.0f;
-//            self.tableView.contentOffset = point;
-        
-            self.tableView.contentInset = originContentInset;
-            self.tableView.contentOffset = originContentOffset;
-            
-            //[self.tableView reloadData];
-        }
-        else{
+        if(error){
 #ifdef DEBUG
             UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Load content error" delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:nil, nil];
             [alertView show];
@@ -267,10 +271,14 @@
     NSUInteger rowNumOfSection = sectionInfo.numberOfObjects;
     if (indexPath.section == (sectionNum -1) && indexPath.row == (rowNumOfSection - 1)) {
         
+        lastCell = TRUE;
         Story *story = [self.fetchedResultsController objectAtIndexPath:indexPath];
-        NSString *currentDateString = story.date.date;
-        
-        [self.netClient downloadBeforeDate:currentDateString withCompletionHandler:nil];
+        currentDateString = story.date.date;
+    }
+    
+    if (self.tableView.contentSize.height > self.view.bounds.size.height
+        && self.tableView.contentSize.height > loadMoreTableFooterView.frame.origin.y) {
+        [self resetMoreFrame];
     }
 }
 
@@ -310,9 +318,6 @@
         cell = [tableView dequeueReusableCellWithIdentifier:@"storyCell" forIndexPath:indexPath];
     }
     cell.customeLabel.text = story.title;
-    
-//    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"storyCell" forIndexPath:indexPath];
-//    cell.textLabel.text = @"111";
     
     return cell;
 }
@@ -437,12 +442,37 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     
+    if (!_reloading && !isLoadMoreing && [_refreshHeaderView getState] == EGOOPullRefreshNormal
+        && [loadMoreTableFooterView getState] == PullLoadMoreNormal) {
+        
+        //解决sectionHeaderView卡在navigationBar下面的问题
+        CGFloat sectionHeaderHeight = HEIGHT_OF_SECTION_HEADER;
+        if (scrollView.contentOffset.y <= sectionHeaderHeight && scrollView.contentOffset.y >= 0) {
+            scrollView.contentInset = UIEdgeInsetsMake(-scrollView.contentOffset.y, scrollView.contentInset.left, scrollView.contentInset.bottom, scrollView.contentInset.right);
+        } else if (scrollView.contentOffset.y>=sectionHeaderHeight) {
+            scrollView.contentInset = UIEdgeInsetsMake(-sectionHeaderHeight, scrollView.contentInset.left, scrollView.contentInset.bottom, scrollView.contentInset.right);
+        }
+    }
+    
+    
     [_refreshHeaderView egoRefreshScrollViewDidScroll:scrollView];
+    
+    if(lastCell)
+    {
+        [loadMoreTableFooterView loadMoreScrollViewDidScroll:scrollView];
+    }
+//    NSLog(@"insert:[%lf, %lf, %lf, %lf], offset:[%lf, %lf]", scrollView.contentInset.top,
+//          scrollView.contentInset.left, scrollView.contentInset.bottom,scrollView.contentInset.right,scrollView.contentOffset.x, scrollView.contentOffset.y);
 }
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
     
     [_refreshHeaderView egoRefreshScrollViewDidEndDragging:scrollView];
+    
+    if(lastCell)
+    {
+        [loadMoreTableFooterView loadMoreScrollViewDidEndDragging:scrollView];
+    }
 }
 
 #pragma mark EGORefreshTableHeaderDelegate Methods
@@ -463,6 +493,57 @@
     
     return [NSDate date]; // should return date data source was last changed
     
+}
+
+#pragma mark LoadMoreTableFooterDelegate Methods
+
+- (void)loadMoreTableFooterDidTriggerLoadMore:(LoadMoreTableFooterView*)view
+{
+    isLoadMoreing = YES;
+    
+    [self.netClient downloadBeforeDate:currentDateString withCompletionHandler:^(NSError *error){
+        
+        isLoadMoreing = NO;
+        
+        [loadMoreTableFooterView loadMoreScrollViewDataSourceDidFinishedLoading:self.tableView];
+        
+        if(error){
+#ifdef DEBUG
+            UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Load content error" delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:nil, nil];
+            [alertView show];
+#endif
+        }
+        else{
+            lastCell = FALSE;
+        }
+    }];
+}
+
+- (BOOL)loadMoreTableFooterDataSourceIsLoading:(LoadMoreTableFooterView*)view
+{
+    return isLoadMoreing;
+}
+
+
+-(void)notification
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(notificationEvent:)
+                                                 name:NSManagedObjectContextObjectsDidChangeNotification
+                                               object:self.managedObjectContext];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(notificationEvent:)
+                                                 name:NSManagedObjectContextDidSaveNotification
+                                               object:self.managedObjectContext];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(notificationEvent:)
+                                                 name:NSManagedObjectContextWillSaveNotification
+                                               object:self.managedObjectContext];
+}
+
+-(void)notificationEvent:(NSNotification*)notify
+{
+    NSLog(@"%@", [notify description]);
 }
 
 @end
