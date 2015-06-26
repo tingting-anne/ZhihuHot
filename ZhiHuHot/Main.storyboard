@@ -129,7 +129,7 @@
             </objects>
             <point key="canvasLocation" x="981" y="-318"/>
         </scene>
-        <!--今日热谈-->
+        <!--今日热闻-->
         <scene sceneID="4Cs-TM-iox">
             <objects>
                 <tableViewController id="Qwj-uH-7q1" customClass="DailyTableViewController" sceneMemberID="viewController">
@@ -205,7 +205,7 @@
                         </connections>
                     </tableView>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="今日热谈" id="Bto-83-3LA">
+                    <navigationItem key="navigationItem" title="今日热闻" id="Bto-83-3LA">
                         <barButtonItem key="leftBarButtonItem" image="sideMenu" id="opB-l8-pLg"/>
                     </navigationItem>
                     <connections>
@@ -321,6 +321,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="nmB-XB-NcZ"/>
-        <segue reference="WlD-Bd-4y2"/>
+        <segue reference="dWF-6J-WXD"/>
     </inferredMetricsTieBreakers>
 </document>

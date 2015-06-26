@@ -1,4 +1,4 @@
-修改与优化：
+历史与总结：
 1、表单元中图片需要使用占位图片，否则会先刷新title,再刷新图片时会很慢。用占位符直接替换。
 2、修改EGOTableViewPullRefreshAndLoadMore实现，对每次拉动后的contentInsets和contentOffset重置，否则会有叠加；
 3、由于(NSPredicate *)predicateWithFormat:(NSString *)format,, ...中format写为[NSString format ...]导致date重复插入;

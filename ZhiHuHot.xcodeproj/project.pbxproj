@@ -38,6 +38,7 @@
 		EAAFDBD11B3BF612007DA451 /* whiteArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EAAFDBBF1B3BF612007DA451 /* whiteArrow@2x.png */; };
 		EAAFDBD21B3BF612007DA451 /* whiteArrowLoadMore.png in Resources */ = {isa = PBXBuildFile; fileRef = EAAFDBC01B3BF612007DA451 /* whiteArrowLoadMore.png */; };
 		EAAFDBD31B3BF612007DA451 /* whiteArrowLoadMore@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EAAFDBC11B3BF612007DA451 /* whiteArrowLoadMore@2x.png */; };
+		EABAA8C31B3D3B540056D242 /* 知乎日报-API-分析.md in Sources */ = {isa = PBXBuildFile; fileRef = EABAA8C21B3D3B540056D242 /* 知乎日报-API-分析.md */; };
 		EABE31901B38FC730004BB69 /* Doc in Resources */ = {isa = PBXBuildFile; fileRef = EABE318F1B38FC730004BB69 /* Doc */; };
 		EAC2883A1B30459600390CFB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EAC288391B30459600390CFB /* main.m */; };
 		EAC2883D1B30459600390CFB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EAC2883C1B30459600390CFB /* AppDelegate.m */; };
@@ -109,6 +110,7 @@
 		EAAFDBBF1B3BF612007DA451 /* whiteArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "whiteArrow@2x.png"; sourceTree = "<group>"; };
 		EAAFDBC01B3BF612007DA451 /* whiteArrowLoadMore.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = whiteArrowLoadMore.png; sourceTree = "<group>"; };
 		EAAFDBC11B3BF612007DA451 /* whiteArrowLoadMore@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "whiteArrowLoadMore@2x.png"; sourceTree = "<group>"; };
+		EABAA8C21B3D3B540056D242 /* 知乎日报-API-分析.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = "知乎日报-API-分析.md"; sourceTree = "<group>"; };
 		EABE318F1B38FC730004BB69 /* Doc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Doc; sourceTree = "<group>"; };
 		EAC288341B30459600390CFB /* ZhiHuHot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZhiHuHot.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EAC288381B30459600390CFB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -260,9 +262,21 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		EABAA8C11B3CDFCB0056D242 /* XIBS */ = {
+			isa = PBXGroup;
+			children = (
+				EAFD51DC1B39A6F1007307BE /* LinkViewController.xib */,
+				EAC288491B30459700390CFB /* LaunchScreen.xib */,
+				EA43A6FE1B369A2700FF3FF0 /* DailyTableSectionHeader.xib */,
+				EAFD51D51B396D31007307BE /* ContentHeaderView.xib */,
+			);
+			name = XIBS;
+			sourceTree = "<group>";
+		};
 		EAC2882B1B30459600390CFB = {
 			isa = PBXGroup;
 			children = (
+				EABAA8C21B3D3B540056D242 /* 知乎日报-API-分析.md */,
 				EABE318F1B38FC730004BB69 /* Doc */,
 				EAC288361B30459600390CFB /* ZhiHuHot */,
 				EAC288531B30459700390CFB /* ZhiHuHotTests */,
@@ -284,17 +298,14 @@
 		EAC288361B30459600390CFB /* ZhiHuHot */ = {
 			isa = PBXGroup;
 			children = (
+				EABAA8C11B3CDFCB0056D242 /* XIBS */,
 				EAAFDBAA1B3BF612007DA451 /* EGOTableViewPullRefreshAndLoadMore */,
 				EA29D7121B3312AF002DCCAF /* ViewControllers */,
 				EA29D7111B3311E1002DCCAF /* Models */,
 				EAC2883B1B30459600390CFB /* AppDelegate.h */,
 				EAC2883C1B30459600390CFB /* AppDelegate.m */,
 				EAC288471B30459700390CFB /* Images.xcassets */,
-				EAFD51DC1B39A6F1007307BE /* LinkViewController.xib */,
-				EAC288491B30459700390CFB /* LaunchScreen.xib */,
 				EAA74F0A1B31B9B300EE9360 /* Main.storyboard */,
-				EA43A6FE1B369A2700FF3FF0 /* DailyTableSectionHeader.xib */,
-				EAFD51D51B396D31007307BE /* ContentHeaderView.xib */,
 				EAC288371B30459600390CFB /* Supporting Files */,
 			);
 			path = ZhiHuHot;
@@ -506,6 +517,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EABAA8C31B3D3B540056D242 /* 知乎日报-API-分析.md in Sources */,
 				EAAFDBC21B3BF612007DA451 /* EGORefreshTableHeaderView.m in Sources */,
 				EAFD51CF1B392F9B007307BE /* ListTableViewCell.m in Sources */,
 				EAC288401B30459600390CFB /* ZhiHuHot.xcdatamodeld in Sources */,
@@ -646,6 +658,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer: Wei Feng Hou (W5X736XVC4)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Wei Feng Hou (W5X736XVC4)";
 				INFOPLIST_FILE = ZhiHuHot/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/**";
@@ -659,6 +672,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Wei Feng Hou (W5X736XVC4)";
 				INFOPLIST_FILE = ZhiHuHot/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/**";

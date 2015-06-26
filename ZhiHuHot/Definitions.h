@@ -26,6 +26,12 @@ typedef enum CONTENTTYPE{
     THEME_STORY_CONTENT,
 }CONTENTTYPE;
 
+typedef enum SCROLL_DIRECTION_ENUM{
+    SCROLL_DIRECTION_UP,
+    SCROLL_DIRECTION_DOWN,
+    SCROLL_DIRECTION_NUM,
+}SCROLL_DIRECTION_ENUM;
+
 #define ZHHErrorDomain @"FakeZhihuDailyDomain"
 
 typedef enum : NSUInteger {

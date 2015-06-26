@@ -20,22 +20,30 @@
 #import "ListTableViewCell.h"
 
 #define HEIGHT_OF_SECTION_HEADER 30.0f
+#define HEIGHT_OF_CELL 90.0f
 
 @interface DailyTableViewController ()
 {
+    //----- 下拉刷新------
     EGORefreshTableHeaderView *_refreshHeaderView;
     BOOL _reloading;
     
-//    //保存初始内容，EGOTableViewPullRefreshAndLoadMore执行完后要重新赋值，否则导航条会遮挡住表单元
-//    //originContentInset[64,0,0,0] originContentOffset[0, -64]
-    //CGPoint originContentOffset;
-    //UIEdgeInsets originContentInset;
-    
+    //------上拉刷新------
     LoadMoreTableFooterView *loadMoreTableFooterView;
     BOOL isLoadMoreing;
     
+    //用于上拉刷新异步
     BOOL lastCell;
     NSString *currentDateString;
+    
+    //------navigationItem标题修改------
+    DailyTableSectionHeader* lastestSectionView;
+    NSInteger latestSection;
+    
+    //判断拉动方向
+    CGFloat startContentOffsetY;
+//    CGFloat willEndContentOffsetY;
+//    CGFloat endContentOffsetY;
 }
 
 @property(strong,nonatomic)NSFetchedResultsController* fetchedResultsController;
@@ -46,6 +54,7 @@
 -(void)updateLatestStories;
 - (void)reloadTableViewDataSource;
 - (void)resetMoreFrame;
+- (void)resetForNavItemTitle:(CGFloat)endOffsetY;
 
 @end
 
@@ -76,6 +85,8 @@
         loadMoreTableFooterView.delegate = self;
         [self.tableView addSubview:loadMoreTableFooterView];
     }
+    latestSection = 0;
+    lastestSectionView = nil;
 }
 
 - (void)setManagedObjectContext:(NSManagedObjectContext *)managedObjectContext {
@@ -167,6 +178,34 @@
     loadMoreTableFooterView.frame = CGRectMake(0.0f, self.tableView.contentSize.height, self.view.frame.size.width, self.tableView.bounds.size.height);
 }
 
+- (void)resetForNavItemTitle:(CGFloat)endOffsetY
+{
+   //lastestSectionView=nil说明没用拉动
+    if (lastestSectionView){
+        SCROLL_DIRECTION_ENUM direction = SCROLL_DIRECTION_NUM;
+        if (endOffsetY < startContentOffsetY) { //下拉
+            direction = SCROLL_DIRECTION_DOWN;
+        } else if (endOffsetY > startContentOffsetY) {//上拉
+            direction = SCROLL_DIRECTION_UP;
+        }
+        NSLog(@"%lf, %lf", lastestSectionView.frame.origin.y,self.tableView.contentInset.top);
+        CGFloat headerHieght = self.navigationController.navigationBar.frame.size.height + [[UIApplication sharedApplication] statusBarFrame].size.height;
+        if (direction == SCROLL_DIRECTION_DOWN && lastestSectionView.frame.origin.y - headerHieght >= self.tableView.contentOffset.y) {
+            
+            NSIndexPath *objectIndexPath = [NSIndexPath indexPathForRow:0 inSection:latestSection-1];
+            Story *story = [self.fetchedResultsController objectAtIndexPath:objectIndexPath];
+            if(story.date.date != self.navigationItem.title){
+                self.navigationItem.title = [self headerStringFormateWithDate:story.date.date];
+            }
+        }
+        else if (direction == SCROLL_DIRECTION_UP && (lastestSectionView.frame.origin.y - (headerHieght - HEIGHT_OF_SECTION_HEADER)) <= self.tableView.contentOffset.y) {
+            if(lastestSectionView.headerString.text != self.navigationItem.title){
+                self.navigationItem.title = lastestSectionView.headerString.text;
+            }
+        }
+    }
+}
+
 -(void)updateLatestStories
 {
     static NSDate* preDate = nil;
@@ -191,7 +230,7 @@
 {
     if ([[AppHelper shareAppHelper] isValidDateString:dateString]) {
         if ([[AppHelper shareAppHelper] isTodayWithDateString:dateString]) {
-            return @"今日";
+            return @"今日热闻";
         }
         
         static NSDateFormatter *dateFormatter = nil;
@@ -261,6 +300,8 @@
     NSString *headerString = [self headerStringFormateWithDate:dateString];
     sectionHeaderView.headerString.text = headerString;
     
+    lastestSectionView = sectionHeaderView;
+    latestSection = section;
     return sectionHeaderView;
 }
 
@@ -283,7 +324,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 90.0f;
+    return HEIGHT_OF_CELL;
 }
 
 #pragma mark - Table view data source delegate
@@ -441,7 +482,6 @@
 #pragma mark UIScrollViewDelegate Methods
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    
     if (!_reloading && !isLoadMoreing && [_refreshHeaderView getState] == EGOOPullRefreshNormal
         && [loadMoreTableFooterView getState] == PullLoadMoreNormal) {
         
@@ -454,16 +494,24 @@
         }
     }
     
-    
     [_refreshHeaderView egoRefreshScrollViewDidScroll:scrollView];
     
     if(lastCell)
     {
         [loadMoreTableFooterView loadMoreScrollViewDidScroll:scrollView];
     }
+    
 //    NSLog(@"insert:[%lf, %lf, %lf, %lf], offset:[%lf, %lf]", scrollView.contentInset.top,
 //          scrollView.contentInset.left, scrollView.contentInset.bottom,scrollView.contentInset.right,scrollView.contentOffset.x, scrollView.contentOffset.y);
 }
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{ //拖动前的起始坐标
+    startContentOffsetY = scrollView.contentOffset.y;
+}
+
+//- (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset{ //将要停止前的坐标
+//    willEndContentOffsetY = scrollView.contentOffset.y;
+//}
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
     
@@ -473,6 +521,13 @@
     {
         [loadMoreTableFooterView loadMoreScrollViewDidEndDragging:scrollView];
     }
+    [self resetForNavItemTitle:scrollView.contentOffset.y];
+}
+
+-(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+{
+    //防止继续滚动导致出现新的section
+    [self resetForNavItemTitle:scrollView.contentOffset.y];
 }
 
 #pragma mark EGORefreshTableHeaderDelegate Methods
@@ -524,7 +579,7 @@
     return isLoadMoreing;
 }
 
-
+#pragma mark test mothed
 -(void)notification
 {
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -543,7 +598,7 @@
 
 -(void)notificationEvent:(NSNotification*)notify
 {
-    NSLog(@"%@", [notify description]);
+    NSLog(@"%s: %@", __FUNCTION__,[notify description]);
 }
 
 @end
