@@ -15,6 +15,7 @@
 @interface ContentViewController()
 {
     BOOL isFirstLoad;
+    BOOL isLinkOpen;
 }
 @property(strong,nonatomic)NetClient* netClient;
 @property(strong,nonatomic)LinkViewController* linkViewController;
@@ -57,19 +58,27 @@
             return;
         }
         
-        NSString *htmlString = [NSString stringWithFormat:@"<html><head><link rel=\"stylesheet\" type=\"text/css\" href=%@ /></head><body>%@</body></html>", dic[@"css"][0], dic[@"body"]];
-        
-        [self.webView loadHTMLString:htmlString baseURL:nil];
-        
-        if (DAILY_STORY_CONTENT == self.contentType) {
-            [self loadDailyWebViewPart:dic];
+        if (!dic || (!dic[@"body"] && !dic[@"share_url"])) {
+            return;
+        }
+        if (dic[@"body"] == nil) {//再次链接
+            isLinkOpen = TRUE;
+            NSURL* share_url = [[NSURL alloc] initWithString:dic[@"share_url"]];
+            [self.webView loadRequest:[NSURLRequest requestWithURL:share_url]];
         }
         else{
-            [self loadThemeWebViewPart:dic];
+            isLinkOpen = FALSE;
+            NSString *htmlString = [NSString stringWithFormat:@"<html><head><link rel=\"stylesheet\" type=\"text/css\" href=%@ /></head><body>%@</body></html>", dic[@"css"][0], dic[@"body"]];
+            
+            [self.webView loadHTMLString:htmlString baseURL:nil];
+            
+            if (DAILY_STORY_CONTENT == self.contentType) {
+                [self loadDailyWebViewPart:dic];
+            }
+            else{
+                [self loadThemeWebViewPart:dic];
+            }
         }
-        
-        [self.activity stopAnimating];
-        self.activity.hidden = YES;
     }];
 }
 
@@ -95,6 +104,10 @@
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
+    if (isLinkOpen) {//链接方式打开，都在当前页处理
+        return TRUE;
+    }
+    
     BOOL ret = TRUE;
     if (isFirstLoad) {
         isFirstLoad = FALSE;
@@ -122,4 +135,12 @@
     self.activity.hidden = YES;
 }
 
+-(void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
+{
+    UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"ERROR", nil) message:NSLocalizedString(@"NET_DOWNLOAD_ERROR", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"CANCEL", nil)  otherButtonTitles:nil, nil];
+    [alertView show];
+    
+    [self.activity stopAnimating];
+    self.activity.hidden = YES;
+}
 @end
