@@ -39,6 +39,8 @@
 		EAAFDBD21B3BF612007DA451 /* whiteArrowLoadMore.png in Resources */ = {isa = PBXBuildFile; fileRef = EAAFDBC01B3BF612007DA451 /* whiteArrowLoadMore.png */; };
 		EAAFDBD31B3BF612007DA451 /* whiteArrowLoadMore@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EAAFDBC11B3BF612007DA451 /* whiteArrowLoadMore@2x.png */; };
 		EABAA8C31B3D3B540056D242 /* 知乎日报-API-分析.md in Sources */ = {isa = PBXBuildFile; fileRef = EABAA8C21B3D3B540056D242 /* 知乎日报-API-分析.md */; };
+		EABAA8D21B3D4CA60056D242 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = EABAA8D01B3D4CA60056D242 /* Localizable.strings */; };
+		EABAA8D61B3D4CB30056D242 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = EABAA8D41B3D4CB30056D242 /* Localizable.strings */; };
 		EABE31901B38FC730004BB69 /* Doc in Resources */ = {isa = PBXBuildFile; fileRef = EABE318F1B38FC730004BB69 /* Doc */; };
 		EAC2883A1B30459600390CFB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EAC288391B30459600390CFB /* main.m */; };
 		EAC2883D1B30459600390CFB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EAC2883C1B30459600390CFB /* AppDelegate.m */; };
@@ -111,6 +113,8 @@
 		EAAFDBC01B3BF612007DA451 /* whiteArrowLoadMore.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = whiteArrowLoadMore.png; sourceTree = "<group>"; };
 		EAAFDBC11B3BF612007DA451 /* whiteArrowLoadMore@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "whiteArrowLoadMore@2x.png"; sourceTree = "<group>"; };
 		EABAA8C21B3D3B540056D242 /* 知乎日报-API-分析.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = "知乎日报-API-分析.md"; sourceTree = "<group>"; };
+		EABAA8D11B3D4CA60056D242 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Localizable.strings; sourceTree = "<group>"; };
+		EABAA8D51B3D4CB30056D242 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = Localizable.strings; sourceTree = "<group>"; };
 		EABE318F1B38FC730004BB69 /* Doc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Doc; sourceTree = "<group>"; };
 		EAC288341B30459600390CFB /* ZhiHuHot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZhiHuHot.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EAC288381B30459600390CFB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -273,10 +277,38 @@
 			name = XIBS;
 			sourceTree = "<group>";
 		};
+		EABAA8CE1B3D4BF60056D242 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				EABAA8D31B3D4CB30056D242 /* zh-Hans.lproj */,
+				EABAA8CF1B3D4CA60056D242 /* en.lproj */,
+				EABAA8C21B3D3B540056D242 /* 知乎日报-API-分析.md */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		EABAA8CF1B3D4CA60056D242 /* en.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				EABAA8D01B3D4CA60056D242 /* Localizable.strings */,
+			);
+			name = en.lproj;
+			path = ZhiHuHot/en.lproj;
+			sourceTree = "<group>";
+		};
+		EABAA8D31B3D4CB30056D242 /* zh-Hans.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				EABAA8D41B3D4CB30056D242 /* Localizable.strings */,
+			);
+			name = "zh-Hans.lproj";
+			path = "ZhiHuHot/zh-Hans.lproj";
+			sourceTree = "<group>";
+		};
 		EAC2882B1B30459600390CFB = {
 			isa = PBXGroup;
 			children = (
-				EABAA8C21B3D3B540056D242 /* 知乎日报-API-分析.md */,
+				EABAA8CE1B3D4BF60056D242 /* Resources */,
 				EABE318F1B38FC730004BB69 /* Doc */,
 				EAC288361B30459600390CFB /* ZhiHuHot */,
 				EAC288531B30459700390CFB /* ZhiHuHotTests */,
@@ -427,6 +459,7 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hans",
 			);
 			mainGroup = EAC2882B1B30459600390CFB;
 			productRefGroup = EAC288351B30459600390CFB /* Products */;
@@ -454,9 +487,11 @@
 				EAAFDBC81B3BF612007DA451 /* blueArrow.png in Resources */,
 				EA43A6FF1B369A2700FF3FF0 /* DailyTableSectionHeader.xib in Resources */,
 				EAFD51DE1B39A6F1007307BE /* LinkViewController.xib in Resources */,
+				EABAA8D61B3D4CB30056D242 /* Localizable.strings in Resources */,
 				EAC2884B1B30459700390CFB /* LaunchScreen.xib in Resources */,
 				EAAFDBC51B3BF612007DA451 /* blackArrow@2x.png in Resources */,
 				EAAFDBC71B3BF612007DA451 /* blackArrowLoadMore@2x.png in Resources */,
+				EABAA8D21B3D4CA60056D242 /* Localizable.strings in Resources */,
 				EAAFDBCF1B3BF612007DA451 /* grayArrowLoadMore@2x.png in Resources */,
 				EABE31901B38FC730004BB69 /* Doc in Resources */,
 				EAC288481B30459700390CFB /* Images.xcassets in Resources */,
@@ -559,6 +594,22 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		EABAA8D01B3D4CA60056D242 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EABAA8D11B3D4CA60056D242 /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		EABAA8D41B3D4CB30056D242 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EABAA8D51B3D4CB30056D242 /* zh-Hans */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		EAC288491B30459700390CFB /* LaunchScreen.xib */ = {
 			isa = PBXVariantGroup;
 			children = (

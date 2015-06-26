@@ -52,10 +52,8 @@
     [self.netClient downloadWithNewsID:[newsID unsignedIntegerValue] withCompletionHandler:^(NSDictionary* dic, NSError *error){
         
         if(error){
-#ifdef DEBUG
-            UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Load content error" delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:nil, nil];
+            UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"ERROR", nil) message:NSLocalizedString(@"NET_DOWNLOAD_ERROR", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"CANCEL", nil)  otherButtonTitles:nil, nil];
             [alertView show];
-#endif
             return;
         }
         

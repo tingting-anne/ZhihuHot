@@ -230,7 +230,7 @@
 {
     if ([[AppHelper shareAppHelper] isValidDateString:dateString]) {
         if ([[AppHelper shareAppHelper] isTodayWithDateString:dateString]) {
-            return @"今日热闻";
+            return NSLocalizedString(@"DAILY_LATEST", @"today's news");
         }
         
         static NSDateFormatter *dateFormatter = nil;
@@ -262,10 +262,8 @@
         [_refreshHeaderView egoRefreshScrollViewDataSourceDidFinishedLoading:self.tableView];
         
         if(error){
-#ifdef DEBUG
-            UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Load content error" delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:nil, nil];
+            UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"ERROR", nil) message:NSLocalizedString(@"NET_DOWNLOAD_ERROR", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"CANCEL", nil)  otherButtonTitles:nil, nil];
             [alertView show];
-#endif
         }
     }];
 }
@@ -563,10 +561,8 @@
         [loadMoreTableFooterView loadMoreScrollViewDataSourceDidFinishedLoading:self.tableView];
         
         if(error){
-#ifdef DEBUG
-            UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Load content error" delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:nil, nil];
+            UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"ERROR", nil) message:NSLocalizedString(@"NET_DOWNLOAD_ERROR", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"CANCEL", nil)  otherButtonTitles:nil, nil];
             [alertView show];
-#endif
         }
         else{
             lastCell = FALSE;

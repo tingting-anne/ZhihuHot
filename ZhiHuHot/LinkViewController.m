@@ -49,11 +49,8 @@
 
 -(void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
 {
-#ifdef DEBUG
-    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"错误" message:@"加载失败" delegate:nil cancelButtonTitle:@"取消" otherButtonTitles:nil, nil];
-    
-    [alert show];
-#endif
+    UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"ERROR", nil) message:NSLocalizedString(@"NET_DOWNLOAD_ERROR", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"CANCEL", nil)  otherButtonTitles:nil, nil];
+    [alertView show];
     
     [self.activity stopAnimating];
     self.activity.hidden = YES;
