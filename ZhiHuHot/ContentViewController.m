@@ -37,7 +37,8 @@
     [super viewDidLoad];
     
     self.webView.delegate = self;//放在awakeFromNib中没有调用成功
-    self.activity.hidesWhenStopped = YES;
+    self.activity.hidden = NO;
+    [self.view bringSubviewToFront:self.activity];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -47,8 +48,7 @@
 
 -(void)setNewsID:(NSNumber *)newsID
 {
-    self.activity.hidden = NO;
-    [self.activity startAnimating];
+   // [self.activity startAnimating];
     
     [self.netClient downloadWithNewsID:[newsID unsignedIntegerValue] withCompletionHandler:^(NSDictionary* dic, NSError *error){
         
@@ -125,14 +125,12 @@
 
 -(void)webViewDidStartLoad:(UIWebView *)webView
 {
-    self.activity.hidden = NO;
     [self.activity startAnimating];
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
     [self.activity stopAnimating];
-    self.activity.hidden = YES;
 }
 
 -(void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
@@ -141,6 +139,5 @@
     [alertView show];
     
     [self.activity stopAnimating];
-    self.activity.hidden = YES;
 }
 @end

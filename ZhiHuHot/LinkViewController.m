@@ -9,14 +9,19 @@
 #import "LinkViewController.h"
 
 @interface LinkViewController ()
-
+{
+    uint loadCount;
+}
 @end
 
 @implementation LinkViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    
+    [self.view bringSubviewToFront:self.activity];
+    self.activity.hidden = NO;
+    
     // Do any additional setup after loading the view from its nib.
     self.webView.delegate = self;
     self.webView.scalesPageToFit = YES;
@@ -30,21 +35,15 @@
 }
 
 #pragma mark UIWebViewDelegate
-- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
-{
-    return YES;
-}
 
 -(void)webViewDidStartLoad:(UIWebView *)webView
 {
-    self.activity.hidden = NO;
     [self.activity startAnimating];
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
     [self.activity stopAnimating];
-    self.activity.hidden = YES;
 }
 
 -(void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
@@ -53,7 +52,6 @@
     [alertView show];
     
     [self.activity stopAnimating];
-    self.activity.hidden = YES;
 }
 
 /*
