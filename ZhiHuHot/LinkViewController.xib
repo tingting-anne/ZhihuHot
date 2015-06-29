@@ -1,34 +1,35 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LinkViewController">
             <connections>
-                <outlet property="activity" destination="Fbo-sY-khf" id="XXq-vo-Axa"/>
+                <outlet property="activity" destination="kfT-Z0-dKa" id="3HK-MG-oVm"/>
                 <outlet property="view" destination="IAa-wu-BeP" id="u1O-Hy-oOX"/>
                 <outlet property="webView" destination="TyV-sC-6YE" id="o9l-Uw-AaX"/>
             </connections>
         </placeholder>
         <view contentMode="scaleToFill" id="IAa-wu-BeP">
-            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <rect key="frame" x="0.0" y="64" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Fbo-sY-khf">
-                    <rect key="frame" x="290" y="290" width="20" height="20"/>
-                </activityIndicatorView>
                 <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TyV-sC-6YE">
-                    <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </webView>
+                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="kfT-Z0-dKa">
+                    <rect key="frame" x="290" y="290" width="20" height="20"/>
+                </activityIndicatorView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstAttribute="centerY" secondItem="Fbo-sY-khf" secondAttribute="centerY" id="2TX-n3-0RT"/>
-                <constraint firstItem="TyV-sC-6YE" firstAttribute="top" secondItem="IAa-wu-BeP" secondAttribute="top" constant="64" id="Boh-kx-uVj"/>
+                <constraint firstItem="TyV-sC-6YE" firstAttribute="top" secondItem="IAa-wu-BeP" secondAttribute="top" id="Boh-kx-uVj"/>
                 <constraint firstAttribute="trailing" secondItem="TyV-sC-6YE" secondAttribute="trailing" id="KmO-jl-Zs8"/>
-                <constraint firstAttribute="centerX" secondItem="Fbo-sY-khf" secondAttribute="centerX" id="hNa-ez-jNA"/>
+                <constraint firstAttribute="centerY" secondItem="kfT-Z0-dKa" secondAttribute="centerY" id="giv-KP-Af0"/>
+                <constraint firstAttribute="centerX" secondItem="kfT-Z0-dKa" secondAttribute="centerX" id="v3E-yo-klS"/>
                 <constraint firstAttribute="bottom" secondItem="TyV-sC-6YE" secondAttribute="bottom" id="wP7-0p-xcl"/>
                 <constraint firstItem="TyV-sC-6YE" firstAttribute="leading" secondItem="IAa-wu-BeP" secondAttribute="leading" id="x4F-fl-KFZ"/>
             </constraints>

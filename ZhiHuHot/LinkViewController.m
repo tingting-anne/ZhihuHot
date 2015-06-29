@@ -19,8 +19,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self.view bringSubviewToFront:self.activity];
-    self.activity.hidden = NO;
+   // [self.view bringSubviewToFront:self.activity];
+  //  self.activity.hidden = NO;
     
     // Do any additional setup after loading the view from its nib.
     self.webView.delegate = self;

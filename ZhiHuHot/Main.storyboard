@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="adt-OC-CuN">
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -285,11 +286,11 @@
                         <rect key="frame" x="0.0" y="64" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="qgt-Wf-uw6">
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="qgt-Wf-uw6">
                                 <rect key="frame" x="290" y="290" width="20" height="20"/>
                             </activityIndicatorView>
                             <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="osy-rY-80U">
-                                <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </webView>
                         </subviews>
@@ -297,7 +298,7 @@
                         <constraints>
                             <constraint firstAttribute="centerX" secondItem="qgt-Wf-uw6" secondAttribute="centerX" id="PEb-Ld-sCX"/>
                             <constraint firstAttribute="trailing" secondItem="osy-rY-80U" secondAttribute="trailing" id="SV3-oC-wKP"/>
-                            <constraint firstItem="osy-rY-80U" firstAttribute="top" secondItem="a1Q-no-0PK" secondAttribute="top" constant="64" id="bLj-XU-Wqi"/>
+                            <constraint firstItem="osy-rY-80U" firstAttribute="top" secondItem="a1Q-no-0PK" secondAttribute="top" id="bLj-XU-Wqi"/>
                             <constraint firstAttribute="bottom" secondItem="osy-rY-80U" secondAttribute="bottom" id="cr0-jY-HmR"/>
                             <constraint firstAttribute="centerX" secondItem="osy-rY-80U" secondAttribute="centerX" id="n5R-dk-EJW"/>
                             <constraint firstItem="osy-rY-80U" firstAttribute="leading" secondItem="a1Q-no-0PK" secondAttribute="leading" id="pUQ-il-Ybp"/>

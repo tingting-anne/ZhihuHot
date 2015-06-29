@@ -273,6 +273,7 @@
 				EAC288491B30459700390CFB /* LaunchScreen.xib */,
 				EA43A6FE1B369A2700FF3FF0 /* DailyTableSectionHeader.xib */,
 				EAFD51D51B396D31007307BE /* ContentHeaderView.xib */,
+				EAA74F0A1B31B9B300EE9360 /* Main.storyboard */,
 			);
 			name = XIBS;
 			sourceTree = "<group>";
@@ -337,7 +338,6 @@
 				EAC2883B1B30459600390CFB /* AppDelegate.h */,
 				EAC2883C1B30459600390CFB /* AppDelegate.m */,
 				EAC288471B30459700390CFB /* Images.xcassets */,
-				EAA74F0A1B31B9B300EE9360 /* Main.storyboard */,
 				EAC288371B30459600390CFB /* Supporting Files */,
 			);
 			path = ZhiHuHot;
@@ -445,6 +445,7 @@
 				TargetAttributes = {
 					EAC288331B30459600390CFB = {
 						CreatedOnToolsVersion = 6.3.2;
+						DevelopmentTeam = GHW3937Z5U;
 					};
 					EAC2884F1B30459700390CFB = {
 						CreatedOnToolsVersion = 6.3.2;
@@ -712,6 +713,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/**";
 			};
 			name = Debug;
@@ -722,10 +724,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Wei Feng Hou (W5X736XVC4)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Wei Feng Hou (W5X736XVC4)";
 				INFOPLIST_FILE = ZhiHuHot/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/**";
 			};
 			name = Release;
