@@ -39,11 +39,10 @@
     //------navigationItem标题修改------
     DailyTableSectionHeader* lastestSectionView;
     NSInteger latestSection;
+    UIEdgeInsets originContentInset;
     
     //判断拉动方向
     CGFloat startContentOffsetY;
-//    CGFloat willEndContentOffsetY;
-//    CGFloat endContentOffsetY;
 }
 
 @property(strong,nonatomic)NSFetchedResultsController* fetchedResultsController;
@@ -163,12 +162,8 @@
         [self.view addGestureRecognizer:self.revealViewController.tapGestureRecognizer];
     }
     
+    originContentInset = self.tableView.contentInset;
     [_refreshHeaderView setOriginContentOffset:self.tableView.contentOffset insets:self.tableView.contentInset];
-}
-
--(void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
 }
 
 #pragma mark -
@@ -188,7 +183,7 @@
         } else if (endOffsetY > startContentOffsetY) {//上拉
             direction = SCROLL_DIRECTION_UP;
         }
-        NSLog(@"%lf, %lf", lastestSectionView.frame.origin.y,self.tableView.contentInset.top);
+        //NSLog(@"%lf, %lf", lastestSectionView.frame.origin.y,self.tableView.contentInset.top);
         CGFloat headerHieght = self.navigationController.navigationBar.frame.size.height + [[UIApplication sharedApplication] statusBarFrame].size.height;
         if (direction == SCROLL_DIRECTION_DOWN && lastestSectionView.frame.origin.y - headerHieght >= self.tableView.contentOffset.y) {
             
@@ -489,6 +484,11 @@
             scrollView.contentInset = UIEdgeInsetsMake(-scrollView.contentOffset.y, scrollView.contentInset.left, scrollView.contentInset.bottom, scrollView.contentInset.right);
         } else if (scrollView.contentOffset.y>=sectionHeaderHeight) {
             scrollView.contentInset = UIEdgeInsetsMake(-sectionHeaderHeight, scrollView.contentInset.left, scrollView.contentInset.bottom, scrollView.contentInset.right);
+        }
+        else if (scrollView.contentOffset.y < 0) {
+            if (originContentInset.top > 0) {
+                scrollView.contentInset = originContentInset;
+            }
         }
     }
     

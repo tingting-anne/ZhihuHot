@@ -95,7 +95,7 @@
     }
     
     if (interval >= UPDATECONTENTINTERVAL) {
-        [self.netClient downloadThemeStoriesWithThemeID:[self.themeID unsignedLongLongValue] withCompletionHandler:nil];
+        [self.netClient downloadThemeStoriesWithThemeID:[self.themeID unsignedIntValue] withCompletionHandler:nil];
     }
     
 }
@@ -115,7 +115,7 @@
 - (void)reloadTableViewDataSource{
     _reloading = YES;
     
-    [self.netClient downloadThemeStoriesWithThemeID:[self.themeID unsignedLongLongValue] withCompletionHandler:^(NSError* error){
+    [self.netClient downloadThemeStoriesWithThemeID:[self.themeID unsignedIntValue] withCompletionHandler:^(NSError* error){
         
         _reloading = NO;
         [_refreshHeaderView egoRefreshScrollViewDataSourceDidFinishedLoading:self.tableView];
@@ -192,7 +192,7 @@
     NSUInteger rowNumOfSection = sectionInfo.numberOfObjects;
     if (indexPath.section == (sectionNum -1) && indexPath.row == (rowNumOfSection - 1)) {
         
-        [self.netClient downloadThemeStoriesWithThemeID:[self.themeID unsignedLongLongValue] withCompletionHandler:nil];
+        [self.netClient downloadThemeStoriesWithThemeID:[self.themeID unsignedIntValue] withCompletionHandler:nil];
     }
 }
 
