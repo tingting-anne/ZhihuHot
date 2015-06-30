@@ -14,7 +14,6 @@
 
 @dynamic date;
 @dynamic stories;
-@dynamic topStories;
 
 @end
 

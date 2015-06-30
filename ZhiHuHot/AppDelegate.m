@@ -19,7 +19,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
     NetClient *netClient = [[NetClient alloc] initWithManagedObjectContext:self.managedObjectContext];
-    [netClient downloadLatestStoriesWithCompletionHandler:^(NSError* error){
+    [netClient downloadLatestStoriesWithCompletionHandler:^(NSError* error, NSArray* topStories){
         if (error) {
             NSLog(@"ERROR downloadStories : %s", __FUNCTION__);
         }

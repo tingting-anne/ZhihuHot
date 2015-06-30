@@ -15,7 +15,6 @@
 
 @property (nonatomic, retain) NSString * date;
 @property (nonatomic, retain) NSSet *stories;
-@property (nonatomic, retain) NSSet *topStories;
 @end
 
 @interface Date (CoreDataGeneratedAccessors)
@@ -24,11 +23,6 @@
 - (void)removeStoriesObject:(Story *)value;
 - (void)addStories:(NSSet *)values;
 - (void)removeStories:(NSSet *)values;
-
-- (void)addTopStoriesObject:(NSManagedObject *)value;
-- (void)removeTopStoriesObject:(NSManagedObject *)value;
-- (void)addTopStories:(NSSet *)values;
-- (void)removeTopStories:(NSSet *)values;
 
 @end
 

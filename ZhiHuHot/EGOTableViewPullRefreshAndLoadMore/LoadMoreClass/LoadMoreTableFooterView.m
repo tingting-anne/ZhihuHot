@@ -174,7 +174,7 @@
 		[UIView setAnimationDuration:0.2];
         
         originContentInset = scrollView.contentInset;
-		scrollView.contentInset = UIEdgeInsetsMake(0.0f, 0.0f, originContentInset.bottom + 60.0f, 0.0f);
+		scrollView.contentInset = UIEdgeInsetsMake(scrollView.contentInset.top, 0.0f, originContentInset.bottom + 60.0f, 0.0f);
 		[UIView commitAnimations];
         
         originContentOffset = scrollView.contentOffset;

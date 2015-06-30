@@ -14,5 +14,6 @@
 
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *menuBarButtonItem;
 @property (strong, nonatomic) NSNumber* themeID;
+@property (strong, nonatomic) NSString* thumbnail;
 
 @end

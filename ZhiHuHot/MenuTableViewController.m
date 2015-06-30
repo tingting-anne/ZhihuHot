@@ -174,9 +174,9 @@
         && [[destViewController childViewControllers].firstObject isKindOfClass:[SubjectTableViewController class]]) {
 
         SubjectTableViewController *subjectTableViewCtroller = (SubjectTableViewController *)[destViewController childViewControllers][0];
+        subjectTableViewCtroller.thumbnail = theme.thumbnail;
         subjectTableViewCtroller.themeID = theme.id;
         subjectTableViewCtroller.title = theme.name;
-        
     }
 }
 

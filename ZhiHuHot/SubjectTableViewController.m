@@ -181,7 +181,7 @@
 {
     [super viewDidAppear:animated];
     
-    [_refreshHeaderView setOriginContentOffset:self.tableView.contentOffset insets:self.tableView.contentInset];
+    [_refreshHeaderView setOriginContentOffset:CGPointMake(0.0f, -64.0f) insets:UIEdgeInsetsMake(64.0f, 0.0f, 0.0f, 0.0f)];
 }
 
 #pragma mark - Table view delegate

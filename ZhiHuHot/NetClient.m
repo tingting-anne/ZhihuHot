@@ -17,7 +17,7 @@
 
 @interface NetClient ()
 
--(void)getAndSaveStoriesWithUrl:(NSString *)urlString withCompletionHandler:(void(^)(NSError *error))completionHandler;
+-(void)getAndSaveStoriesWithUrl:(NSString *)urlString today:(BOOL) isToday withCompletionHandler:(void(^)(NSError *error, NSArray *topStories))completionHandler;
 
 @end
 
@@ -31,7 +31,7 @@
     return self;
 }
 
--(void)getAndSaveStoriesWithUrl:(NSString *)urlString withCompletionHandler:(void(^)(NSError *error))completionHandler
+-(void)getAndSaveStoriesWithUrl:(NSString *)urlString today:(BOOL) isToday withCompletionHandler:(void(^)(NSError *error, NSArray *topStories))completionHandler
 {
     AFHTTPSessionManager *smanager = [AFHTTPSessionManager manager];
     smanager.responseSerializer = [AFHTTPResponseSerializer serializer]; //告诉manager只下载原始数据, 不要解析数据
@@ -44,31 +44,34 @@
         
         NSString *dateString = storiesDictionary[@"date"];
         NSArray *storiesArray = storiesDictionary[@"stories"];
+        NSArray *topStoriesArray = storiesDictionary[@"top_stories"];
+        
         [self.context performBlock:^{
             NSError *saveError = nil;
             [Story loadFromArray:storiesArray withDate:dateString intoManagedObjectContext:self.context];
+            
             [self.context save:&saveError];
             if (saveError) {
                 NSLog(@"%s context save error, error:%@",__FUNCTION__,saveError);
             }
             
             if (completionHandler) {
-                completionHandler(saveError);
+                completionHandler(saveError, topStoriesArray);
             }
         }];
     }failure:^(NSURLSessionDataTask *task, NSError *error) {
         NSLog(@"%s %@",__FUNCTION__,error);
         
         if (completionHandler) {
-            completionHandler(error);
+            completionHandler(error, nil);
         }
     }];
 }
 
-- (void)downloadLatestStoriesWithCompletionHandler:(void(^)(NSError *error))completionHandler
+- (void)downloadLatestStoriesWithCompletionHandler:(void(^)(NSError *error, NSArray *topStories))completionHandler
 {
     NSString *urlString = [NSString stringWithFormat:@"%s", LATESTSTORIES];
-    [self getAndSaveStoriesWithUrl:urlString withCompletionHandler:completionHandler];
+    [self getAndSaveStoriesWithUrl:urlString today:YES withCompletionHandler:completionHandler];
 }
 
 - (void)downloadBeforeDate:(NSString *)dateString withCompletionHandler:(void(^)(NSError *error))completionHandler
@@ -83,7 +86,9 @@
     }
     else{
         NSString *urlString = [NSString stringWithFormat:[NSString stringWithFormat:@"%s", BEFORESTORIES], dateString];
-        [self getAndSaveStoriesWithUrl:urlString withCompletionHandler:completionHandler];
+        [self getAndSaveStoriesWithUrl:urlString today:NO withCompletionHandler:^(NSError *error, NSArray *topStories){
+            completionHandler(error);
+        }];
     }
 }
 

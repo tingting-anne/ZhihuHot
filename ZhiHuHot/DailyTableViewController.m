@@ -18,9 +18,11 @@
 #import "Definitions.h"
 #import "NetClient.h"
 #import "ListTableViewCell.h"
+#import "ImagesScrollView.h"
 
 #define HEIGHT_OF_SECTION_HEADER 30.0f
 #define HEIGHT_OF_CELL 90.0f
+#define HEIGHT_OF_FIRST_SECTION_HEADER 200.0f
 
 @interface DailyTableViewController ()
 {
@@ -43,23 +45,69 @@
     
     //判断拉动方向
     CGFloat startContentOffsetY;
+
 }
 
 @property(strong,nonatomic)NSFetchedResultsController* fetchedResultsController;
 @property(strong,nonatomic)NSManagedObjectContext* managedObjectContext;
 @property(strong,nonatomic)NetClient* netClient;
+@property(strong,nonatomic)ImagesScrollView * scrollView;
+@property(strong,nonatomic)UIView* firstSectionView;
 
 -(NSString *)headerStringFormateWithDate:(NSString *)dateString;
--(void)updateLatestStories;
+-(BOOL)updateLatestStories;
 - (void)reloadTableViewDataSource;
 - (void)resetMoreFrame;
 - (void)resetForNavItemTitle:(CGFloat)endOffsetY;
-
+- (void)createScrollView;
+- (void)setTopStories:(NSArray*) topStories;
 @end
 
 @implementation DailyTableViewController
 
 #pragma mark -
+
+#pragma mark - 构建图片滚动视图
+- (void)createScrollView
+{
+    CGRect headerRect = {{0,64}, {self.tableView.frame.size.width, HEIGHT_OF_FIRST_SECTION_HEADER}};
+    self.firstSectionView = [[UIView alloc] initWithFrame:headerRect];
+    
+    self.scrollView = [[ImagesScrollView alloc]initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, HEIGHT_OF_FIRST_SECTION_HEADER)];
+    //如果滚动视图的父视图由导航控制器控制,必须要设置该属性(ps,猜测这是为了正常显示,导航控制器内部设置了UIEdgeInsetsMake(64, 0, 0, 0))
+    [self.firstSectionView addSubview:self.scrollView];
+    
+    self.scrollView.PageControlShowStyle = UIPageControlShowStyleCenter;
+    //self.scrollView.pageControl.pageIndicatorTintColor = [UIColor blueColor];
+    //self.scrollView.pageControl.currentPageIndicatorTintColor = [UIColor purpleColor];
+    
+    //由于PageControl这个空间必须要添加在滚动视图的父视图上(添加在滚动视图上的话会随着图片滚动,而达不到效果)
+    [self.firstSectionView addSubview:self.scrollView.pageControl];
+}
+
+-(void)setTopStories:(NSArray *)topStories
+{
+    static NSArray* preTopStories = nil;
+    
+    if (!topStories) {
+        topStories = preTopStories;
+    }
+    else{
+        preTopStories = topStories;
+    }
+    
+    if (topStories && topStories.count > 0) {
+        NSMutableArray* imageNameArray = [[NSMutableArray alloc] initWithObjects:nil];
+        NSMutableArray* titleArray = [[NSMutableArray alloc] initWithObjects:nil];
+
+        for (NSDictionary *dic in topStories) {
+            [imageNameArray addObject:dic[@"image"]];
+            [titleArray addObject:dic[@"title"]];
+        }
+        
+        [self.scrollView setImageArray:imageNameArray titleArray:titleArray];
+    }
+}
 
 -(void)awakeFromNib
 {
@@ -117,6 +165,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self createScrollView];
+    
 #ifdef DEBUG
    // [self notification];
 #endif
@@ -132,7 +182,10 @@
     //[self.view addGestureRecognizer:self.revealViewController.panGestureRecognizer];
     //[self.view addGestureRecognizer:self.revealViewController.tapGestureRecognizer];
     
-    [self updateLatestStories];
+    if(![self updateLatestStories])
+    {
+        [self setTopStories:nil];
+    }
     
     NSError *error;
     BOOL success = [self.fetchedResultsController performFetch:&error];
@@ -161,9 +214,16 @@
         [self.view addGestureRecognizer:self.revealViewController.panGestureRecognizer];
         [self.view addGestureRecognizer:self.revealViewController.tapGestureRecognizer];
     }
+}
+
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
     
     originContentInset = self.tableView.contentInset;
-    [_refreshHeaderView setOriginContentOffset:self.tableView.contentOffset insets:self.tableView.contentInset];
+
+    //进入ContentViewController页面后再返回，offset变了，所以这里写死
+    [_refreshHeaderView setOriginContentOffset:CGPointMake(0.0f, -64.0f) insets:UIEdgeInsetsMake(64.0f, 0.0f, 0.0f, 0.0f)];
 }
 
 #pragma mark -
@@ -201,14 +261,14 @@
     }
 }
 
--(void)updateLatestStories
+-(BOOL)updateLatestStories
 {
     static NSDate* preDate = nil;
     
     NSTimeInterval interval = 0.0;
     if(preDate == nil){
         preDate = [NSDate date];
-        //interval = UPDATECONTENTINTERVAL;
+        interval = UPDATECONTENTINTERVAL;
     }
     else{
         NSDate* current = [NSDate date];
@@ -216,9 +276,14 @@
         preDate = current;
     }
     
+    BOOL ret = FALSE;
     if (interval >= UPDATECONTENTINTERVAL) {
-        [self.netClient downloadLatestStoriesWithCompletionHandler:nil];
+        ret = TRUE;
+        [self.netClient downloadLatestStoriesWithCompletionHandler:^(NSError* error, NSArray* topStories){
+            [self setTopStories:topStories];
+        }];
     }
+    return ret;
 }
 
 -(NSString *)headerStringFormateWithDate:(NSString *)dateString
@@ -250,7 +315,7 @@
 - (void)reloadTableViewDataSource{
     _reloading = YES;
     
-    [self.netClient downloadLatestStoriesWithCompletionHandler:^(NSError* error){
+    [self.netClient downloadLatestStoriesWithCompletionHandler:^(NSError* error, NSArray* topStories){
         
         _reloading = NO;
         
@@ -259,6 +324,9 @@
         if(error){
             UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"ERROR", nil) message:NSLocalizedString(@"NET_DOWNLOAD_ERROR", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"CANCEL", nil)  otherButtonTitles:nil, nil];
             [alertView show];
+        }
+        else{
+            [self setTopStories:topStories];
         }
     }];
 }
@@ -269,7 +337,7 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     if (section == 0) {
-        return 0.0f;
+        return HEIGHT_OF_FIRST_SECTION_HEADER;
     }
     else{
         return HEIGHT_OF_SECTION_HEADER;
@@ -280,7 +348,7 @@
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     if (section == 0) {
-        return nil;
+        return self.firstSectionView;
     }
     
     CGRect headerRect = {{0,0}, {self.tableView.frame.size.width, HEIGHT_OF_SECTION_HEADER}};
@@ -479,16 +547,21 @@
         && [loadMoreTableFooterView getState] == PullLoadMoreNormal) {
         
         //解决sectionHeaderView卡在navigationBar下面的问题
-        CGFloat sectionHeaderHeight = HEIGHT_OF_SECTION_HEADER;
-        if (scrollView.contentOffset.y <= sectionHeaderHeight && scrollView.contentOffset.y >= 0) {
+        CGFloat firstSectionHeaderHeight = HEIGHT_OF_FIRST_SECTION_HEADER;
+        //CGFloat sectionHeaderHeight = HEIGHT_OF_SECTION_HEADER;
+        if (scrollView.contentOffset.y <= firstSectionHeaderHeight && scrollView.contentOffset.y >= 0) {
             scrollView.contentInset = UIEdgeInsetsMake(-scrollView.contentOffset.y, scrollView.contentInset.left, scrollView.contentInset.bottom, scrollView.contentInset.right);
-        } else if (scrollView.contentOffset.y>=sectionHeaderHeight) {
-            scrollView.contentInset = UIEdgeInsetsMake(-sectionHeaderHeight, scrollView.contentInset.left, scrollView.contentInset.bottom, scrollView.contentInset.right);
+        } else if (scrollView.contentOffset.y>=firstSectionHeaderHeight) {
+            scrollView.contentInset = UIEdgeInsetsMake(-firstSectionHeaderHeight, scrollView.contentInset.left, scrollView.contentInset.bottom, scrollView.contentInset.right);
         }
-        else if (scrollView.contentOffset.y < 0) {
+        else if (scrollView.contentOffset.y <= -64) {
             if (originContentInset.top > 0) {
                 scrollView.contentInset = originContentInset;
             }
+        }
+        else if(scrollView.contentOffset.y > -64 && scrollView.contentOffset.y < 0)
+        {
+            scrollView.contentInset = UIEdgeInsetsMake(-scrollView.contentOffset.y, scrollView.contentInset.left, scrollView.contentInset.bottom, scrollView.contentInset.right);
         }
     }
     
@@ -498,6 +571,8 @@
     {
         [loadMoreTableFooterView loadMoreScrollViewDidScroll:scrollView];
     }
+    
+    [self resetForNavItemTitle:scrollView.contentOffset.y];
     
 //    NSLog(@"insert:[%lf, %lf, %lf, %lf], offset:[%lf, %lf]", scrollView.contentInset.top,
 //          scrollView.contentInset.left, scrollView.contentInset.bottom,scrollView.contentInset.right,scrollView.contentOffset.x, scrollView.contentOffset.y);
@@ -566,8 +641,17 @@
         }
         else{
             lastCell = FALSE;
+            [self resetMoreFrame];
+            
+            //[NSTimer scheduledTimerWithTimeInterval:0.3f target:self selector:@selector(updateOffset:) userInfo:nil repeats:NO];
+            [self updateOffset:nil];
         }
     }];
+}
+
+-(void) updateOffset:(NSTimer*)timer
+{
+    self.tableView.contentOffset = CGPointMake(self.tableView.contentOffset.x, self.tableView.contentOffset.y + 90.0f);
 }
 
 - (BOOL)loadMoreTableFooterDataSourceIsLoading:(LoadMoreTableFooterView*)view

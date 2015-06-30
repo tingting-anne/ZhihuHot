@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		95FFA4E629FA97BD19FE8B4F /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AFBEBB398DE331AAA35A810D /* libPods.a */; };
+		EA06DF531B423C1800E30733 /* dailyImagePlacehold320.png in Resources */ = {isa = PBXBuildFile; fileRef = EA06DF501B423C1800E30733 /* dailyImagePlacehold320.png */; };
+		EA06DF541B423C1800E30733 /* dailyImagePlacehold375.png in Resources */ = {isa = PBXBuildFile; fileRef = EA06DF511B423C1800E30733 /* dailyImagePlacehold375.png */; };
+		EA06DF551B423C1800E30733 /* dailyImagePlacehold414.png in Resources */ = {isa = PBXBuildFile; fileRef = EA06DF521B423C1800E30733 /* dailyImagePlacehold414.png */; };
 		EA29D7141B33134F002DCCAF /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA29D7131B33134F002DCCAF /* CoreData.framework */; };
 		EA29D7261B3315F1002DCCAF /* Story.m in Sources */ = {isa = PBXBuildFile; fileRef = EA29D7251B3315F1002DCCAF /* Story.m */; };
 		EA29D7291B3315F2002DCCAF /* Date.m in Sources */ = {isa = PBXBuildFile; fileRef = EA29D7281B3315F2002DCCAF /* Date.m */; };
@@ -48,6 +51,7 @@
 		EAC288481B30459700390CFB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EAC288471B30459700390CFB /* Images.xcassets */; };
 		EAC2884B1B30459700390CFB /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = EAC288491B30459700390CFB /* LaunchScreen.xib */; };
 		EAC288571B30459700390CFB /* ZhiHuHotTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EAC288561B30459700390CFB /* ZhiHuHotTests.m */; };
+		EAC880CA1B41623600946EC9 /* ImagesScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = EAC880C91B41623600946EC9 /* ImagesScrollView.m */; };
 		EADD2F0F1B33D56E0087C1CA /* NetClient.m in Sources */ = {isa = PBXBuildFile; fileRef = EADD2F0E1B33D56E0087C1CA /* NetClient.m */; };
 		EADD2F161B3417F40087C1CA /* AppHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = EADD2F151B3417F40087C1CA /* AppHelper.m */; };
 		EAFD51CF1B392F9B007307BE /* ListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EAFD51CE1B392F9B007307BE /* ListTableViewCell.m */; };
@@ -71,6 +75,9 @@
 		602AD774374D7FD2A394DF34 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		AFBEBB398DE331AAA35A810D /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2DB723098B3D2807A3403B1 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		EA06DF501B423C1800E30733 /* dailyImagePlacehold320.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dailyImagePlacehold320.png; sourceTree = "<group>"; };
+		EA06DF511B423C1800E30733 /* dailyImagePlacehold375.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dailyImagePlacehold375.png; sourceTree = "<group>"; };
+		EA06DF521B423C1800E30733 /* dailyImagePlacehold414.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dailyImagePlacehold414.png; sourceTree = "<group>"; };
 		EA29D7131B33134F002DCCAF /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		EA29D7241B3315F1002DCCAF /* Story.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Story.h; sourceTree = "<group>"; };
 		EA29D7251B3315F1002DCCAF /* Story.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Story.m; sourceTree = "<group>"; };
@@ -127,6 +134,10 @@
 		EAC288501B30459700390CFB /* ZhiHuHotTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ZhiHuHotTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EAC288551B30459700390CFB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EAC288561B30459700390CFB /* ZhiHuHotTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZhiHuHotTests.m; sourceTree = "<group>"; };
+		EAC880C81B41623600946EC9 /* ImagesScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImagesScrollView.h; sourceTree = "<group>"; };
+		EAC880C91B41623600946EC9 /* ImagesScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImagesScrollView.m; sourceTree = "<group>"; };
+		EAC880D11B417E8800946EC9 /* ZhiHuHot 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "ZhiHuHot 2.xcdatamodel"; sourceTree = "<group>"; };
+		EAC880D21B417EA600946EC9 /* ZhiHuHot 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "ZhiHuHot 3.xcdatamodel"; sourceTree = "<group>"; };
 		EADD2F0D1B33D56E0087C1CA /* NetClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetClient.h; sourceTree = "<group>"; };
 		EADD2F0E1B33D56E0087C1CA /* NetClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetClient.m; sourceTree = "<group>"; };
 		EADD2F141B3417F40087C1CA /* AppHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppHelper.h; sourceTree = "<group>"; };
@@ -180,9 +191,20 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		EA06DF491B4230B700E30733 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				EA06DF501B423C1800E30733 /* dailyImagePlacehold320.png */,
+				EA06DF511B423C1800E30733 /* dailyImagePlacehold375.png */,
+				EA06DF521B423C1800E30733 /* dailyImagePlacehold414.png */,
+			);
+			name = Images;
+			sourceTree = "<group>";
+		};
 		EA29D7111B3311E1002DCCAF /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				EAC880C71B41617200946EC9 /* New Group */,
 				EADD2F171B34191C0087C1CA /* Definitions.h */,
 				EADD2F141B3417F40087C1CA /* AppHelper.h */,
 				EADD2F151B3417F40087C1CA /* AppHelper.m */,
@@ -211,6 +233,8 @@
 				EAFD51D81B396D59007307BE /* ContentHeaderView.m */,
 				EAFD51DA1B39A6F1007307BE /* LinkViewController.h */,
 				EAFD51DB1B39A6F1007307BE /* LinkViewController.m */,
+				EAC880C81B41623600946EC9 /* ImagesScrollView.h */,
+				EAC880C91B41623600946EC9 /* ImagesScrollView.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -331,6 +355,7 @@
 		EAC288361B30459600390CFB /* ZhiHuHot */ = {
 			isa = PBXGroup;
 			children = (
+				EA06DF491B4230B700E30733 /* Images */,
 				EABAA8C11B3CDFCB0056D242 /* XIBS */,
 				EAAFDBAA1B3BF612007DA451 /* EGOTableViewPullRefreshAndLoadMore */,
 				EA29D7121B3312AF002DCCAF /* ViewControllers */,
@@ -367,6 +392,13 @@
 				EAC288551B30459700390CFB /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		EAC880C71B41617200946EC9 /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "New Group";
 			sourceTree = "<group>";
 		};
 		EADD2F091B33C95B0087C1CA /* Data */ = {
@@ -482,8 +514,10 @@
 				EAAFDBCE1B3BF612007DA451 /* grayArrowLoadMore.png in Resources */,
 				EAA74F0B1B31B9B300EE9360 /* Main.storyboard in Resources */,
 				EAAFDBC41B3BF612007DA451 /* blackArrow.png in Resources */,
+				EA06DF551B423C1800E30733 /* dailyImagePlacehold414.png in Resources */,
 				EAAFDBD21B3BF612007DA451 /* whiteArrowLoadMore.png in Resources */,
 				EAAFDBC61B3BF612007DA451 /* blackArrowLoadMore.png in Resources */,
+				EA06DF531B423C1800E30733 /* dailyImagePlacehold320.png in Resources */,
 				EAAFDBCA1B3BF612007DA451 /* blueArrowLoadMore.png in Resources */,
 				EAAFDBC81B3BF612007DA451 /* blueArrow.png in Resources */,
 				EA43A6FF1B369A2700FF3FF0 /* DailyTableSectionHeader.xib in Resources */,
@@ -498,6 +532,7 @@
 				EAC288481B30459700390CFB /* Images.xcassets in Resources */,
 				EAAFDBCB1B3BF612007DA451 /* blueArrowLoadMore@2x.png in Resources */,
 				EAAFDBCC1B3BF612007DA451 /* grayArrow.png in Resources */,
+				EA06DF541B423C1800E30733 /* dailyImagePlacehold375.png in Resources */,
 				EAAFDBD01B3BF612007DA451 /* whiteArrow.png in Resources */,
 				EAAFDBD31B3BF612007DA451 /* whiteArrowLoadMore@2x.png in Resources */,
 				EAFD51D61B396D31007307BE /* ContentHeaderView.xib in Resources */,
@@ -557,6 +592,7 @@
 				EAAFDBC21B3BF612007DA451 /* EGORefreshTableHeaderView.m in Sources */,
 				EAFD51CF1B392F9B007307BE /* ListTableViewCell.m in Sources */,
 				EAC288401B30459600390CFB /* ZhiHuHot.xcdatamodeld in Sources */,
+				EAC880CA1B41623600946EC9 /* ImagesScrollView.m in Sources */,
 				EAC2883D1B30459600390CFB /* AppDelegate.m in Sources */,
 				EADD2F161B3417F40087C1CA /* AppHelper.m in Sources */,
 				EA29D72F1B3315F2002DCCAF /* ThemeStory.m in Sources */,
@@ -804,6 +840,8 @@
 		EAC2883E1B30459600390CFB /* ZhiHuHot.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				EAC880D21B417EA600946EC9 /* ZhiHuHot 3.xcdatamodel */,
+				EAC880D11B417E8800946EC9 /* ZhiHuHot 2.xcdatamodel */,
 				EAC2883F1B30459600390CFB /* ZhiHuHot.xcdatamodel */,
 			);
 			currentVersion = EAC2883F1B30459600390CFB /* ZhiHuHot.xcdatamodel */;
