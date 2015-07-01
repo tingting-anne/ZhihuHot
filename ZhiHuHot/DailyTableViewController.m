@@ -339,7 +339,9 @@
 {
     NSLog(@"you click ImageScrollView newsID:%d", [newsID intValue]);
     
-    ContentViewController *contentViewController = [[ContentViewController alloc] init];
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    ContentViewController *contentViewController = [storyboard instantiateViewControllerWithIdentifier:@"contentViewController"];
+    
     contentViewController.contentType = DAILY_STORY_CONTENT;
     contentViewController.newsID = newsID;
     [self.navigationController pushViewController:contentViewController animated:YES];

@@ -79,6 +79,7 @@ static CGFloat const chageImageTime = 5.0;//轮训时间
     NSLayoutConstraint *Bottom = [NSLayoutConstraint constraintWithItem:label attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:imageView attribute:NSLayoutAttributeBottom multiplier:1.0f constant:-30.0f];
     [imageView addConstraint:Bottom];
     
+    imageView.userInteractionEnabled = YES;//必须赋值，否则无法交互
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
     [imageView addGestureRecognizer:tap];
 }

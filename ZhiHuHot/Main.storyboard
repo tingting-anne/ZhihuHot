@@ -277,7 +277,7 @@
         <!--Content View Controller-->
         <scene sceneID="wJ0-GW-I52">
             <objects>
-                <viewController id="dyQ-Ef-3q2" customClass="ContentViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="contentViewController" id="dyQ-Ef-3q2" customClass="ContentViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="6MR-1u-wYX"/>
                         <viewControllerLayoutGuide type="bottom" id="0FH-ho-bld"/>
