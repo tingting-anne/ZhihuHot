@@ -10,11 +10,13 @@
 #import "AppDelegate.h"
 #import "Theme.h"
 #import "SubjectTableViewController.h"
+#import "AppHelper.h"
 
 @interface MenuTableViewController ()
 
 @property(strong,nonatomic)NSFetchedResultsController* fetchedResultsController;
 @property(strong,nonatomic)NSManagedObjectContext* managedObjectContext;
+@property(strong,nonatomic)NSIndexPath* lastSelectIndexPath;//上次点中的path
 
 @end
 
@@ -68,12 +70,25 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+}
 
+-(void)viewDidAppear:(BOOL)animated
+{
+    self.tableView.backgroundColor = [UIColor colorWithRed:0.04f green:0.13f blue:0.15f alpha:1.0f];
+    self.tableView.separatorColor = self.tableView.backgroundColor;
+//    
+//    if([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0)
+//    {
+//        CGRect rect = self.tableView.frame;
+//        rect.origin.y += 20;
+//        self.tableView.frame = rect;
+//    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -82,6 +97,22 @@
 }
 
 #pragma mark - Table view data source
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    //主要是去掉选择后再返回界面时，会出现多个cell选中的状态,这里选择后将上次的选择恢复
+    if (self.lastSelectIndexPath && [self.lastSelectIndexPath compare:indexPath] != NSOrderedSame) {
+        UITableViewCell* cellLast = [self.tableView cellForRowAtIndexPath:self.lastSelectIndexPath];
+        cellLast.textLabel.font = [UIFont fontWithName:@"Helvetica" size:17.0f];
+        cellLast.backgroundColor = [UIColor colorWithRed:0.04f green:0.13f blue:0.15f alpha:1.0f];
+    }
+    
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    cell.textLabel.font = [UIFont fontWithName:@"Arial Rounded MT Bold" size:17.0f];
+    cell.backgroundColor = [UIColor colorWithRed:0.04f green:0.03f blue:0.15f alpha:1.0f];
+    //cell.contentView.backgroundColor = [UIColor colorWithRed:0.04f green:0.03f blue:0.15f alpha:1.0f];
+    
+    self.lastSelectIndexPath = indexPath;
+}
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return [[self.fetchedResultsController sections] count];
@@ -118,6 +149,13 @@
         Theme *theme = [self.fetchedResultsController objectAtIndexPath:objectIndexPath];
         cell.textLabel.text = theme.name;
     }
+    
+    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];//取消选中的默认颜色设置*
+    
+    cell.textLabel.font = [UIFont fontWithName:@"Helvetica" size:17.0f];
+    cell.textLabel.textColor = [UIColor whiteColor];
+    //cell.contentView.backgroundColor = [UIColor colorWithRed:0.04f green:0.13f blue:0.15f alpha:1.0f];
+    cell.backgroundColor = [UIColor colorWithRed:0.04f green:0.13f blue:0.15f alpha:1.0f];
     
     return cell;
 }

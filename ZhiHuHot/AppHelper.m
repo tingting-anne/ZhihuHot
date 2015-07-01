@@ -75,5 +75,8 @@ static AppHelper *sharesingleton=nil;
     return [dateFormatter stringFromDate:[NSDate date]];
 }
 
-
+-(UIColor *)backgroundColor
+{
+    return [UIColor colorWithRed:0.3f green:0.6f blue:1.0f alpha:1.0f];
+}
 @end

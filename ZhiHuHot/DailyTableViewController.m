@@ -378,6 +378,11 @@
     
     lastestSectionView = sectionHeaderView;
     latestSection = section;
+
+    sectionHeaderView.backgroundColor = [UIColor colorWithRed:0.3f green:0.6f blue:1.0f alpha:0.9f];
+    sectionHeaderView.headerString.font = [UIFont fontWithName:@"Arial Rounded MT Bold" size:19.0f];
+    sectionHeaderView.headerString.textColor = [UIColor whiteColor];
+    
     return sectionHeaderView;
 }
 

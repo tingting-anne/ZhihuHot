@@ -238,7 +238,7 @@
             <objects>
                 <tableViewController id="8Ef-qa-utK" customClass="MenuTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="lXq-rh-Hl9">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="64" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -268,6 +268,7 @@
                         </connections>
                     </tableView>
                     <toolbarItems/>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dhp-kc-JhK" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -286,8 +287,8 @@
                         <rect key="frame" x="0.0" y="64" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="qgt-Wf-uw6">
-                                <rect key="frame" x="290" y="290" width="20" height="20"/>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="qgt-Wf-uw6">
+                                <rect key="frame" x="282" y="282" width="37" height="37"/>
                             </activityIndicatorView>
                             <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="osy-rY-80U">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
@@ -322,6 +323,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="nmB-XB-NcZ"/>
-        <segue reference="dWF-6J-WXD"/>
+        <segue reference="WlD-Bd-4y2"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "NetClient.h"
+#import "AppHelper.h"
 
 @interface AppDelegate ()
 
@@ -31,6 +32,16 @@
         }
     }];
     
+    [[UINavigationBar appearance] setBarTintColor:[[AppHelper shareAppHelper] backgroundColor]];
+    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
+    
+    [[UINavigationBar appearance] setTitleTextAttributes:
+        [NSDictionary dictionaryWithObjectsAndKeys:
+        [UIColor whiteColor], NSForegroundColorAttributeName,
+        [UIFont fontWithName:@"Arial Rounded MT Bold" size:19.0f], NSFontAttributeName,
+         nil]];
+    
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:YES];
     return YES;
 }
 

@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
+#import <UIKit/UIKit.h>
 
 @interface AppHelper : NSObject
 
@@ -16,5 +17,6 @@
 - (BOOL)isValidDateString:(NSString *)dateString;
 - (BOOL)isTodayWithDateString:(NSString *)dateString;
 - (NSString *)stringOfToday;
+- (UIColor *)backgroundColor;
 
 @end
