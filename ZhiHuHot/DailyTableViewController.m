@@ -24,7 +24,7 @@
 #define HEIGHT_OF_CELL 90.0f
 #define HEIGHT_OF_FIRST_SECTION_HEADER 200.0f
 
-@interface DailyTableViewController ()
+@interface DailyTableViewController ()<ImagesScrollViewDelegate>
 {
     //----- 下拉刷新------
     EGORefreshTableHeaderView *_refreshHeaderView;
@@ -61,6 +61,7 @@
 - (void)resetForNavItemTitle:(CGFloat)endOffsetY;
 - (void)createScrollView;
 - (void)setTopStories:(NSArray*) topStories;
+- (void)didSelectedNewsID:(NSNumber*)newsID;
 @end
 
 @implementation DailyTableViewController
@@ -77,6 +78,7 @@
     //如果滚动视图的父视图由导航控制器控制,必须要设置该属性(ps,猜测这是为了正常显示,导航控制器内部设置了UIEdgeInsetsMake(64, 0, 0, 0))
     [self.firstSectionView addSubview:self.scrollView];
     
+    self.scrollView.imageScrolldelegate = self;
     self.scrollView.PageControlShowStyle = UIPageControlShowStyleCenter;
     //self.scrollView.pageControl.pageIndicatorTintColor = [UIColor blueColor];
     //self.scrollView.pageControl.currentPageIndicatorTintColor = [UIColor purpleColor];
@@ -99,13 +101,15 @@
     if (topStories && topStories.count > 0) {
         NSMutableArray* imageNameArray = [[NSMutableArray alloc] initWithObjects:nil];
         NSMutableArray* titleArray = [[NSMutableArray alloc] initWithObjects:nil];
-
+        NSMutableArray* idArray = [[NSMutableArray alloc] initWithObjects:nil];
+        
         for (NSDictionary *dic in topStories) {
             [imageNameArray addObject:dic[@"image"]];
             [titleArray addObject:dic[@"title"]];
+            [idArray addObject:dic[@"id"]];
         }
         
-        [self.scrollView setImageArray:imageNameArray titleArray:titleArray];
+        [self.scrollView setImageArray:imageNameArray titleArray:titleArray newsID:idArray];
     }
 }
 
@@ -331,6 +335,15 @@
     }];
 }
 
+- (void)didSelectedNewsID:(NSNumber*)newsID
+{
+    NSLog(@"you click ImageScrollView newsID:%d", [newsID intValue]);
+    
+    ContentViewController *contentViewController = [[ContentViewController alloc] init];
+    contentViewController.contentType = DAILY_STORY_CONTENT;
+    contentViewController.newsID = newsID;
+    [self.navigationController pushViewController:contentViewController animated:YES];
+}
 
 #pragma mark -Table view delegate
 

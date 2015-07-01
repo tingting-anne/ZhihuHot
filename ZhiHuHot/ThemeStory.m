@@ -47,7 +47,7 @@
                 story.them = theme;
             }
             else{
-                NSLog(@"%s has a them story which id[%u] has no them", __FUNCTION__, themeID);
+                NSLog(@"%s has a them story which id[%lu] has no them", __FUNCTION__, themeID);
             }
         }
     }

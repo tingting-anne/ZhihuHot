@@ -36,6 +36,8 @@ static CGFloat const chageImageTime = 5.0;//轮训时间
 @property (strong, nonatomic)UIImageView * centerImageView;
 @property (strong, nonatomic)UIImageView * rightImageView;
 
+@property(strong, nonatomic)NSArray* imageNewsId;//轮训图片对应的newsID
+
 //循环滚动的周期时间
 @property (strong, nonatomic)NSTimer * moveTime;
 
@@ -76,6 +78,9 @@ static CGFloat const chageImageTime = 5.0;//轮训时间
     
     NSLayoutConstraint *Bottom = [NSLayoutConstraint constraintWithItem:label attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:imageView attribute:NSLayoutAttributeBottom multiplier:1.0f constant:-30.0f];
     [imageView addConstraint:Bottom];
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
+    [imageView addGestureRecognizer:tap];
 }
 
 -(void)createImageAndLabel
@@ -90,6 +95,12 @@ static CGFloat const chageImageTime = 5.0;//轮训时间
     _leftAdLabel = [[UILabel alloc] init];
     _centerAdLabel = [[UILabel alloc] init];
     _rightAdLabel = [[UILabel alloc] init];
+}
+
+- (void)handleTap:(UITapGestureRecognizer *)tap{
+    if (self.imageScrolldelegate && [self.imageScrolldelegate respondsToSelector:@selector(didSelectedNewsID:)]) {
+        [self.imageScrolldelegate didSelectedNewsID:_imageNewsId[currentImage%_imageNewsId.count]];
+    }
 }
 
 -(NSUInteger)preImageIndex
@@ -139,7 +150,7 @@ static CGFloat const chageImageTime = 5.0;//轮训时间
     return self;
 }
 
-- (void)setImageArray:(NSArray *)imageArray titleArray:(NSArray *)titleArray
+- (void)setImageArray:(NSArray *)imageArray titleArray:(NSArray *)titleArray newsID:(NSArray *)newsID
 {
     if (_moveTime) {
         [_moveTime setFireDate:[NSDate distantFuture]];
@@ -156,6 +167,7 @@ static CGFloat const chageImageTime = 5.0;//轮训时间
     
     [self setImageNameArray:imageArray];
     [self setAdTitleArray:titleArray];
+    _imageNewsId = newsID;
     
     if(reDrawPageControll){
         [self createPageControll];

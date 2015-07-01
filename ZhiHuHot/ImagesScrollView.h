@@ -16,13 +16,18 @@ typedef NS_ENUM(NSUInteger, UIPageControlShowStyle)
     UIPageControlShowStyleRight,
 };
 
+@protocol ImagesScrollViewDelegate <NSObject>
+- (void)didSelectedNewsID:(NSNumber*)newsID;
+@end
+
 @interface ImagesScrollView : UIScrollView<UIScrollViewDelegate>
 
+@property (weak, nonatomic)id<ImagesScrollViewDelegate> imageScrolldelegate;
 @property (retain,nonatomic,readonly) UIPageControl * pageControl;
 @property (assign,nonatomic,readwrite) UIPageControlShowStyle  PageControlShowStyle;
 
 - (instancetype)initWithFrame:(CGRect)frame withShowStyle:(NSTextAlignment)titleStyle;
-- (void)setImageArray:(NSArray *)imageArray titleArray:(NSArray *)titleArray;
+- (void)setImageArray:(NSArray *)imageArray titleArray:(NSArray *)titleArray newsID:(NSArray *)newsID;
 
 @end
 
