@@ -48,8 +48,6 @@
 
 -(void)setNewsID:(NSNumber *)newsID
 {
-   // [self.activity startAnimating];
-    
     [self.netClient downloadWithNewsID:[newsID unsignedIntegerValue] withCompletionHandler:^(NSDictionary* dic, NSError *error){
         
         if(error){
@@ -91,7 +89,7 @@
     CGRect headerFrame = CGRectMake(0, 0, self.webView.frame.size.width, 220);
     headerView.frame = headerFrame;
 
-    [headerView.imageView sd_setImageWithURL:[NSURL URLWithString:dic[@"image"]] placeholderImage:[UIImage imageNamed:@"placeholder"]];
+    [headerView.imageView sd_setImageWithURL:[NSURL URLWithString:dic[@"image"]] placeholderImage:[UIImage imageNamed:@"placeholder"] options:SDWebImageHighPriority];
     
     headerView.titleLable.text = dic[@"title"];
     headerView.imageSourceLabel.text = dic[@"image_source"];

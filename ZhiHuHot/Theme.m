@@ -23,13 +23,12 @@
 
 +(void)loadFromArray:(NSArray *)array intoManagedObjectContext:(NSManagedObjectContext *)context
 {
+    Theme *theme = nil;
+    NSError *error;
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Theme"];
+    
     for (NSDictionary *themeDic in array) {
-        Theme *theme = nil;
-        
-        NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Theme"];
         request.predicate = [NSPredicate predicateWithFormat:@"id = %@", themeDic[@"id"]];
-        
-        NSError *error;
         NSArray *resultArray = [context executeFetchRequest:request error:&error];
         
         if (!resultArray || error || [resultArray count] > 1) {

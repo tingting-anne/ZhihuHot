@@ -11,6 +11,7 @@
 #import "AppHelper.h"
 #import "SWRevealViewController.h"
 #import "Story.h"
+#import "TopStory.h"
 #import "Date.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "DailyTableSectionHeader.h"
@@ -24,7 +25,7 @@
 #define HEIGHT_OF_CELL 90.0f
 #define HEIGHT_OF_FIRST_SECTION_HEADER 200.0f
 
-@interface DailyTableViewController ()<ImagesScrollViewDelegate>
+@interface DailyTableViewController ()<ImagesScrollViewDelegate, SWRevealViewControllerDelegate>
 {
     //----- 下拉刷新------
     EGORefreshTableHeaderView *_refreshHeaderView;
@@ -62,6 +63,9 @@
 - (void)createScrollView;
 - (void)setTopStories:(NSArray*) topStories;
 - (void)didSelectedNewsID:(NSNumber*)newsID;
+
+- (void)revealController:(SWRevealViewController *)revealController didMoveToPosition:(FrontViewPosition)position;
+
 @end
 
 @implementation DailyTableViewController
@@ -92,12 +96,19 @@
     static NSArray* preTopStories = nil;
     
     if (!topStories) {
+        if(!preTopStories){
+            //用数据库中的数据
+            NSLog(@"[%@ %@] updateLatestStories: failed, use DB to update top stories", NSStringFromClass([self class]), NSStringFromSelector(_cmd));
+            
+            preTopStories = [TopStory getArrayFromManagedObjectContext:self.managedObjectContext];
+        }
+        
         topStories = preTopStories;
     }
     else{
         preTopStories = topStories;
     }
-    
+
     if (topStories && topStories.count > 0) {
         NSMutableArray* imageNameArray = [[NSMutableArray alloc] initWithObjects:nil];
         NSMutableArray* titleArray = [[NSMutableArray alloc] initWithObjects:nil];
@@ -217,6 +228,10 @@
         
         [self.view addGestureRecognizer:self.revealViewController.panGestureRecognizer];
         [self.view addGestureRecognizer:self.revealViewController.tapGestureRecognizer];
+        
+        self.revealViewController.delegate = self;
+        self.revealViewController.rearViewRevealWidth = 220.0f;
+        self.revealViewController.rearViewRevealOverdraw = 0.0f;
     }
 }
 
@@ -337,14 +352,26 @@
 
 - (void)didSelectedNewsID:(NSNumber*)newsID
 {
+#ifdef DEBUG
     NSLog(@"you click ImageScrollView newsID:%d", [newsID intValue]);
-    
+#endif
+
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     ContentViewController *contentViewController = [storyboard instantiateViewControllerWithIdentifier:@"contentViewController"];
     
     contentViewController.contentType = DAILY_STORY_CONTENT;
     contentViewController.newsID = newsID;
     [self.navigationController pushViewController:contentViewController animated:YES];
+}
+
+- (void)revealController:(SWRevealViewController *)revealController didMoveToPosition:(FrontViewPosition)position
+{
+    if (FrontViewPositionLeft == position) {
+        [self.scrollView setImageViewUserInteractionEnabled:TRUE];
+    }
+    else if(FrontViewPositionRight == position){
+        [self.scrollView setImageViewUserInteractionEnabled:FALSE];
+    }
 }
 
 #pragma mark -Table view delegate

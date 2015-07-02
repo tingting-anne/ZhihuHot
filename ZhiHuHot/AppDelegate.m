@@ -42,6 +42,11 @@
          nil]];
     
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:YES];
+    
+    
+    NSURLCache* urlCache = [NSURLCache sharedURLCache];
+    NSLog(@"NSURLCache diskCapacity:%u, memoryCapacity:%u", urlCache.diskCapacity, urlCache.memoryCapacity);
+    
     return YES;
 }
 

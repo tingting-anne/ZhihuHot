@@ -11,6 +11,7 @@
 #import "Story.h"
 #import "Theme.h"
 #import "Date.h"
+#import "TopStory.h"
 #import "ThemeStory.h"
 #import "AppHelper.h"
 #import "Definitions.h"
@@ -49,6 +50,10 @@
         [self.context performBlock:^{
             NSError *saveError = nil;
             [Story loadFromArray:storiesArray withDate:dateString intoManagedObjectContext:self.context];
+            
+            if (isToday) {
+                [TopStory loadFromArray:topStoriesArray intoManagedObjectContext:self.context];
+            }
             
             [self.context save:&saveError];
             if (saveError) {

@@ -121,6 +121,13 @@ static CGFloat const chageImageTime = 5.0;//轮训时间
     return (currentImage + 1) % _imageNameArray.count;
 }
 
+-(void)setImageViewUserInteractionEnabled:(BOOL)enable
+{
+    _leftImageView.userInteractionEnabled = enable;
+    _rightImageView.userInteractionEnabled = enable;
+    _centerImageView.userInteractionEnabled = enable;
+}
+
 - (instancetype)initWithFrame:(CGRect)frame
 {
     return [self initWithFrame:frame withShowStyle:NSTextAlignmentLeft];
@@ -187,11 +194,11 @@ static CGFloat const chageImageTime = 5.0;//轮训时间
 {
     _imageNameArray = imageNameArray;
     
-    [_leftImageView sd_setImageWithURL:[NSURL URLWithString:_imageNameArray[[self preImageIndex]]] placeholderImage:[UIImage imageNamed:dailyImagePlacehold]];
+    [_leftImageView sd_setImageWithURL:[NSURL URLWithString:_imageNameArray[[self preImageIndex]]] placeholderImage:[UIImage imageNamed:dailyImagePlacehold] options:SDWebImageHighPriority];
     
-    [_centerImageView sd_setImageWithURL:[NSURL URLWithString:_imageNameArray[currentImage%_imageNameArray.count]] placeholderImage:[UIImage imageNamed:dailyImagePlacehold]];
+    [_centerImageView sd_setImageWithURL:[NSURL URLWithString:_imageNameArray[currentImage%_imageNameArray.count]] placeholderImage:[UIImage imageNamed:dailyImagePlacehold] options:SDWebImageHighPriority];
     
-    [_rightImageView sd_setImageWithURL:[NSURL URLWithString:_imageNameArray[[self nextImageIndex]]] placeholderImage:[UIImage imageNamed:dailyImagePlacehold]];
+    [_rightImageView sd_setImageWithURL:[NSURL URLWithString:_imageNameArray[[self nextImageIndex]]] placeholderImage:[UIImage imageNamed:dailyImagePlacehold] options:SDWebImageHighPriority];
 }
 
 - (void)setAdTitleArray:(NSArray *)adTitleArray

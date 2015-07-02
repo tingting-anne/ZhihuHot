@@ -23,16 +23,16 @@
 
 +(void)loadFromArray:(NSArray *)storyArray withDate:(NSString *)date intoManagedObjectContext:(NSManagedObjectContext *)context
 {
+    Story* story = nil;
+    NSError *error = nil;
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    NSEntityDescription* description = [NSEntityDescription entityForName:@"Story" inManagedObjectContext:context];
+    [request setEntity:description];
+    
     for (NSDictionary* dic in storyArray) {
-        Story* story = nil;
-        NSFetchRequest *request = [[NSFetchRequest alloc] init];
-        NSEntityDescription* description = [NSEntityDescription entityForName:@"Story" inManagedObjectContext:context];
-        [request setEntity:description];
-        
         NSPredicate* predicate = [NSPredicate predicateWithFormat:@"id = %@", dic[@"id"]];
         [request setPredicate:predicate];
         
-        NSError *error = nil;
         NSArray* result = [context executeFetchRequest:request error:&error];
         
         if (!result || error || [result count] > 1) {
