@@ -95,7 +95,13 @@
     }
     
     if (interval >= UPDATECONTENTINTERVAL) {
-        [self.netClient downloadThemeStoriesWithThemeID:[self.themeID unsignedIntValue] withCompletionHandler:nil];
+        [self.netClient downloadThemeStoriesWithThemeID:[self.themeID unsignedIntValue] withCompletionHandler:^(NSError *error){
+      
+            if(error){
+                UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"ERROR", nil) message:NSLocalizedString(@"NET_DOWNLOAD_ERROR", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"CANCEL", nil)  otherButtonTitles:nil, nil];
+                [alertView show];
+            }
+        }];
     }
     
 }

@@ -71,14 +71,16 @@
 + (NSArray *)getArrayFromManagedObjectContext:(NSManagedObjectContext *)context
 {
     NSFetchRequest *request =[NSFetchRequest fetchRequestWithEntityName:@"TopStory"];
+    
     NSError *error;
     NSArray* result = [context executeFetchRequest:request error:&error];
     
     TopStory* topStory;
-    NSMutableDictionary* dic = [[NSMutableDictionary alloc] init];
     NSMutableArray* dicArray = [[NSMutableArray alloc] init];
     
     for (topStory in result) {
+        //必须每个object都allco，否则array所有元素都指向同一个对象
+         NSMutableDictionary* dic = [[NSMutableDictionary alloc] init];
         [dic setValue:topStory.id forKey:@"id"];
         [dic setValue:topStory.title forKey:@"title"];
         [dic setValue:topStory.image forKey:@"image"];

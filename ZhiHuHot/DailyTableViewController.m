@@ -299,7 +299,13 @@
     if (interval >= UPDATECONTENTINTERVAL) {
         ret = TRUE;
         [self.netClient downloadLatestStoriesWithCompletionHandler:^(NSError* error, NSArray* topStories){
+            //为空也要设置，会根据数据库的值显示
             [self setTopStories:topStories];
+            
+            if(error){
+                UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"ERROR", nil) message:NSLocalizedString(@"NET_DOWNLOAD_ERROR", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"CANCEL", nil)  otherButtonTitles:nil, nil];
+                [alertView show];
+            }
         }];
     }
     return ret;

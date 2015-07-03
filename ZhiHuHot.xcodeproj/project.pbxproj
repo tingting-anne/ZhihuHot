@@ -18,6 +18,7 @@
 		EA29D72F1B3315F2002DCCAF /* ThemeStory.m in Sources */ = {isa = PBXBuildFile; fileRef = EA29D72E1B3315F2002DCCAF /* ThemeStory.m */; };
 		EA43A6FF1B369A2700FF3FF0 /* DailyTableSectionHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA43A6FE1B369A2700FF3FF0 /* DailyTableSectionHeader.xib */; };
 		EA43A7021B369F7900FF3FF0 /* DailyTableSectionHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = EA43A7011B369F7900FF3FF0 /* DailyTableSectionHeader.m */; };
+		EA82B5921B4564AA004042AA /* TopStory.m in Sources */ = {isa = PBXBuildFile; fileRef = EA82B5911B4564AA004042AA /* TopStory.m */; };
 		EAA74EF41B31A7E100EE9360 /* MenuTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EAA74EF31B31A7E100EE9360 /* MenuTableViewController.m */; };
 		EAA74EFD1B31AF0D00EE9360 /* ContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EAA74EFC1B31AF0D00EE9360 /* ContentViewController.m */; };
 		EAA74F0B1B31B9B300EE9360 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EAA74F0A1B31B9B300EE9360 /* Main.storyboard */; };
@@ -90,6 +91,9 @@
 		EA43A6FE1B369A2700FF3FF0 /* DailyTableSectionHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DailyTableSectionHeader.xib; sourceTree = "<group>"; };
 		EA43A7001B369F7900FF3FF0 /* DailyTableSectionHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DailyTableSectionHeader.h; sourceTree = "<group>"; };
 		EA43A7011B369F7900FF3FF0 /* DailyTableSectionHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DailyTableSectionHeader.m; sourceTree = "<group>"; };
+		EA82B5901B4564AA004042AA /* TopStory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopStory.h; sourceTree = "<group>"; };
+		EA82B5911B4564AA004042AA /* TopStory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopStory.m; sourceTree = "<group>"; };
+		EA82B5931B457AE7004042AA /* ZhiHuHot 4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "ZhiHuHot 4.xcdatamodel"; sourceTree = "<group>"; };
 		EAA74EF21B31A7E100EE9360 /* MenuTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuTableViewController.h; sourceTree = "<group>"; };
 		EAA74EF31B31A7E100EE9360 /* MenuTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuTableViewController.m; sourceTree = "<group>"; };
 		EAA74EFB1B31AF0D00EE9360 /* ContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentViewController.h; sourceTree = "<group>"; };
@@ -405,6 +409,8 @@
 			isa = PBXGroup;
 			children = (
 				EAC2883E1B30459600390CFB /* ZhiHuHot.xcdatamodeld */,
+				EA82B5901B4564AA004042AA /* TopStory.h */,
+				EA82B5911B4564AA004042AA /* TopStory.m */,
 				EA29D72D1B3315F2002DCCAF /* ThemeStory.h */,
 				EA29D72E1B3315F2002DCCAF /* ThemeStory.m */,
 				EA29D72A1B3315F2002DCCAF /* Theme.h */,
@@ -591,6 +597,7 @@
 				EABAA8C31B3D3B540056D242 /* 知乎日报-API-分析.md in Sources */,
 				EAAFDBC21B3BF612007DA451 /* EGORefreshTableHeaderView.m in Sources */,
 				EAFD51CF1B392F9B007307BE /* ListTableViewCell.m in Sources */,
+				EA82B5921B4564AA004042AA /* TopStory.m in Sources */,
 				EAC288401B30459600390CFB /* ZhiHuHot.xcdatamodeld in Sources */,
 				EAC880CA1B41623600946EC9 /* ImagesScrollView.m in Sources */,
 				EAC2883D1B30459600390CFB /* AppDelegate.m in Sources */,
@@ -840,6 +847,7 @@
 		EAC2883E1B30459600390CFB /* ZhiHuHot.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				EA82B5931B457AE7004042AA /* ZhiHuHot 4.xcdatamodel */,
 				EAC880D21B417EA600946EC9 /* ZhiHuHot 3.xcdatamodel */,
 				EAC880D11B417E8800946EC9 /* ZhiHuHot 2.xcdatamodel */,
 				EAC2883F1B30459600390CFB /* ZhiHuHot.xcdatamodel */,
