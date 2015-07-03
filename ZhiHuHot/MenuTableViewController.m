@@ -53,7 +53,7 @@
         NSEntityDescription* entityDescription = [NSEntityDescription entityForName:@"Theme" inManagedObjectContext:self.managedObjectContext];
         [request setEntity:entityDescription];
         
-        NSSortDescriptor *sortDescription = [[NSSortDescriptor alloc] initWithKey:@"id" ascending:NO];
+        NSSortDescriptor *sortDescription = [[NSSortDescriptor alloc] initWithKey:@"sortId" ascending:YES];
         [request setSortDescriptors:@[sortDescription]];
         
         self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:self.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
@@ -87,6 +87,7 @@
     {
         CGRect rect = self.tableView.frame;
         rect.origin.y += 20;
+        rect.size.height -= 20;
         self.tableView.frame = rect;
         
 //        CGRect rect1 = self.view.frame;

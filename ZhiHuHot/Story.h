@@ -16,6 +16,7 @@
 @property (nonatomic, retain) NSString * title;
 @property (nonatomic, retain) NSString * images;
 @property (nonatomic, retain) NSNumber * id;
+@property (nonatomic, retain) NSNumber *sortId;
 @property (nonatomic, retain) Date *date;
 
 @end

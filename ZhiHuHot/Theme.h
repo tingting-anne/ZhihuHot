@@ -15,6 +15,7 @@
 
 @property (nonatomic, retain) NSString * thumbnail;
 @property (nonatomic, retain) NSNumber * id;
+@property (nonatomic, retain) NSNumber *sortId;
 @property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) NSSet *themStories;
 @end

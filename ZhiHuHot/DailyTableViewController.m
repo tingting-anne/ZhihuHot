@@ -23,7 +23,7 @@
 
 #define HEIGHT_OF_SECTION_HEADER 30.0f
 #define HEIGHT_OF_CELL 90.0f
-#define HEIGHT_OF_FIRST_SECTION_HEADER 200.0f
+#define HEIGHT_OF_FIRST_SECTION_HEADER 240.0f
 
 @interface DailyTableViewController ()<ImagesScrollViewDelegate, SWRevealViewControllerDelegate>
 {
@@ -168,7 +168,7 @@
         [request setEntity:entityDescription];
         
         NSSortDescriptor *sortDate = [[NSSortDescriptor alloc] initWithKey:@"date.date" ascending:NO];
-        NSSortDescriptor *sortID = [[NSSortDescriptor alloc] initWithKey:@"id" ascending:NO];
+        NSSortDescriptor *sortID = [[NSSortDescriptor alloc] initWithKey:@"sortId" ascending:YES];
         [request setSortDescriptors:[NSArray arrayWithObjects:sortDate, sortID, nil]];
         
         self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:self.managedObjectContext sectionNameKeyPath:@"date.date" cacheName:nil];

@@ -13,6 +13,7 @@
 @interface TopStory : NSManagedObject
 
 @property (nonatomic, retain) NSNumber * id;
+@property (nonatomic, retain) NSNumber * sortId;
 @property (nonatomic, retain) NSString * image;
 @property (nonatomic, retain) NSString * title;
 

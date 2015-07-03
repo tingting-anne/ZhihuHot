@@ -14,6 +14,7 @@
 
 @dynamic thumbnail;
 @dynamic id;
+@dynamic sortId;
 @dynamic name;
 @dynamic themStories;
 
@@ -27,6 +28,7 @@
     NSError *error;
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Theme"];
     
+    UInt32 sortId = 0;
     for (NSDictionary *themeDic in array) {
         request.predicate = [NSPredicate predicateWithFormat:@"id = %@", themeDic[@"id"]];
         NSArray *resultArray = [context executeFetchRequest:request error:&error];
@@ -38,7 +40,15 @@
             theme.id = themeDic[@"id"];
             theme.name = themeDic[@"name"];
             theme.thumbnail = themeDic[@"thumbnail"];
+            theme.sortId = [NSNumber numberWithUnsignedInt:sortId];
         }
+        else{
+            theme = resultArray[0];
+            theme.name = themeDic[@"name"];
+            theme.thumbnail = themeDic[@"thumbnail"];
+            theme.sortId = [NSNumber numberWithUnsignedInt:sortId];
+        }
+        sortId++;
     }
 }
 

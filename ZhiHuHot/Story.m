@@ -15,6 +15,7 @@
 @dynamic title;
 @dynamic images;
 @dynamic id;
+@dynamic sortId;
 @dynamic date;
 
 @end
@@ -29,6 +30,7 @@
     NSEntityDescription* description = [NSEntityDescription entityForName:@"Story" inManagedObjectContext:context];
     [request setEntity:description];
     
+    UInt32 sortId;
     for (NSDictionary* dic in storyArray) {
         NSPredicate* predicate = [NSPredicate predicateWithFormat:@"id = %@", dic[@"id"]];
         [request setPredicate:predicate];
@@ -44,7 +46,16 @@
             story.title = dic[@"title"];
             story.images = dic[@"images"][0];
             story.date = [Date loadFromString:date inManagedObjectContext:context];
+            story.sortId = [NSNumber numberWithUnsignedInt:sortId];
         }
+        else{
+            story = result[0];
+            story.title = dic[@"title"];
+            story.images = dic[@"images"][0];
+            story.date = [Date loadFromString:date inManagedObjectContext:context];
+            story.sortId = [NSNumber numberWithUnsignedInt:sortId];
+        }
+        sortId++;
     }
 }
 

@@ -79,6 +79,8 @@
 		EA06DF501B423C1800E30733 /* dailyImagePlacehold320.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dailyImagePlacehold320.png; sourceTree = "<group>"; };
 		EA06DF511B423C1800E30733 /* dailyImagePlacehold375.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dailyImagePlacehold375.png; sourceTree = "<group>"; };
 		EA06DF521B423C1800E30733 /* dailyImagePlacehold414.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dailyImagePlacehold414.png; sourceTree = "<group>"; };
+		EA16E5D11B464F720034A6ED /* ZhiHuHot 5.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "ZhiHuHot 5.xcdatamodel"; sourceTree = "<group>"; };
+		EA16E5D21B4660D80034A6ED /* ZhiHuHot 6.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "ZhiHuHot 6.xcdatamodel"; sourceTree = "<group>"; };
 		EA29D7131B33134F002DCCAF /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		EA29D7241B3315F1002DCCAF /* Story.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Story.h; sourceTree = "<group>"; };
 		EA29D7251B3315F1002DCCAF /* Story.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Story.m; sourceTree = "<group>"; };
@@ -847,12 +849,14 @@
 		EAC2883E1B30459600390CFB /* ZhiHuHot.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				EA16E5D21B4660D80034A6ED /* ZhiHuHot 6.xcdatamodel */,
+				EA16E5D11B464F720034A6ED /* ZhiHuHot 5.xcdatamodel */,
 				EA82B5931B457AE7004042AA /* ZhiHuHot 4.xcdatamodel */,
 				EAC880D21B417EA600946EC9 /* ZhiHuHot 3.xcdatamodel */,
 				EAC880D11B417E8800946EC9 /* ZhiHuHot 2.xcdatamodel */,
 				EAC2883F1B30459600390CFB /* ZhiHuHot.xcdatamodel */,
 			);
-			currentVersion = EAC2883F1B30459600390CFB /* ZhiHuHot.xcdatamodel */;
+			currentVersion = EA16E5D21B4660D80034A6ED /* ZhiHuHot 6.xcdatamodel */;
 			path = ZhiHuHot.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

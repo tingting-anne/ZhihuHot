@@ -12,6 +12,7 @@
 @implementation TopStory
 
 @dynamic id;
+@dynamic sortId;
 @dynamic image;
 @dynamic title;
 
@@ -28,6 +29,7 @@
     
     NSMutableArray* idArray = [[NSMutableArray alloc] init];
     
+    UInt32 sortId = 0;
     for (NSDictionary* dic in topStoryArray) {
         [idArray addObject:dic[@"id"]];
         
@@ -44,13 +46,17 @@
             topStory.id = dic[@"id"];
             topStory.title = dic[@"title"];
             topStory.image = dic[@"image"];
+            topStory.sortId = [NSNumber numberWithUnsignedInt:sortId];
         }
         else{
             //找到重新赋值即可
             topStory = result[0];
             topStory.title = dic[@"title"];
             topStory.image = dic[@"image"];
+            topStory.sortId = [NSNumber numberWithUnsignedInt:sortId];
         }
+        
+        sortId++;
     }
     
     //只保持最新的数据即可
@@ -71,7 +77,8 @@
 + (NSArray *)getArrayFromManagedObjectContext:(NSManagedObjectContext *)context
 {
     NSFetchRequest *request =[NSFetchRequest fetchRequestWithEntityName:@"TopStory"];
-    
+    NSSortDescriptor *sortDescription = [[NSSortDescriptor alloc] initWithKey:@"sortId" ascending:YES];
+    [request setSortDescriptors:@[sortDescription]];
     NSError *error;
     NSArray* result = [context executeFetchRequest:request error:&error];
     

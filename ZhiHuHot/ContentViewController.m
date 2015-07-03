@@ -70,7 +70,7 @@
             
             [self.webView loadHTMLString:htmlString baseURL:nil];
             
-            if (DAILY_STORY_CONTENT == self.contentType) {
+            if ([dic objectForKey:@"image"]) {
                 [self loadDailyWebViewPart:dic];
             }
             else{

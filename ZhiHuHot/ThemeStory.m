@@ -13,6 +13,7 @@
 @implementation ThemeStory
 
 @dynamic id;
+@dynamic sortId;
 @dynamic images;
 @dynamic title;
 @dynamic them;
@@ -25,8 +26,8 @@
 +(void)loadFromArray:(NSArray *)array withThemeID:(NSUInteger)themeID intoManagedObjectContext:(NSManagedObjectContext *)context
 {
     Theme* theme = [Theme getThemeWithID:themeID inManagedObjectContext:context];
-    if(theme != nil){
-        NSLog(@"%s has a them story which id[%lu] has no them", __FUNCTION__, themeID);
+    if(theme == nil){
+        NSLog(@"%s has a them story which id[%lu] has no them", __FUNCTION__, (unsigned long)themeID);
         return;
     }
     
@@ -34,6 +35,7 @@
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"ThemeStory"];
     NSError *error;
     
+    UInt32 sortId = 0;
     for (NSDictionary *storyDictionary in array) {
         fetchRequest.predicate = [NSPredicate predicateWithFormat:@"id = %@", storyDictionary[@"id"]];
         
@@ -48,7 +50,16 @@
             story.title = storyDictionary[@"title"];
             story.images = storyDictionary[@"images"][0];
             story.them = theme;
+            story.sortId = [NSNumber numberWithUnsignedInt:sortId];
         }
+        else{
+            story = matchedResult[0];
+            story.title = storyDictionary[@"title"];
+            story.images = storyDictionary[@"images"][0];
+            story.them = theme;
+            story.sortId = [NSNumber numberWithUnsignedInt:sortId];
+        }
+        sortId++;
     }
 }
 

@@ -57,7 +57,7 @@
     NSPredicate* predicate = [NSPredicate predicateWithFormat:@"them.id = %@", self.themeID];
     [request setPredicate:predicate];
     
-    NSSortDescriptor *sortDescription = [[NSSortDescriptor alloc] initWithKey:@"id" ascending:NO];
+    NSSortDescriptor *sortDescription = [[NSSortDescriptor alloc] initWithKey:@"sortId" ascending:YES];
     [request setSortDescriptors:@[sortDescription]];
     
     self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:self.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
@@ -191,16 +191,6 @@
 }
 
 #pragma mark - Table view delegate
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    NSUInteger sectionNum = [self.fetchedResultsController.sections count];
-    id<NSFetchedResultsSectionInfo> sectionInfo = [self.fetchedResultsController.sections objectAtIndex:indexPath.section];
-    NSUInteger rowNumOfSection = sectionInfo.numberOfObjects;
-    if (indexPath.section == (sectionNum -1) && indexPath.row == (rowNumOfSection - 1)) {
-        
-        [self.netClient downloadThemeStoriesWithThemeID:[self.themeID unsignedIntValue] withCompletionHandler:nil];
-    }
-}
 
 #pragma mark - Table view data source
 
