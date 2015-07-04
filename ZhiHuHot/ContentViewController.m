@@ -22,6 +22,7 @@
 
 -(void)loadDailyWebViewPart:(NSDictionary*) dic;
 -(void)loadThemeWebViewPart:(NSDictionary*) dic;
+-(void)loadData;
 
 @end
 
@@ -29,8 +30,12 @@
 
 -(void)awakeFromNib
 {
+    [super awakeFromNib];
+    
     self.netClient = [[NetClient alloc] initWithManagedObjectContext:nil];
     isFirstLoad = TRUE;
+    
+    //Long story short, the view may be loaded in awakeFromNib, but its contents are loaded lazily, which is why you should use viewDidLoad instead of awakeFromNib for what you are trying to achieve.
 }
 
 - (void)viewDidLoad{
@@ -39,16 +44,22 @@
     self.webView.delegate = self;//放在awakeFromNib中没有调用成功
     self.activity.hidden = NO;
     [self.view bringSubviewToFront:self.activity];
+    
+    [self loadData];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+    
+    NSLog(@"------------------------");
+    NSLog(@"didReceiveMemoryWarning");
+    NSLog(@"------------------------");
 }
 
--(void)setNewsID:(NSNumber *)newsID
+-(void)loadData
 {
-    [self.netClient downloadWithNewsID:[newsID unsignedIntegerValue] withCompletionHandler:^(NSDictionary* dic, NSError *error){
+    [self.netClient downloadWithNewsID:[self.newsID unsignedIntegerValue] withCompletionHandler:^(NSDictionary* dic, NSError *error){
         
         if(error){
             UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"ERROR", nil) message:NSLocalizedString(@"NET_DOWNLOAD_ERROR", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"CANCEL", nil)  otherButtonTitles:nil, nil];
@@ -68,14 +79,14 @@
             isLinkOpen = FALSE;
             NSString *htmlString = [NSString stringWithFormat:@"<html><head><link rel=\"stylesheet\" type=\"text/css\" href=%@ /></head><body>%@</body></html>", dic[@"css"][0], dic[@"body"]];
             
-            [self.webView loadHTMLString:htmlString baseURL:nil];
-            
             if ([dic objectForKey:@"image"]) {
                 [self loadDailyWebViewPart:dic];
             }
             else{
                 [self loadThemeWebViewPart:dic];
             }
+            
+            [self.webView loadHTMLString:htmlString baseURL:nil];
         }
     }];
 }

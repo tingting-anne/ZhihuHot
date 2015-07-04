@@ -55,6 +55,7 @@
 		EAC880CA1B41623600946EC9 /* ImagesScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = EAC880C91B41623600946EC9 /* ImagesScrollView.m */; };
 		EADD2F0F1B33D56E0087C1CA /* NetClient.m in Sources */ = {isa = PBXBuildFile; fileRef = EADD2F0E1B33D56E0087C1CA /* NetClient.m */; };
 		EADD2F161B3417F40087C1CA /* AppHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = EADD2F151B3417F40087C1CA /* AppHelper.m */; };
+		EAFBECE21B4688C500BCD5E4 /* DataCache.m in Sources */ = {isa = PBXBuildFile; fileRef = EAFBECE01B4688C500BCD5E4 /* DataCache.m */; };
 		EAFD51CF1B392F9B007307BE /* ListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EAFD51CE1B392F9B007307BE /* ListTableViewCell.m */; };
 		EAFD51D61B396D31007307BE /* ContentHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EAFD51D51B396D31007307BE /* ContentHeaderView.xib */; };
 		EAFD51D91B396D59007307BE /* ContentHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = EAFD51D81B396D59007307BE /* ContentHeaderView.m */; };
@@ -149,6 +150,8 @@
 		EADD2F141B3417F40087C1CA /* AppHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppHelper.h; sourceTree = "<group>"; };
 		EADD2F151B3417F40087C1CA /* AppHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppHelper.m; sourceTree = "<group>"; };
 		EADD2F171B34191C0087C1CA /* Definitions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Definitions.h; sourceTree = "<group>"; };
+		EAFBECE01B4688C500BCD5E4 /* DataCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataCache.m; sourceTree = "<group>"; };
+		EAFBECE11B4688C500BCD5E4 /* DataCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataCache.h; sourceTree = "<group>"; };
 		EAFD51CD1B392F9B007307BE /* ListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListTableViewCell.h; sourceTree = "<group>"; };
 		EAFD51CE1B392F9B007307BE /* ListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListTableViewCell.m; sourceTree = "<group>"; };
 		EAFD51D51B396D31007307BE /* ContentHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContentHeaderView.xib; sourceTree = "<group>"; };
@@ -428,6 +431,8 @@
 		EADD2F0A1B33C9890087C1CA /* Net */ = {
 			isa = PBXGroup;
 			children = (
+				EAFBECE01B4688C500BCD5E4 /* DataCache.m */,
+				EAFBECE11B4688C500BCD5E4 /* DataCache.h */,
 				EADD2F0D1B33D56E0087C1CA /* NetClient.h */,
 				EADD2F0E1B33D56E0087C1CA /* NetClient.m */,
 			);
@@ -598,6 +603,7 @@
 			files = (
 				EABAA8C31B3D3B540056D242 /* 知乎日报-API-分析.md in Sources */,
 				EAAFDBC21B3BF612007DA451 /* EGORefreshTableHeaderView.m in Sources */,
+				EAFBECE21B4688C500BCD5E4 /* DataCache.m in Sources */,
 				EAFD51CF1B392F9B007307BE /* ListTableViewCell.m in Sources */,
 				EA82B5921B4564AA004042AA /* TopStory.m in Sources */,
 				EAC288401B30459600390CFB /* ZhiHuHot.xcdatamodeld in Sources */,

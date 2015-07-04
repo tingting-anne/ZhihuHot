@@ -15,6 +15,7 @@
 #import "ThemeStory.h"
 #import "AppHelper.h"
 #import "Definitions.h"
+#import "DataCache.h"
 
 @interface NetClient ()
 
@@ -175,23 +176,35 @@
 {
     NSString *urlString = [NSString stringWithFormat:[NSString stringWithFormat:@"%s", NEWSCONTENT],[NSNumber numberWithUnsignedLong:newsID]];
     
-    AFHTTPSessionManager *smanager = [AFHTTPSessionManager manager];
-    smanager.responseSerializer = [AFHTTPResponseSerializer serializer]; //告诉manager只下载原始数据, 不要解析数据
-    NSDictionary *dict = @{@"format": @"json"};
-    [smanager GET:urlString parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
-        
-        NSData *data = responseObject;
-        NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
-        
-        if (completionHandler) {
-            completionHandler(dic, nil);
+    [[DataCache sharedDataCache] queryDiskCacheForKey:urlString done:^(NSData *data, DataCacheType cacheType){
+        if (data) {
+            NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+            if (completionHandler) {
+                completionHandler(dic, nil);
+            }
         }
-        
-    }failure:^(NSURLSessionDataTask *task, NSError *error) {
-        NSLog(@"%s %@",__FUNCTION__,error);
-        
-        if (completionHandler) {
-            completionHandler(nil, error);
+        else{
+            AFHTTPSessionManager *smanager = [AFHTTPSessionManager manager];
+            smanager.responseSerializer = [AFHTTPResponseSerializer serializer]; //告诉manager只下载原始数据, 不要解析数据
+            NSDictionary *dict = @{@"format": @"json"};
+            [smanager GET:urlString parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
+                
+                NSData *data = responseObject;
+                NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+                
+                if (completionHandler) {
+                    completionHandler(dic, nil);
+                }
+                
+                [[DataCache sharedDataCache] storeData:data forKey:urlString];
+                
+            }failure:^(NSURLSessionDataTask *task, NSError *error) {
+                NSLog(@"%s %@",__FUNCTION__,error);
+                
+                if (completionHandler) {
+                    completionHandler(nil, error);
+                }
+            }];
         }
     }];
 }
