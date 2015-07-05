@@ -301,7 +301,6 @@
                             <constraint firstAttribute="trailing" secondItem="osy-rY-80U" secondAttribute="trailing" id="SV3-oC-wKP"/>
                             <constraint firstItem="osy-rY-80U" firstAttribute="top" secondItem="a1Q-no-0PK" secondAttribute="top" id="bLj-XU-Wqi"/>
                             <constraint firstAttribute="bottom" secondItem="osy-rY-80U" secondAttribute="bottom" id="cr0-jY-HmR"/>
-                            <constraint firstAttribute="centerX" secondItem="osy-rY-80U" secondAttribute="centerX" id="n5R-dk-EJW"/>
                             <constraint firstItem="osy-rY-80U" firstAttribute="leading" secondItem="a1Q-no-0PK" secondAttribute="leading" id="pUQ-il-Ybp"/>
                             <constraint firstAttribute="centerY" secondItem="qgt-Wf-uw6" secondAttribute="centerY" id="xRr-w6-KiL"/>
                         </constraints>
@@ -323,6 +322,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="nmB-XB-NcZ"/>
-        <segue reference="WlD-Bd-4y2"/>
+        <segue reference="dWF-6J-WXD"/>
     </inferredMetricsTieBreakers>
 </document>

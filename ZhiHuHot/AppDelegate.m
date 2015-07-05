@@ -9,6 +9,8 @@
 #import "AppDelegate.h"
 #import "NetClient.h"
 #import "AppHelper.h"
+#import "SDWebImage/SDImageCache.h"
+#import "DataCache.h"
 
 @interface AppDelegate ()
 
@@ -43,8 +45,23 @@
     
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:YES];
     
-    
+    //////////////////////////////////////////////////////////
     NSURLCache* urlCache = [NSURLCache sharedURLCache];
+    urlCache.diskCapacity = 5 * 1024 * 1024;
+    urlCache.memoryCapacity = 1024 * 1024;
+    
+    SDImageCache* sdImageCache = [SDImageCache sharedImageCache];
+    sdImageCache.maxCacheAge = 7 * 24 * 60 * 60;
+    sdImageCache.maxCacheSize = 10 * 1024 * 1024;
+    sdImageCache.maxMemoryCost = 2 * 1024 * 1024;
+    
+    DataCache* dataCache = [DataCache sharedDataCache];
+    dataCache.maxCacheAge = 7 * 24 * 60 * 60;
+    dataCache.maxCacheSize = 5 * 1024 * 1024;
+    dataCache.maxMemoryCost = 1024 * 1024;
+    
+    //Default NSURLCache :disk:20M, memory:4M
+    
     NSLog(@"NSURLCache diskCapacity:%lu, memoryCapacity:%lu", (unsigned long)urlCache.diskCapacity, (unsigned long)urlCache.memoryCapacity);
     
     return YES;

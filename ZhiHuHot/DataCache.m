@@ -244,8 +244,8 @@ static const NSInteger kDefaultCacheMaxCacheAge = 60 * 60 * 24 * 7; // 1 week
             if (diskData) {
                 CGFloat cost = diskData.length;
                 [self.memCache setObject:diskData forKey:key cost:cost];
+                NSLog(@"%s load from disk", __FUNCTION__);
             }
-            NSLog(@"%s load from disk", __FUNCTION__);
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 doneBlock(diskData, DataCacheTypeDisk);

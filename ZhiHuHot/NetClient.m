@@ -209,4 +209,35 @@
     }];
 }
 
+- (void)downloadCss:(NSString *)href withCompletionHandler:(void(^)(NSData* cssData, NSError *error))completionHandler
+{
+    [[DataCache sharedDataCache] queryDiskCacheForKey:href done:^(NSData *data, DataCacheType cacheType){
+        if (data) {
+            if (completionHandler) {
+                completionHandler(data, nil);
+            }
+        }
+        else{
+            AFHTTPSessionManager *smanager = [AFHTTPSessionManager manager];
+            smanager.responseSerializer = [AFHTTPResponseSerializer serializer]; //告诉manager只下载原始数据, 不要解析数据
+        
+            [smanager GET:href parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+                
+                NSData *data = responseObject;
+                if (completionHandler) {
+                    completionHandler(data, nil);
+                }
+                
+                [[DataCache sharedDataCache] storeData:data forKey:href];
+                
+            }failure:^(NSURLSessionDataTask *task, NSError *error) {
+                NSLog(@"%s %@",__FUNCTION__,error);
+                
+                if (completionHandler) {
+                    completionHandler(nil, error);
+                }
+            }];
+        }
+    }];
+}
 @end

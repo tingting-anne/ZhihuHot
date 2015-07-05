@@ -16,13 +16,16 @@
 {
     BOOL isFirstLoad;
     BOOL isLinkOpen;
+    ContentHeaderView *headerView;
 }
+
 @property(strong,nonatomic)NetClient* netClient;
 @property(strong,nonatomic)LinkViewController* linkViewController;
 
 -(void)loadDailyWebViewPart:(NSDictionary*) dic;
 -(void)loadThemeWebViewPart:(NSDictionary*) dic;
 -(void)loadData;
+-(void)loadErrorWithError:(NSError *)error;
 
 @end
 
@@ -59,17 +62,15 @@
 
 -(void)loadData
 {
+    [self.activity startAnimating];
+    
     [self.netClient downloadWithNewsID:[self.newsID unsignedIntegerValue] withCompletionHandler:^(NSDictionary* dic, NSError *error){
         
-        if(error){
-            UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"ERROR", nil) message:NSLocalizedString(@"NET_DOWNLOAD_ERROR", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"CANCEL", nil)  otherButtonTitles:nil, nil];
-            [alertView show];
+        if (error || !dic || (!dic[@"body"] && !dic[@"share_url"])) {
+            [self loadErrorWithError:error];
             return;
         }
         
-        if (!dic || (!dic[@"body"] && !dic[@"share_url"])) {
-            return;
-        }
         if (dic[@"body"] == nil) {//再次链接
             isLinkOpen = TRUE;
             NSURL* share_url = [[NSURL alloc] initWithString:dic[@"share_url"]];
@@ -77,16 +78,45 @@
         }
         else{
             isLinkOpen = FALSE;
-            NSString *htmlString = [NSString stringWithFormat:@"<html><head><link rel=\"stylesheet\" type=\"text/css\" href=%@ /></head><body>%@</body></html>", dic[@"css"][0], dic[@"body"]];
             
-            if ([dic objectForKey:@"image"]) {
-                [self loadDailyWebViewPart:dic];
-            }
-            else{
-                [self loadThemeWebViewPart:dic];
-            }
-            
-            [self.webView loadHTMLString:htmlString baseURL:nil];
+            [self.netClient downloadCss:dic[@"css"][0] withCompletionHandler:^(NSData* cssData, NSError *error){
+                
+                if (error) {
+                    [self loadErrorWithError:error];
+                    return;
+                }
+                
+                static NSString* defaultCssString = nil;
+                NSString *cssString = nil;
+                
+                if(!cssData){
+                    if (defaultCssString) {
+                        cssString = defaultCssString;
+                    }
+                    else{
+                        [self loadErrorWithError:error];
+                        return;
+                    }
+                }
+                else{
+                    cssString = [[NSString alloc] initWithData:cssData  encoding:NSUTF8StringEncoding];
+                    
+                    if (!defaultCssString) {
+                        defaultCssString = cssString;
+                    }
+                }
+                    
+                NSString * htmlString = [NSString stringWithFormat:@"<html><head><style type=\"text/css\"> %@ </style></head><body>%@</body></html>", cssString, dic[@"body"]];
+                
+                [self.webView loadHTMLString:htmlString baseURL:nil];
+                
+                if ([dic objectForKey:@"image"]) {
+                    [self loadDailyWebViewPart:dic];
+                }
+                else{
+                    [self loadThemeWebViewPart:dic];
+                }
+            }];
         }
     }];
 }
@@ -94,21 +124,31 @@
 -(void)loadDailyWebViewPart:(NSDictionary *)dic
 {
     NSArray *nibArray = [[NSBundle mainBundle] loadNibNamed:@"ContentHeaderView" owner:self options:nil];
-    ContentHeaderView *headerView = [nibArray firstObject];
+    headerView = [nibArray firstObject];
     
     // Setup header view
-    CGRect headerFrame = CGRectMake(0, 0, self.webView.frame.size.width, 220);
+    CGRect headerFrame = CGRectMake(0, 0, self.view.bounds.size.width, 205);
     headerView.frame = headerFrame;
 
-    [headerView.imageView sd_setImageWithURL:[NSURL URLWithString:dic[@"image"]] placeholderImage:[UIImage imageNamed:@"placeholder"] options:SDWebImageHighPriority];
+    NSString *dailyImagePlacehold = [NSString stringWithFormat:@"dailyImagePlacehold%d",(int)self.view.bounds.size.width];
+    
+    [headerView.imageView sd_setImageWithURL:[NSURL URLWithString:dic[@"image"]] placeholderImage:[UIImage imageNamed:dailyImagePlacehold] options:SDWebImageHighPriority];
     
     headerView.titleLable.text = dic[@"title"];
     headerView.imageSourceLabel.text = dic[@"image_source"];
-    [self.webView.scrollView addSubview:headerView];
+  //  [self.webView.scrollView addSubview:headerView];
 }
 
 -(void)loadThemeWebViewPart:(NSDictionary *)dic
 {
+}
+
+-(void)loadErrorWithError:(NSError *)error
+{
+    UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"ERROR", nil) message:NSLocalizedString(@"NET_DOWNLOAD_ERROR", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"CANCEL", nil)  otherButtonTitles:nil, nil];
+    [alertView show];
+    
+    [self.activity stopAnimating];
 }
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
@@ -135,6 +175,10 @@
 -(void)webViewDidStartLoad:(UIWebView *)webView
 {
     [self.activity startAnimating];
+    
+    if (headerView) {
+        [self.webView.scrollView addSubview:headerView];
+    }
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView
@@ -144,9 +188,6 @@
 
 -(void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
 {
-    UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"ERROR", nil) message:NSLocalizedString(@"NET_DOWNLOAD_ERROR", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"CANCEL", nil)  otherButtonTitles:nil, nil];
-    [alertView show];
-    
-    [self.activity stopAnimating];
+    [self loadErrorWithError:error];
 }
 @end
