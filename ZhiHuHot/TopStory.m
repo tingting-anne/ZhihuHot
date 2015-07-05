@@ -79,10 +79,10 @@
     NSFetchRequest *request =[NSFetchRequest fetchRequestWithEntityName:@"TopStory"];
     NSSortDescriptor *sortDescription = [[NSSortDescriptor alloc] initWithKey:@"sortId" ascending:YES];
     [request setSortDescriptors:@[sortDescription]];
-    NSError *error;
+    NSError *error = nil;
     NSArray* result = [context executeFetchRequest:request error:&error];
     
-    TopStory* topStory;
+    TopStory* topStory = nil;
     NSMutableArray* dicArray = [[NSMutableArray alloc] init];
     
     for (topStory in result) {

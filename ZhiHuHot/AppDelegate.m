@@ -11,6 +11,7 @@
 #import "AppHelper.h"
 #import "SDWebImage/SDImageCache.h"
 #import "DataCache.h"
+#import "Story.h"
 
 @interface AppDelegate ()
 
@@ -75,6 +76,14 @@
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    
+    [Story deleteStoriesBeforeDays:30 inManagedObjectContext:self.managedObjectContext];
+    
+    NSError *saveError = nil;
+    [self.managedObjectContext save:&saveError];
+    if (saveError) {
+        NSLog(@"%s context save error, error:%@",__FUNCTION__,saveError);
+    }
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {

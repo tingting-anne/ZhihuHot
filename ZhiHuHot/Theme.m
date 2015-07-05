@@ -25,7 +25,7 @@
 +(void)loadFromArray:(NSArray *)array intoManagedObjectContext:(NSManagedObjectContext *)context
 {
     Theme *theme = nil;
-    NSError *error;
+    NSError *error = nil;
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Theme"];
     
     UInt32 sortId = 0;

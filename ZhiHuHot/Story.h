@@ -25,4 +25,5 @@
 
 + (void)loadFromArray:(NSArray *)storyArray withDate:(NSString *)date intoManagedObjectContext:(NSManagedObjectContext *)context;
 
++ (void)deleteStoriesBeforeDays:(NSUInteger)days inManagedObjectContext:(NSManagedObjectContext *)context;
 @end

@@ -33,7 +33,7 @@
     
     ThemeStory *story =  nil;
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"ThemeStory"];
-    NSError *error;
+    NSError *error = nil;
     
     UInt32 sortId = 0;
     for (NSDictionary *storyDictionary in array) {

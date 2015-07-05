@@ -30,7 +30,7 @@
     NSEntityDescription* description = [NSEntityDescription entityForName:@"Story" inManagedObjectContext:context];
     [request setEntity:description];
     
-    UInt32 sortId;
+    UInt32 sortId = 0;
     for (NSDictionary* dic in storyArray) {
         NSPredicate* predicate = [NSPredicate predicateWithFormat:@"id = %@", dic[@"id"]];
         [request setPredicate:predicate];
@@ -59,4 +59,28 @@
     }
 }
 
++ (void)deleteStoriesBeforeDays:(NSUInteger)days inManagedObjectContext:(NSManagedObjectContext *)context
+{
+    NSError *error = nil;
+    NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"Story"];
+    
+    NSTimeInterval timeInterval = days * 24 * 60 * 60 * -1.0f;
+    NSDate *dateDelete = [NSDate dateWithTimeIntervalSinceNow:timeInterval];
+    NSLog(@"dateDelete %@", dateDelete);
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateStyle:NSDateFormatterFullStyle];
+    dateFormatter.dateFormat = @"yyyyMMdd";
+    
+    NSString *dateDeleteString = [dateFormatter stringFromDate:dateDelete];
+    NSPredicate* predicate = [NSPredicate predicateWithFormat:@"date.date < %@", dateDeleteString];
+    [request setPredicate:predicate];
+        
+    NSArray* result = [context executeFetchRequest:request error:&error];
+    if (result && !error && [result count] > 0) {
+        for (Story *story in result) {
+            [context deleteObject:story];
+        }
+    }
+}
 @end
