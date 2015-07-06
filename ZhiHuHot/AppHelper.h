@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 #import <UIKit/UIKit.h>
+#import "Definitions.h"
 
 @interface AppHelper : NSObject
 
@@ -18,5 +19,7 @@
 - (BOOL)isTodayWithDateString:(NSString *)dateString;
 - (NSString *)stringOfToday;
 - (UIColor *)backgroundColor;
+
+-(void)showAlertViewWithError:(NSError *) error type:(AlertErrorType)type;
 
 @end

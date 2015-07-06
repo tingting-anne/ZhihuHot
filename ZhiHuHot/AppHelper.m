@@ -79,4 +79,30 @@ static AppHelper *sharesingleton=nil;
 {
     return [UIColor colorWithRed:0.3f green:0.6f blue:1.0f alpha:1.0f];
 }
+
+
+-(void)showAlertViewWithError:(NSError *) error type:(AlertErrorType)type
+{
+    NSString* errorMessage = nil;
+    switch (type) {
+        case NET_DOWNLOAD_ERROR:
+            errorMessage = @"NET_DOWNLOAD_ERROR";
+            break;
+        case PSC_STORE_ERROR:
+            errorMessage = @"PSC_STORE_ERROR";
+            break;
+        case MOC_SAVE_ERROR:
+            errorMessage = @"MOC_SAVE_ERROR";
+            break;
+        default:
+            errorMessage = @"ERROR_UNKNOWN";
+            break;
+    }
+    
+//    UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"ERROR", nil) message:NSLocalizedString(errorMessage, nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"CANCEL", nil)  otherButtonTitles:nil, nil];
+    
+     UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(errorMessage, nil) message:[error localizedFailureReason] delegate:nil cancelButtonTitle:NSLocalizedString(@"CANCEL", nil)  otherButtonTitles:nil, nil];
+    [alertView show];
+}
+
 @end

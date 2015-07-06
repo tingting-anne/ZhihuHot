@@ -15,6 +15,8 @@
 
 @interface AppDelegate ()
 
+@property (readonly, strong, nonatomic) NSManagedObjectContext *writeManagedObjectContext;
+
 @end
 
 @implementation AppDelegate
@@ -22,7 +24,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
-    NetClient *netClient = [[NetClient alloc] initWithManagedObjectContext:self.managedObjectContext];
+    NetClient *netClient = [[NetClient alloc] init];
     [netClient downloadLatestStoriesWithCompletionHandler:^(NSError* error, NSArray* topStories){
         if (error) {
             NSLog(@"ERROR downloadStories : %s", __FUNCTION__);
@@ -78,12 +80,7 @@
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
     
     [Story deleteStoriesBeforeDays:30 inManagedObjectContext:self.managedObjectContext];
-    
-    NSError *saveError = nil;
-    [self.managedObjectContext save:&saveError];
-    if (saveError) {
-        NSLog(@"%s context save error, error:%@",__FUNCTION__,saveError);
-    }
+    [self saveContext];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
@@ -165,8 +162,12 @@
     if (!coordinator) {
         return nil;
     }
+    _writeManagedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+    [_writeManagedObjectContext setPersistentStoreCoordinator:coordinator];
+    
     _managedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
-    [_managedObjectContext setPersistentStoreCoordinator:coordinator];
+    _managedObjectContext.parentContext = _writeManagedObjectContext;
+    
     return _managedObjectContext;
 }
 
@@ -180,8 +181,20 @@
             // Replace this implementation with code to handle the error appropriately.
             // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
             NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-            abort();
+            [[AppHelper shareAppHelper] showAlertViewWithError:error type:MOC_SAVE_ERROR];
         }
+    }
+    
+    if (_writeManagedObjectContext != nil) {
+        [_writeManagedObjectContext performBlock:^{
+            NSError *error = nil;
+            if ([_writeManagedObjectContext hasChanges] && ![_writeManagedObjectContext save:&error]) {
+                // Replace this implementation with code to handle the error appropriately.
+                // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+                NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+                [[AppHelper shareAppHelper] showAlertViewWithError:error type:PSC_STORE_ERROR];
+            }
+        }];
     }
 }
 

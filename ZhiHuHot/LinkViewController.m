@@ -7,6 +7,7 @@
 //
 
 #import "LinkViewController.h"
+#import "AppHelper.h"
 
 @interface LinkViewController ()
 {
@@ -48,9 +49,7 @@
 
 -(void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
 {
-    UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"ERROR", nil) message:NSLocalizedString(@"NET_DOWNLOAD_ERROR", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"CANCEL", nil)  otherButtonTitles:nil, nil];
-    [alertView show];
-    
+    [[AppHelper shareAppHelper] showAlertViewWithError:error type:NET_DOWNLOAD_ERROR];
     [self.activity stopAnimating];
 }
 

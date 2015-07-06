@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZhiHuHot/DailyTableViewController.m"
-            timestampString = "457611989.473802"
+            timestampString = "457868953.476271"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "688"
-            endingLineNumber = "688"
+            startingLineNumber = "710"
+            endingLineNumber = "710"
             landmarkName = "-loadMoreTableFooterDidTriggerLoadMore:"
             landmarkType = "5">
          </BreakpointContent>
@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZhiHuHot/DailyTableViewController.m"
-            timestampString = "457611989.473802"
+            timestampString = "457868953.476271"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "322"
-            endingLineNumber = "322"
+            startingLineNumber = "345"
+            endingLineNumber = "345"
             landmarkName = "-headerStringFormateWithDate:"
             landmarkType = "5">
          </BreakpointContent>
@@ -42,28 +42,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZhiHuHot/DailyTableViewController.m"
-            timestampString = "457611989.473802"
+            timestampString = "457868953.476271"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "360"
-            endingLineNumber = "360"
+            startingLineNumber = "382"
+            endingLineNumber = "382"
             landmarkName = "-didSelectedNewsID:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ZhiHuHot/DailyTableViewController.m"
-            timestampString = "457611989.473802"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "693"
-            endingLineNumber = "693"
-            landmarkName = "-loadMoreTableFooterDidTriggerLoadMore:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -106,11 +90,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZhiHuHot/DailyTableViewController.m"
-            timestampString = "457611989.473802"
+            timestampString = "457868953.476271"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "449"
-            endingLineNumber = "449"
+            startingLineNumber = "471"
+            endingLineNumber = "471"
             landmarkName = "-tableView:numberOfRowsInSection:"
             landmarkType = "5">
          </BreakpointContent>
@@ -154,11 +138,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZhiHuHot/NetClient.m"
-            timestampString = "457616110.083757"
+            timestampString = "457863577.27355"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "54"
-            endingLineNumber = "54"
+            startingLineNumber = "59"
+            endingLineNumber = "59"
             landmarkName = "-getAndSaveStoriesWithUrl:today:withCompletionHandler:"
             landmarkType = "5">
          </BreakpointContent>
@@ -170,11 +154,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZhiHuHot/NetClient.m"
-            timestampString = "457616110.083757"
+            timestampString = "457863577.27355"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "66"
-            endingLineNumber = "66"
+            startingLineNumber = "68"
+            endingLineNumber = "68"
             landmarkName = "-getAndSaveStoriesWithUrl:today:withCompletionHandler:"
             landmarkType = "5">
          </BreakpointContent>
@@ -186,11 +170,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZhiHuHot/DailyTableViewController.m"
-            timestampString = "457611989.473802"
+            timestampString = "457868055.720458"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "297"
-            endingLineNumber = "297"
+            startingLineNumber = "321"
+            endingLineNumber = "321"
             landmarkName = "-updateLatestStories"
             landmarkType = "5">
          </BreakpointContent>
@@ -202,11 +186,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZhiHuHot/DailyTableViewController.m"
-            timestampString = "457611989.473802"
+            timestampString = "457868953.476271"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "445"
-            endingLineNumber = "445"
+            startingLineNumber = "467"
+            endingLineNumber = "467"
             landmarkName = "-numberOfSectionsInTableView:"
             landmarkType = "5">
          </BreakpointContent>
@@ -218,11 +202,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZhiHuHot/NetClient.m"
-            timestampString = "457616110.083757"
+            timestampString = "457863577.27355"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "97"
-            endingLineNumber = "97"
+            startingLineNumber = "99"
+            endingLineNumber = "99"
             landmarkName = "-downloadBeforeDate:withCompletionHandler:"
             landmarkType = "5">
          </BreakpointContent>
@@ -234,11 +218,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZhiHuHot/DailyTableViewController.m"
-            timestampString = "457611989.473802"
+            timestampString = "457868953.476271"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "714"
-            endingLineNumber = "714"
+            startingLineNumber = "735"
+            endingLineNumber = "735"
             landmarkName = "@implementation DailyTableViewController"
             landmarkType = "3">
          </BreakpointContent>
@@ -250,11 +234,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZhiHuHot/DailyTableViewController.m"
-            timestampString = "457611989.473802"
+            timestampString = "457868953.476271"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "661"
-            endingLineNumber = "661"
+            startingLineNumber = "683"
+            endingLineNumber = "683"
             landmarkName = "-egoRefreshTableHeaderDidTriggerRefresh:"
             landmarkType = "5">
          </BreakpointContent>
@@ -266,11 +250,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZhiHuHot/DailyTableViewController.m"
-            timestampString = "457611989.473802"
+            timestampString = "457868953.476271"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "661"
-            endingLineNumber = "661"
+            startingLineNumber = "683"
+            endingLineNumber = "683"
             landmarkName = "-egoRefreshTableHeaderDidTriggerRefresh:"
             landmarkType = "5">
          </BreakpointContent>
@@ -282,11 +266,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZhiHuHot/DailyTableViewController.m"
-            timestampString = "457537464.917077"
+            timestampString = "457868055.720458"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "142"
-            endingLineNumber = "142"
+            startingLineNumber = "151"
+            endingLineNumber = "151"
             landmarkName = "-awakeFromNib"
             landmarkType = "5">
          </BreakpointContent>
@@ -298,11 +282,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZhiHuHot/DailyTableViewController.m"
-            timestampString = "457611989.473802"
+            timestampString = "457868953.476271"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "678"
-            endingLineNumber = "678"
+            startingLineNumber = "700"
+            endingLineNumber = "700"
             landmarkName = "@implementation DailyTableViewController"
             landmarkType = "3">
          </BreakpointContent>
@@ -314,11 +298,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZhiHuHot/DailyTableViewController.m"
-            timestampString = "457611989.473802"
+            timestampString = "457868953.476271"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "660"
-            endingLineNumber = "660"
+            startingLineNumber = "682"
+            endingLineNumber = "682"
             landmarkName = "-egoRefreshTableHeaderDidTriggerRefresh:"
             landmarkType = "5">
          </BreakpointContent>
@@ -346,11 +330,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZhiHuHot/DailyTableViewController.m"
-            timestampString = "457611989.473802"
+            timestampString = "457868953.476271"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "447"
-            endingLineNumber = "447"
+            startingLineNumber = "469"
+            endingLineNumber = "469"
             landmarkName = "-numberOfSectionsInTableView:"
             landmarkType = "5">
          </BreakpointContent>
@@ -409,22 +393,6 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "ZhiHuHot/DailyTableViewController.m"
-            timestampString = "457611989.473802"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "732"
-            endingLineNumber = "732"
-            landmarkName = "-notificationEvent:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "ZhiHuHot/EGOTableViewPullRefreshAndLoadMore/LoadMoreClass/LoadMoreTableFooterView.m"
             timestampString = "456990542.276881"
             startingColumnNumber = "9223372036854775807"
@@ -442,11 +410,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZhiHuHot/NetClient.m"
-            timestampString = "457616110.083757"
+            timestampString = "457863577.27355"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "41"
-            endingLineNumber = "41"
+            startingLineNumber = "47"
+            endingLineNumber = "47"
             landmarkName = "-getAndSaveStoriesWithUrl:today:withCompletionHandler:"
             landmarkType = "5">
          </BreakpointContent>
@@ -458,11 +426,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZhiHuHot/DailyTableViewController.m"
-            timestampString = "457611989.473802"
+            timestampString = "457868953.476271"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "658"
-            endingLineNumber = "658"
+            startingLineNumber = "680"
+            endingLineNumber = "680"
             landmarkName = "@implementation DailyTableViewController"
             landmarkType = "3">
          </BreakpointContent>
@@ -522,11 +490,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZhiHuHot/DailyTableViewController.m"
-            timestampString = "457611989.473802"
+            timestampString = "457868055.720458"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "303"
-            endingLineNumber = "303"
+            startingLineNumber = "327"
+            endingLineNumber = "327"
             landmarkName = "-updateLatestStories"
             landmarkType = "5">
          </BreakpointContent>
@@ -538,11 +506,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZhiHuHot/DailyTableViewController.m"
-            timestampString = "457611989.473802"
+            timestampString = "457868953.476271"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "455"
-            endingLineNumber = "455"
+            startingLineNumber = "477"
+            endingLineNumber = "477"
             landmarkName = "-tableView:numberOfRowsInSection:"
             landmarkType = "5">
          </BreakpointContent>
@@ -554,11 +522,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZhiHuHot/DailyTableViewController.m"
-            timestampString = "457611989.473802"
+            timestampString = "457868953.476271"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "456"
-            endingLineNumber = "456"
+            startingLineNumber = "478"
+            endingLineNumber = "478"
             landmarkName = "-tableView:numberOfRowsInSection:"
             landmarkType = "5">
          </BreakpointContent>
@@ -586,11 +554,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZhiHuHot/DailyTableViewController.m"
-            timestampString = "457611989.473802"
+            timestampString = "457868953.476271"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "495"
-            endingLineNumber = "495"
+            startingLineNumber = "517"
+            endingLineNumber = "517"
             landmarkName = "@implementation DailyTableViewController"
             landmarkType = "3">
          </BreakpointContent>
@@ -602,11 +570,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZhiHuHot/DailyTableViewController.m"
-            timestampString = "457611989.473802"
+            timestampString = "457868953.476271"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "442"
-            endingLineNumber = "442"
+            startingLineNumber = "464"
+            endingLineNumber = "464"
             landmarkName = "-tableView:heightForRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -618,11 +586,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZhiHuHot/DailyTableViewController.m"
-            timestampString = "457611989.473802"
+            timestampString = "457868953.476271"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "420"
-            endingLineNumber = "420"
+            startingLineNumber = "442"
+            endingLineNumber = "442"
             landmarkName = "-tableView:viewForHeaderInSection:"
             landmarkType = "5">
          </BreakpointContent>
@@ -634,11 +602,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZhiHuHot/DailyTableViewController.m"
-            timestampString = "457611989.473802"
+            timestampString = "457868953.476271"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "631"
-            endingLineNumber = "631"
+            startingLineNumber = "653"
+            endingLineNumber = "653"
             landmarkName = "-scrollViewDidScroll:"
             landmarkType = "5">
          </BreakpointContent>
@@ -650,11 +618,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZhiHuHot/DailyTableViewController.m"
-            timestampString = "457611989.473802"
+            timestampString = "457868953.476271"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "431"
-            endingLineNumber = "431"
+            startingLineNumber = "453"
+            endingLineNumber = "453"
             landmarkName = "-tableView:willDisplayCell:forRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -666,11 +634,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZhiHuHot/DailyTableViewController.m"
-            timestampString = "457611989.473802"
+            timestampString = "457868953.476271"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "670"
-            endingLineNumber = "670"
+            startingLineNumber = "692"
+            endingLineNumber = "692"
             landmarkName = "-egoRefreshTableHeaderDataSourceIsLoading:"
             landmarkType = "5">
          </BreakpointContent>
@@ -682,11 +650,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZhiHuHot/DailyTableViewController.m"
-            timestampString = "457611989.473802"
+            timestampString = "457868055.720458"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "279"
-            endingLineNumber = "279"
+            startingLineNumber = "303"
+            endingLineNumber = "303"
             landmarkName = "-resetForNavItemTitle:"
             landmarkType = "5">
          </BreakpointContent>
@@ -698,11 +666,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZhiHuHot/LinkViewController.m"
-            timestampString = "457097476.515751"
+            timestampString = "457868953.476271"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "20"
-            endingLineNumber = "20"
+            startingLineNumber = "21"
+            endingLineNumber = "21"
             landmarkName = "-viewDidLoad"
             landmarkType = "5">
          </BreakpointContent>
@@ -714,11 +682,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZhiHuHot/ContentViewController.m"
-            timestampString = "457778819.075885"
+            timestampString = "457868953.476271"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "165"
-            endingLineNumber = "165"
+            startingLineNumber = "164"
+            endingLineNumber = "164"
             landmarkName = "-webView:shouldStartLoadWithRequest:navigationType:"
             landmarkType = "5">
          </BreakpointContent>
@@ -730,11 +698,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZhiHuHot/ContentViewController.m"
-            timestampString = "457778819.075885"
+            timestampString = "457868953.476271"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "186"
-            endingLineNumber = "186"
+            startingLineNumber = "185"
+            endingLineNumber = "185"
             landmarkName = "-webViewDidFinishLoad:"
             landmarkType = "5">
          </BreakpointContent>
@@ -746,11 +714,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZhiHuHot/ContentViewController.m"
-            timestampString = "457778819.075885"
+            timestampString = "457868953.476271"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "191"
-            endingLineNumber = "191"
+            startingLineNumber = "190"
+            endingLineNumber = "190"
             landmarkName = "-webView:didFailLoadWithError:"
             landmarkType = "5">
          </BreakpointContent>
@@ -762,11 +730,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZhiHuHot/ContentViewController.m"
-            timestampString = "457778819.075885"
+            timestampString = "457868953.476271"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "162"
-            endingLineNumber = "162"
+            startingLineNumber = "161"
+            endingLineNumber = "161"
             landmarkName = "-webView:shouldStartLoadWithRequest:navigationType:"
             landmarkType = "5">
          </BreakpointContent>
@@ -778,11 +746,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZhiHuHot/LinkViewController.m"
-            timestampString = "457182434.197977"
+            timestampString = "457868953.476271"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "56"
-            endingLineNumber = "56"
+            startingLineNumber = "55"
+            endingLineNumber = "55"
             landmarkName = "@implementation LinkViewController"
             landmarkType = "3">
          </BreakpointContent>
@@ -794,11 +762,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZhiHuHot/LinkViewController.m"
-            timestampString = "457182434.197977"
+            timestampString = "457868953.476271"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "36"
-            endingLineNumber = "36"
+            startingLineNumber = "37"
+            endingLineNumber = "37"
             landmarkName = "@implementation LinkViewController"
             landmarkType = "3">
          </BreakpointContent>
@@ -810,27 +778,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZhiHuHot/LinkViewController.m"
-            timestampString = "457182434.197977"
+            timestampString = "457868953.476271"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "52"
-            endingLineNumber = "52"
-            landmarkName = "-webView:didFailLoadWithError:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ZhiHuHot/LinkViewController.m"
-            timestampString = "457182434.197977"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "38"
-            endingLineNumber = "38"
+            startingLineNumber = "39"
+            endingLineNumber = "39"
             landmarkName = "-webViewDidStartLoad:"
             landmarkType = "5">
          </BreakpointContent>
@@ -842,11 +794,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZhiHuHot/DailyTableViewController.m"
-            timestampString = "457591500.914392"
+            timestampString = "457868055.720458"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "197"
-            endingLineNumber = "197"
+            startingLineNumber = "214"
+            endingLineNumber = "214"
             landmarkName = "-viewDidLoad"
             landmarkType = "5">
          </BreakpointContent>
@@ -858,11 +810,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZhiHuHot/DailyTableViewController.m"
-            timestampString = "457611989.473802"
+            timestampString = "457868953.476271"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "355"
-            endingLineNumber = "355"
+            startingLineNumber = "377"
+            endingLineNumber = "377"
             landmarkName = "-reloadTableViewDataSource"
             landmarkType = "5">
          </BreakpointContent>
@@ -874,11 +826,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZhiHuHot/DailyTableViewController.m"
-            timestampString = "457611989.473802"
+            timestampString = "457868953.476271"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "358"
-            endingLineNumber = "358"
+            startingLineNumber = "380"
+            endingLineNumber = "380"
             landmarkName = "-didSelectedNewsID:"
             landmarkType = "5">
          </BreakpointContent>
@@ -890,11 +842,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZhiHuHot/DailyTableViewController.m"
-            timestampString = "457611989.473802"
+            timestampString = "457868953.476271"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "618"
-            endingLineNumber = "618"
+            startingLineNumber = "640"
+            endingLineNumber = "640"
             landmarkName = "-scrollViewDidScroll:"
             landmarkType = "5">
          </BreakpointContent>
@@ -906,11 +858,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZhiHuHot/DailyTableViewController.m"
-            timestampString = "457611989.473802"
+            timestampString = "457868953.476271"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "617"
-            endingLineNumber = "617"
+            startingLineNumber = "639"
+            endingLineNumber = "639"
             landmarkName = "-scrollViewDidScroll:"
             landmarkType = "5">
          </BreakpointContent>
@@ -922,11 +874,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZhiHuHot/LinkViewController.m"
-            timestampString = "457253883.204488"
+            timestampString = "457868953.476271"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "42"
-            endingLineNumber = "42"
+            startingLineNumber = "43"
+            endingLineNumber = "43"
             landmarkName = "-webViewDidStartLoad:"
             landmarkType = "5">
          </BreakpointContent>
@@ -938,11 +890,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZhiHuHot/SubjectTableViewController.m"
-            timestampString = "457598895.767688"
+            timestampString = "457868953.476271"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "208"
-            endingLineNumber = "208"
+            startingLineNumber = "206"
+            endingLineNumber = "206"
             landmarkName = "-tableView:numberOfRowsInSection:"
             landmarkType = "5">
          </BreakpointContent>
@@ -954,11 +906,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZhiHuHot/SubjectTableViewController.m"
-            timestampString = "457598895.767688"
+            timestampString = "457868953.476271"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "170"
-            endingLineNumber = "170"
+            startingLineNumber = "168"
+            endingLineNumber = "168"
             landmarkName = "-didReceiveMemoryWarning"
             landmarkType = "5">
          </BreakpointContent>
@@ -986,11 +938,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZhiHuHot/SubjectTableViewController.m"
-            timestampString = "457598895.767688"
+            timestampString = "457868953.476271"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "171"
-            endingLineNumber = "171"
+            startingLineNumber = "169"
+            endingLineNumber = "169"
             landmarkName = "-didReceiveMemoryWarning"
             landmarkType = "5">
          </BreakpointContent>
@@ -1002,11 +954,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZhiHuHot/DailyTableViewController.m"
-            timestampString = "457537464.917077"
+            timestampString = "457868055.720458"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "115"
-            endingLineNumber = "115"
+            startingLineNumber = "124"
+            endingLineNumber = "124"
             landmarkName = "-setTopStories:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1018,11 +970,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZhiHuHot/DailyTableViewController.m"
-            timestampString = "457537464.917077"
+            timestampString = "457868055.720458"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "125"
-            endingLineNumber = "125"
+            startingLineNumber = "134"
+            endingLineNumber = "134"
             landmarkName = "-setTopStories:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1160,11 +1112,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZhiHuHot/DailyTableViewController.m"
-            timestampString = "457611989.473802"
+            timestampString = "457868055.720458"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "252"
-            endingLineNumber = "252"
+            startingLineNumber = "276"
+            endingLineNumber = "276"
             landmarkName = "-resetMoreFrame"
             landmarkType = "5">
          </BreakpointContent>
@@ -1287,38 +1239,6 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "ZhiHuHot/DailyTableViewController.m"
-            timestampString = "457611989.473802"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "719"
-            endingLineNumber = "719"
-            landmarkName = "-notification"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ZhiHuHot/DailyTableViewController.m"
-            timestampString = "457611989.473802"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "718"
-            endingLineNumber = "718"
-            landmarkName = "-notification"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "ZhiHuHot/ImagesScrollView.m"
             timestampString = "457447184.782544"
             startingColumnNumber = "9223372036854775807"
@@ -1352,11 +1272,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZhiHuHot/DailyTableViewController.m"
-            timestampString = "457611989.473802"
+            timestampString = "457868953.476271"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "385"
-            endingLineNumber = "385"
+            startingLineNumber = "407"
+            endingLineNumber = "407"
             landmarkName = "-tableView:heightForHeaderInSection:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1368,11 +1288,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZhiHuHot/AppDelegate.m"
-            timestampString = "457786019.178126"
+            timestampString = "457861004.666879"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "38"
-            endingLineNumber = "38"
+            startingLineNumber = "40"
+            endingLineNumber = "40"
             landmarkName = "-application:didFinishLaunchingWithOptions:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1384,11 +1304,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZhiHuHot/AppDelegate.m"
-            timestampString = "457786019.178126"
+            timestampString = "457861004.666879"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "46"
-            endingLineNumber = "46"
+            startingLineNumber = "48"
+            endingLineNumber = "48"
             landmarkName = "-application:didFinishLaunchingWithOptions:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1432,11 +1352,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZhiHuHot/DailyTableViewController.m"
-            timestampString = "457591500.914392"
+            timestampString = "457868055.720458"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "184"
-            endingLineNumber = "184"
+            startingLineNumber = "194"
+            endingLineNumber = "194"
             landmarkName = "-viewDidLoad"
             landmarkType = "5">
          </BreakpointContent>
@@ -1576,11 +1496,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZhiHuHot/DailyTableViewController.m"
-            timestampString = "457611989.473802"
+            timestampString = "457868953.476271"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "379"
-            endingLineNumber = "379"
+            startingLineNumber = "401"
+            endingLineNumber = "401"
             landmarkName = "-revealController:didMoveToPosition:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1592,11 +1512,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZhiHuHot/ContentViewController.m"
-            timestampString = "457778819.075885"
+            timestampString = "457868953.476271"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "45"
-            endingLineNumber = "45"
+            startingLineNumber = "46"
+            endingLineNumber = "46"
             landmarkName = "-viewDidLoad"
             landmarkType = "5">
          </BreakpointContent>
@@ -1624,11 +1544,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZhiHuHot/ContentViewController.m"
-            timestampString = "457778819.075885"
+            timestampString = "457868953.476271"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "135"
-            endingLineNumber = "135"
+            startingLineNumber = "136"
+            endingLineNumber = "136"
             landmarkName = "-loadDailyWebViewPart:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1704,11 +1624,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZhiHuHot/DailyTableViewController.m"
-            timestampString = "457611989.473802"
+            timestampString = "457868953.476271"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "472"
-            endingLineNumber = "472"
+            startingLineNumber = "494"
+            endingLineNumber = "494"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1720,11 +1640,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZhiHuHot/SubjectTableViewController.m"
-            timestampString = "457598895.767688"
+            timestampString = "457868953.476271"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "232"
-            endingLineNumber = "232"
+            startingLineNumber = "230"
+            endingLineNumber = "230"
             landmarkName = "@implementation SubjectTableViewController"
             landmarkType = "3">
          </BreakpointContent>
@@ -1736,11 +1656,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZhiHuHot/DailyTableViewController.m"
-            timestampString = "457591500.914392"
+            timestampString = "457868055.720458"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "202"
-            endingLineNumber = "202"
+            startingLineNumber = "219"
+            endingLineNumber = "219"
             landmarkName = "-viewDidLoad"
             landmarkType = "5">
          </BreakpointContent>
@@ -1752,11 +1672,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZhiHuHot/DailyTableViewController.m"
-            timestampString = "457591500.914392"
+            timestampString = "457868055.720458"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "198"
-            endingLineNumber = "198"
+            startingLineNumber = "215"
+            endingLineNumber = "215"
             landmarkName = "-viewDidLoad"
             landmarkType = "5">
          </BreakpointContent>
@@ -1768,11 +1688,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZhiHuHot/DailyTableViewController.m"
-            timestampString = "457537458.007904"
+            timestampString = "457868055.720458"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "106"
-            endingLineNumber = "106"
+            startingLineNumber = "115"
+            endingLineNumber = "115"
             landmarkName = "-setTopStories:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1784,11 +1704,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZhiHuHot/DailyTableViewController.m"
-            timestampString = "457537620.841901"
+            timestampString = "457868055.720458"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "103"
-            endingLineNumber = "103"
+            startingLineNumber = "112"
+            endingLineNumber = "112"
             landmarkName = "-setTopStories:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1832,11 +1752,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZhiHuHot/NetClient.m"
-            timestampString = "457616110.083757"
+            timestampString = "457863577.27355"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "48"
-            endingLineNumber = "48"
+            startingLineNumber = "54"
+            endingLineNumber = "54"
             landmarkName = "-getAndSaveStoriesWithUrl:today:withCompletionHandler:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1870,22 +1790,6 @@
             startingLineNumber = "97"
             endingLineNumber = "97"
             landmarkName = "-updateThemeStories"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ZhiHuHot/NetClient.m"
-            timestampString = "457616110.083757"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "154"
-            endingLineNumber = "154"
-            landmarkName = "-downloadThemeStoriesWithThemeID:withCompletionHandler:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1960,27 +1864,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZhiHuHot/NetClient.m"
-            timestampString = "457616110.083757"
+            timestampString = "457863577.27355"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "156"
-            endingLineNumber = "156"
-            landmarkName = "-downloadThemeStoriesWithThemeID:withCompletionHandler:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ZhiHuHot/NetClient.m"
-            timestampString = "457616110.083757"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "179"
-            endingLineNumber = "179"
+            startingLineNumber = "171"
+            endingLineNumber = "171"
             landmarkName = "-downloadWithNewsID:withCompletionHandler:"
             landmarkType = "5">
             <Locations>
@@ -2024,11 +1912,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZhiHuHot/DailyTableViewController.m"
-            timestampString = "457673127.957265"
+            timestampString = "457868953.476271"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "371"
-            endingLineNumber = "371"
+            startingLineNumber = "393"
+            endingLineNumber = "393"
             landmarkName = "-didSelectedNewsID:"
             landmarkType = "5">
          </BreakpointContent>
@@ -2040,11 +1928,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZhiHuHot/DailyTableViewController.m"
-            timestampString = "457673137.909195"
+            timestampString = "457868953.476271"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "527"
-            endingLineNumber = "527"
+            startingLineNumber = "549"
+            endingLineNumber = "549"
             landmarkName = "-prepareForSegue:sender:"
             landmarkType = "5">
          </BreakpointContent>
@@ -2056,11 +1944,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZhiHuHot/ContentViewController.m"
-            timestampString = "457778819.075885"
+            timestampString = "457868953.476271"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "65"
-            endingLineNumber = "65"
+            startingLineNumber = "66"
+            endingLineNumber = "66"
             landmarkName = "-loadData"
             landmarkType = "5">
             <Locations>
@@ -2104,11 +1992,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZhiHuHot/NetClient.m"
-            timestampString = "457673679.825355"
+            timestampString = "457863577.27355"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "180"
-            endingLineNumber = "180"
+            startingLineNumber = "172"
+            endingLineNumber = "172"
             landmarkName = "-downloadWithNewsID:withCompletionHandler:"
             landmarkType = "5">
          </BreakpointContent>
@@ -2136,11 +2024,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZhiHuHot/ContentViewController.m"
-            timestampString = "457778819.075885"
+            timestampString = "457868953.476271"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "68"
-            endingLineNumber = "68"
+            startingLineNumber = "69"
+            endingLineNumber = "69"
             landmarkName = "-loadData"
             landmarkType = "5">
          </BreakpointContent>
@@ -2152,11 +2040,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZhiHuHot/NetClient.m"
-            timestampString = "457673853.202875"
+            timestampString = "457863577.27355"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "183"
-            endingLineNumber = "183"
+            startingLineNumber = "175"
+            endingLineNumber = "175"
             landmarkName = "-downloadWithNewsID:withCompletionHandler:"
             landmarkType = "5">
          </BreakpointContent>
@@ -2168,11 +2056,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZhiHuHot/ContentViewController.m"
-            timestampString = "457778819.075885"
+            timestampString = "457868953.476271"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "109"
-            endingLineNumber = "109"
+            startingLineNumber = "110"
+            endingLineNumber = "110"
             landmarkName = "-loadData"
             landmarkType = "5">
          </BreakpointContent>
@@ -2184,11 +2072,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZhiHuHot/NetClient.m"
-            timestampString = "457674096.529896"
+            timestampString = "457863577.27355"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "188"
-            endingLineNumber = "188"
+            startingLineNumber = "180"
+            endingLineNumber = "180"
             landmarkName = "-downloadWithNewsID:withCompletionHandler:"
             landmarkType = "5">
          </BreakpointContent>
@@ -2232,11 +2120,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZhiHuHot/NetClient.m"
-            timestampString = "457683019.968156"
+            timestampString = "457863577.27355"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "193"
-            endingLineNumber = "193"
+            startingLineNumber = "185"
+            endingLineNumber = "185"
             landmarkName = "-downloadWithNewsID:withCompletionHandler:"
             landmarkType = "5">
          </BreakpointContent>
@@ -2248,11 +2136,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZhiHuHot/ContentViewController.m"
-            timestampString = "457778819.075885"
+            timestampString = "457868953.476271"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "156"
-            endingLineNumber = "156"
+            startingLineNumber = "155"
+            endingLineNumber = "155"
             landmarkName = "-webView:shouldStartLoadWithRequest:navigationType:"
             landmarkType = "5">
          </BreakpointContent>
@@ -2264,11 +2152,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZhiHuHot/ContentViewController.m"
-            timestampString = "457778819.075885"
+            timestampString = "457868953.476271"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "176"
-            endingLineNumber = "176"
+            startingLineNumber = "175"
+            endingLineNumber = "175"
             landmarkName = "-webViewDidStartLoad:"
             landmarkType = "5">
          </BreakpointContent>
@@ -2280,11 +2168,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZhiHuHot/ContentViewController.m"
-            timestampString = "457778819.075885"
+            timestampString = "457868953.476271"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "109"
-            endingLineNumber = "109"
+            startingLineNumber = "110"
+            endingLineNumber = "110"
             landmarkName = "-loadData"
             landmarkType = "5">
          </BreakpointContent>
@@ -2296,11 +2184,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZhiHuHot/ContentViewController.m"
-            timestampString = "457778819.075885"
+            timestampString = "457868953.476271"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "138"
-            endingLineNumber = "138"
+            startingLineNumber = "139"
+            endingLineNumber = "139"
             landmarkName = "-loadDailyWebViewPart:"
             landmarkType = "5">
          </BreakpointContent>
@@ -2312,11 +2200,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZhiHuHot/DailyTableViewController.m"
-            timestampString = "457688017.701063"
+            timestampString = "457868055.720458"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "157"
-            endingLineNumber = "157"
+            startingLineNumber = "166"
+            endingLineNumber = "166"
             landmarkName = "-setManagedObjectContext:"
             landmarkType = "5">
          </BreakpointContent>
@@ -2328,11 +2216,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZhiHuHot/DailyTableViewController.m"
-            timestampString = "457688023.556154"
+            timestampString = "457868055.720458"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "129"
-            endingLineNumber = "129"
+            startingLineNumber = "138"
+            endingLineNumber = "138"
             landmarkName = "-awakeFromNib"
             landmarkType = "5">
          </BreakpointContent>
@@ -2344,11 +2232,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZhiHuHot/ContentViewController.m"
-            timestampString = "457778819.075885"
+            timestampString = "457868953.476271"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "40"
-            endingLineNumber = "40"
+            startingLineNumber = "41"
+            endingLineNumber = "41"
             landmarkName = "-awakeFromNib"
             landmarkType = "5">
          </BreakpointContent>
@@ -2360,11 +2248,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZhiHuHot/DailyTableViewController.m"
-            timestampString = "457688342.441809"
+            timestampString = "457868055.720458"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "151"
-            endingLineNumber = "151"
+            startingLineNumber = "160"
+            endingLineNumber = "160"
             landmarkName = "-awakeFromNib"
             landmarkType = "5">
          </BreakpointContent>
@@ -2376,11 +2264,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZhiHuHot/DailyTableViewController.m"
-            timestampString = "457689105.072293"
+            timestampString = "457868953.476271"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "369"
-            endingLineNumber = "369"
+            startingLineNumber = "391"
+            endingLineNumber = "391"
             landmarkName = "-didSelectedNewsID:"
             landmarkType = "5">
          </BreakpointContent>
@@ -2392,11 +2280,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZhiHuHot/DailyTableViewController.m"
-            timestampString = "457689109.744127"
+            timestampString = "457868953.476271"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "368"
-            endingLineNumber = "368"
+            startingLineNumber = "390"
+            endingLineNumber = "390"
             landmarkName = "-didSelectedNewsID:"
             landmarkType = "5">
          </BreakpointContent>
@@ -2408,11 +2296,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZhiHuHot/AppDelegate.m"
-            timestampString = "457786019.178126"
+            timestampString = "457861004.666879"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "50"
-            endingLineNumber = "50"
+            startingLineNumber = "52"
+            endingLineNumber = "52"
             landmarkName = "-application:didFinishLaunchingWithOptions:"
             landmarkType = "5">
          </BreakpointContent>
@@ -2424,11 +2312,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZhiHuHot/ContentViewController.m"
-            timestampString = "457778819.075885"
+            timestampString = "457868953.476271"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "111"
-            endingLineNumber = "111"
+            startingLineNumber = "112"
+            endingLineNumber = "112"
             landmarkName = "-loadData"
             landmarkType = "5">
          </BreakpointContent>
@@ -2440,11 +2328,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZhiHuHot/ContentViewController.m"
-            timestampString = "457778819.075885"
+            timestampString = "457868953.476271"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "140"
-            endingLineNumber = "140"
+            startingLineNumber = "141"
+            endingLineNumber = "141"
             landmarkName = "-loadDailyWebViewPart:"
             landmarkType = "5">
          </BreakpointContent>
@@ -2456,11 +2344,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZhiHuHot/ContentViewController.m"
-            timestampString = "457778819.075885"
+            timestampString = "457868953.476271"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "179"
-            endingLineNumber = "179"
+            startingLineNumber = "178"
+            endingLineNumber = "178"
             landmarkName = "-webViewDidStartLoad:"
             landmarkType = "5">
          </BreakpointContent>
@@ -2472,11 +2360,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZhiHuHot/ContentViewController.m"
-            timestampString = "457778819.075885"
+            timestampString = "457868953.476271"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "181"
-            endingLineNumber = "181"
+            startingLineNumber = "180"
+            endingLineNumber = "180"
             landmarkName = "-webViewDidStartLoad:"
             landmarkType = "5">
          </BreakpointContent>
@@ -2488,11 +2376,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZhiHuHot/ContentViewController.m"
-            timestampString = "457778819.075885"
+            timestampString = "457868953.476271"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "69"
-            endingLineNumber = "69"
+            startingLineNumber = "70"
+            endingLineNumber = "70"
             landmarkName = "-loadData"
             landmarkType = "5">
          </BreakpointContent>
@@ -2504,11 +2392,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZhiHuHot/ContentViewController.m"
-            timestampString = "457779142.950598"
+            timestampString = "457868953.476271"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "67"
-            endingLineNumber = "67"
+            startingLineNumber = "68"
+            endingLineNumber = "68"
             landmarkName = "-loadData"
             landmarkType = "5">
             <Locations>
@@ -2552,11 +2440,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZhiHuHot/NetClient.m"
-            timestampString = "457780070.49316"
+            timestampString = "457863577.27355"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "59"
-            endingLineNumber = "59"
+            startingLineNumber = "64"
+            endingLineNumber = "64"
             landmarkName = "-getAndSaveStoriesWithUrl:today:withCompletionHandler:"
             landmarkType = "5">
          </BreakpointContent>
@@ -2574,6 +2462,118 @@
             startingLineNumber = "65"
             endingLineNumber = "65"
             landmarkName = "+deleteStoriesBeforeDays:inManagedObjectContext:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ZhiHuHot/DailyTableViewController.m"
+            timestampString = "457868055.720458"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "224"
+            endingLineNumber = "224"
+            landmarkName = "-viewDidLoad"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ZhiHuHot/DailyTableViewController.m"
+            timestampString = "457868953.476271"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "568"
+            endingLineNumber = "568"
+            landmarkName = "-controller:didChangeSection:atIndex:forChangeType:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ZhiHuHot/NetClient.m"
+            timestampString = "457863577.27355"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "65"
+            endingLineNumber = "65"
+            landmarkName = "-getAndSaveStoriesWithUrl:today:withCompletionHandler:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ZhiHuHot/AppDelegate.m"
+            timestampString = "457863959.226539"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "190"
+            endingLineNumber = "190"
+            landmarkName = "-saveContext"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ZhiHuHot/AppDelegate.m"
+            timestampString = "457864033.415657"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "179"
+            endingLineNumber = "179"
+            landmarkName = "-saveContext"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ZhiHuHot/DailyTableViewController.m"
+            timestampString = "457868055.45164"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "79"
+            endingLineNumber = "79"
+            landmarkName = "-localeChanged:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ZhiHuHot/ContentViewController.m"
+            timestampString = "457868953.476271"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "176"
+            endingLineNumber = "176"
+            landmarkName = "-webViewDidStartLoad:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

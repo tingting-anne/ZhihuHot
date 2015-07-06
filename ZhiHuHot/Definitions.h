@@ -38,4 +38,10 @@ typedef enum : NSUInteger {
     ZHHInvalidDateString,
 } ZHHError;
 
+typedef enum AlertErrorType{
+    NET_DOWNLOAD_ERROR,
+    PSC_STORE_ERROR,
+    MOC_SAVE_ERROR,
+}AlertErrorType;
+
 #endif

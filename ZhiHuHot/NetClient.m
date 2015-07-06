@@ -16,8 +16,12 @@
 #import "AppHelper.h"
 #import "Definitions.h"
 #import "DataCache.h"
+#import "AppDelegate.h"
 
 @interface NetClient ()
+
+@property (weak, nonatomic)AppDelegate * appDelegate;
+@property(readonly, strong, nonatomic)NSManagedObjectContext* context;
 
 -(void)getAndSaveStoriesWithUrl:(NSString *)urlString today:(BOOL) isToday withCompletionHandler:(void(^)(NSError *error, NSArray *topStories))completionHandler;
 
@@ -25,10 +29,12 @@
 
 @implementation NetClient
 
-- (id)initWithManagedObjectContext:(NSManagedObjectContext*)context
+-(instancetype)init
 {
     if ((self = [super init])){
-        _context = context;
+        
+        _appDelegate = [[UIApplication sharedApplication] delegate];
+        _context = [_appDelegate managedObjectContext];
     }
     return self;
 }
@@ -49,20 +55,16 @@
         NSArray *topStoriesArray = storiesDictionary[@"top_stories"];
         
         [self.context performBlock:^{
-            NSError *saveError = nil;
             [Story loadFromArray:storiesArray withDate:dateString intoManagedObjectContext:self.context];
             
             if (isToday) {
                 [TopStory loadFromArray:topStoriesArray intoManagedObjectContext:self.context];
             }
             
-            [self.context save:&saveError];
-            if (saveError) {
-                NSLog(@"%s context save error, error:%@",__FUNCTION__,saveError);
-            }
+            [self.appDelegate saveContext];
             
             if (completionHandler) {
-                completionHandler(saveError, topStoriesArray);
+                completionHandler(nil, topStoriesArray);
             }
         }];
     }failure:^(NSURLSessionDataTask *task, NSError *error) {
@@ -112,15 +114,12 @@
         NSArray *themeArray = themesDictionary[@"others"];
         
         [self.context performBlock:^{
-            NSError *saveError = nil;
+            
             [Theme loadFromArray:themeArray intoManagedObjectContext:self.context];
-            [self.context save:&saveError];
-            if (saveError) {
-                NSLog(@"%s context save error, error:%@",__FUNCTION__,saveError);
-            }
+            [self.appDelegate saveContext];
             
             if (completionHandler) {
-                completionHandler(saveError);
+                completionHandler(nil);
             }
         }];
     }failure:^(NSURLSessionDataTask *task, NSError *error) {
@@ -148,19 +147,12 @@
         NSDictionary* themeStoriesDictionary = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
         NSArray *themeStoriesArray = themeStoriesDictionary[@"stories"];
         [self.context performBlock:^{
-            NSError *saveError = nil;
+            
             [ThemeStory loadFromArray:themeStoriesArray withThemeID:themeID intoManagedObjectContext:self.context];
-            [self.context save:&saveError];
-            if (saveError) {
-                NSLog(@"%s context save error, error:%@",__FUNCTION__,saveError);
-            }
-#ifdef DEBUG
-            else{
-                NSLog(@"netclient save ok");
-            }
-#endif
+            [self.appDelegate saveContext];
+
             if (completionHandler) {
-                completionHandler(saveError);
+                completionHandler(nil);
             }
         }];
     }failure:^(NSURLSessionDataTask *task, NSError *error) {

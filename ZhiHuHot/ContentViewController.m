@@ -11,6 +11,7 @@
 #import "ContentHeaderView.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "LinkViewController.h"
+#import "AppHelper.h"
 
 @interface ContentViewController()
 {
@@ -35,7 +36,7 @@
 {
     [super awakeFromNib];
     
-    self.netClient = [[NetClient alloc] initWithManagedObjectContext:nil];
+    self.netClient = [[NetClient alloc] init];
     isFirstLoad = TRUE;
     
     //Long story short, the view may be loaded in awakeFromNib, but its contents are loaded lazily, which is why you should use viewDidLoad instead of awakeFromNib for what you are trying to achieve.
@@ -145,9 +146,7 @@
 
 -(void)loadErrorWithError:(NSError *)error
 {
-    UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"ERROR", nil) message:NSLocalizedString(@"NET_DOWNLOAD_ERROR", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"CANCEL", nil)  otherButtonTitles:nil, nil];
-    [alertView show];
-    
+    [[AppHelper shareAppHelper] showAlertViewWithError:error type:NET_DOWNLOAD_ERROR];
     [self.activity stopAnimating];
 }
 

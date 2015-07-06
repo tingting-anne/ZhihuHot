@@ -11,10 +11,6 @@
 
 @interface NetClient : NSObject
 
-@property(readonly, strong, nonatomic)NSManagedObjectContext* context;
-
-- (id)initWithManagedObjectContext:(NSManagedObjectContext*)context;
-
 - (void)downloadLatestStoriesWithCompletionHandler:(void(^)(NSError *error, NSArray *topStories))completionHandler;
 
 - (void)downloadBeforeDate:(NSString *)dateString withCompletionHandler:(void(^)(NSError *error))completionHandler;

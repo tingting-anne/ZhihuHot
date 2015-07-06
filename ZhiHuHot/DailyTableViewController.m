@@ -55,6 +55,7 @@
 @property(strong,nonatomic)ImagesScrollView * scrollView;
 @property(strong,nonatomic)UIView* firstSectionView;
 
+- (void)localeChanged:(NSNotification *)notif;
 -(NSString *)headerStringFormateWithDate:(NSString *)dateString;
 -(BOOL)updateLatestStories;
 - (void)reloadTableViewDataSource;
@@ -71,6 +72,14 @@
 @implementation DailyTableViewController
 
 #pragma mark -
+
+- (void)localeChanged:(NSNotification *)notif
+{
+    // the user changed the locale (region format) in Settings, so we are notified here to
+    // update the date format in the table view cells
+    //
+    [self.tableView reloadData];
+}
 
 #pragma mark - 构建图片滚动视图
 - (void)createScrollView
@@ -154,7 +163,7 @@
 - (void)setManagedObjectContext:(NSManagedObjectContext *)managedObjectContext {
     
     _managedObjectContext = managedObjectContext;
-    self.netClient = [[NetClient alloc] initWithManagedObjectContext:self.managedObjectContext];
+    self.netClient = [[NetClient alloc] init];
     
     if (_managedObjectContext == nil) {
         NSLog(@"%s error managedObjectContext is nil", __FUNCTION__);
@@ -182,8 +191,16 @@
     
     [self createScrollView];
     
+    // if the local changes behind our back, we need to be notified so we can update the date
+    // format in the table view cells
+    //
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(localeChanged:)
+                                                 name:NSCurrentLocaleDidChangeNotification
+                                               object:nil];
+    
 #ifdef DEBUG
-   // [self notification];
+    //[self notification];
 #endif
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -211,6 +228,13 @@
         NSLog(@"[%@ %@] %@ (%@)", NSStringFromClass([self class]), NSStringFromSelector(_cmd), [error localizedDescription], [error localizedFailureReason]);
     }
     [self.tableView reloadData];
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:NSCurrentLocaleDidChangeNotification
+                                                  object:nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -303,8 +327,7 @@
             [self setTopStories:topStories];
             
             if(error){
-                UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"ERROR", nil) message:NSLocalizedString(@"NET_DOWNLOAD_ERROR", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"CANCEL", nil)  otherButtonTitles:nil, nil];
-                [alertView show];
+                [[AppHelper shareAppHelper] showAlertViewWithError:error type:NET_DOWNLOAD_ERROR];
             }
         }];
     }
@@ -347,8 +370,7 @@
         [_refreshHeaderView egoRefreshScrollViewDataSourceDidFinishedLoading:self.tableView];
         
         if(error){
-            UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"ERROR", nil) message:NSLocalizedString(@"NET_DOWNLOAD_ERROR", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"CANCEL", nil)  otherButtonTitles:nil, nil];
-            [alertView show];
+            [[AppHelper shareAppHelper] showAlertViewWithError:error type:NET_DOWNLOAD_ERROR];
         }
         else{
             [self setTopStories:topStories];
@@ -689,8 +711,7 @@
         [loadMoreTableFooterView loadMoreScrollViewDataSourceDidFinishedLoading:self.tableView];
         
         if(error){
-            UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"ERROR", nil) message:NSLocalizedString(@"NET_DOWNLOAD_ERROR", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"CANCEL", nil)  otherButtonTitles:nil, nil];
-            [alertView show];
+            [[AppHelper shareAppHelper] showAlertViewWithError:error type:NET_DOWNLOAD_ERROR];
         }
         else{
             lastCell = FALSE;
@@ -712,26 +733,26 @@
     return isLoadMoreing;
 }
 
-#pragma mark test mothed
--(void)notification
-{
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(notificationEvent:)
-                                                 name:NSManagedObjectContextObjectsDidChangeNotification
-                                               object:self.managedObjectContext];
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(notificationEvent:)
-                                                 name:NSManagedObjectContextDidSaveNotification
-                                               object:self.managedObjectContext];
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(notificationEvent:)
-                                                 name:NSManagedObjectContextWillSaveNotification
-                                               object:self.managedObjectContext];
-}
-
--(void)notificationEvent:(NSNotification*)notify
-{
-    NSLog(@"%s: %@", __FUNCTION__,[notify description]);
-}
+//#pragma mark test mothed
+//-(void)notification
+//{
+//    [[NSNotificationCenter defaultCenter] addObserver:self
+//                                             selector:@selector(notificationEvent:)
+//                                                 name:NSManagedObjectContextObjectsDidChangeNotification
+//                                               object:self.managedObjectContext];
+//    [[NSNotificationCenter defaultCenter] addObserver:self
+//                                             selector:@selector(notificationEvent:)
+//                                                 name:NSManagedObjectContextDidSaveNotification
+//                                               object:self.managedObjectContext];
+//    [[NSNotificationCenter defaultCenter] addObserver:self
+//                                             selector:@selector(notificationEvent:)
+//                                                 name:NSManagedObjectContextWillSaveNotification
+//                                               object:self.managedObjectContext];
+//}
+//
+//-(void)notificationEvent:(NSNotification*)notify
+//{
+//    NSLog(@"%s: %@", __FUNCTION__,[notify description]);
+//}
 
 @end

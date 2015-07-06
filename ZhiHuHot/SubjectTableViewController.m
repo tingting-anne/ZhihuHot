@@ -41,7 +41,7 @@
     AppDelegate * appDelegate = [[UIApplication sharedApplication] delegate];
     self.managedObjectContext = [appDelegate managedObjectContext];
     
-    self.netClient = [[NetClient alloc] initWithManagedObjectContext:self.managedObjectContext];
+    self.netClient = [[NetClient alloc] init];
 }
 
 -(void)setThemeID:(NSNumber*)themeID
@@ -98,8 +98,7 @@
         [self.netClient downloadThemeStoriesWithThemeID:[self.themeID unsignedIntValue] withCompletionHandler:^(NSError *error){
       
             if(error){
-                UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"ERROR", nil) message:NSLocalizedString(@"NET_DOWNLOAD_ERROR", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"CANCEL", nil)  otherButtonTitles:nil, nil];
-                [alertView show];
+                [[AppHelper shareAppHelper] showAlertViewWithError:error type:NET_DOWNLOAD_ERROR];
             }
         }];
     }
@@ -130,8 +129,7 @@
             //[self.tableView reloadData];
         }
         else{
-            UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"ERROR", nil) message:NSLocalizedString(@"NET_DOWNLOAD_ERROR", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"CANCEL", nil)  otherButtonTitles:nil, nil];
-            [alertView show];
+           [[AppHelper shareAppHelper] showAlertViewWithError:error type:NET_DOWNLOAD_ERROR];
         }
     }];
 }
