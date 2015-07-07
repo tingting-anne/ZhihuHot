@@ -22,6 +22,7 @@
 
 @property (weak, nonatomic)AppDelegate * appDelegate;
 @property(readonly, strong, nonatomic)NSManagedObjectContext* context;
+@property(readonly, strong, nonatomic)AFHTTPSessionManager * smanager;
 
 -(void)getAndSaveStoriesWithUrl:(NSString *)urlString today:(BOOL) isToday withCompletionHandler:(void(^)(NSError *error, NSArray *topStories))completionHandler;
 
@@ -35,16 +36,23 @@
         
         _appDelegate = [[UIApplication sharedApplication] delegate];
         _context = [_appDelegate managedObjectContext];
+        
+        static dispatch_once_t onceToken;
+        static AFHTTPSessionManager *aFHTTPSessionManager = nil;
+        dispatch_once(&onceToken, ^{
+            aFHTTPSessionManager = [AFHTTPSessionManager manager];
+            aFHTTPSessionManager.responseSerializer = [AFHTTPResponseSerializer serializer]; //告诉manager只下载原始数据, 不要解析数据
+        });
+        
+        _smanager = aFHTTPSessionManager;
     }
     return self;
 }
 
 -(void)getAndSaveStoriesWithUrl:(NSString *)urlString today:(BOOL) isToday withCompletionHandler:(void(^)(NSError *error, NSArray *topStories))completionHandler
 {
-    AFHTTPSessionManager *smanager = [AFHTTPSessionManager manager];
-    smanager.responseSerializer = [AFHTTPResponseSerializer serializer]; //告诉manager只下载原始数据, 不要解析数据
     NSDictionary *dict = @{@"format": @"json"};
-    [smanager GET:urlString parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
+    [self.smanager GET:urlString parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
         
         //主线程
         NSData *data = responseObject;
@@ -104,10 +112,8 @@
 {
     NSString *urlString = [NSString stringWithFormat:@"%s", THEMES];
     
-    AFHTTPSessionManager *smanager = [AFHTTPSessionManager manager];
-    smanager.responseSerializer = [AFHTTPResponseSerializer serializer]; //告诉manager只下载原始数据, 不要解析数据
     NSDictionary *dict = @{@"format": @"json"};
-    [smanager GET:urlString parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
+    [self.smanager GET:urlString parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
         
         NSData *data = responseObject;
         NSDictionary* themesDictionary = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
@@ -136,10 +142,8 @@
     NSString *urlString = [NSString stringWithFormat:[NSString stringWithFormat:@"%s", THEMESTORIES],
                            [NSNumber numberWithUnsignedLong:themeID]];
     
-    AFHTTPSessionManager *smanager = [AFHTTPSessionManager manager];
-    smanager.responseSerializer = [AFHTTPResponseSerializer serializer]; //告诉manager只下载原始数据, 不要解析数据
     NSDictionary *dict = @{@"format": @"json"};
-    [smanager GET:urlString parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
+    [self.smanager GET:urlString parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
 #ifdef DEBUG
         NSLog(@"%s netclient ok", __FUNCTION__);
 #endif
@@ -176,10 +180,8 @@
             }
         }
         else{
-            AFHTTPSessionManager *smanager = [AFHTTPSessionManager manager];
-            smanager.responseSerializer = [AFHTTPResponseSerializer serializer]; //告诉manager只下载原始数据, 不要解析数据
             NSDictionary *dict = @{@"format": @"json"};
-            [smanager GET:urlString parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
+            [self.smanager GET:urlString parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
                 
                 NSData *data = responseObject;
                 NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
@@ -210,10 +212,7 @@
             }
         }
         else{
-            AFHTTPSessionManager *smanager = [AFHTTPSessionManager manager];
-            smanager.responseSerializer = [AFHTTPResponseSerializer serializer]; //告诉manager只下载原始数据, 不要解析数据
-        
-            [smanager GET:href parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+            [self.smanager GET:href parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
                 
                 NSData *data = responseObject;
                 if (completionHandler) {

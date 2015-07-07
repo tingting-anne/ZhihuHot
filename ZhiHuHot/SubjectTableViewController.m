@@ -91,7 +91,7 @@
     else{
         NSDate* current = [NSDate date];
         interval = [current timeIntervalSinceDate:preDate];
-        preDate = current;
+        [themeUpdateDate setObject:current forKey:self.themeID];
     }
     
     if (interval >= UPDATECONTENTINTERVAL) {

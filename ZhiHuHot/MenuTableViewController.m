@@ -80,6 +80,8 @@
 
 -(void)viewDidAppear:(BOOL)animated
 {
+    [super viewDidAppear:animated];
+    
     self.tableView.backgroundColor = [UIColor colorWithRed:0.04f green:0.13f blue:0.15f alpha:1.0f];
     self.tableView.separatorColor = self.tableView.backgroundColor;
     

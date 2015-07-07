@@ -24,6 +24,31 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
+    //NSURLCache* urlCache = [NSURLCache sharedURLCache];
+//    urlCache.diskCapacity = 5 * 1024 * 1024;
+//    urlCache.memoryCapacity = 1024 * 1024;
+    
+    NSUInteger memoryCapacity = 1024 * 1024;
+    NSUInteger diskCapacity = 5 * 1024 * 1024;
+    NSURLCache *sharedCache = [[NSURLCache alloc] initWithMemoryCapacity:memoryCapacity diskCapacity:diskCapacity diskPath:@"ZhihuURLCache"];
+    [NSURLCache setSharedURLCache:sharedCache];
+    
+    SDImageCache* sdImageCache = [SDImageCache sharedImageCache];
+    sdImageCache.maxCacheAge = 7 * 24 * 60 * 60;
+    sdImageCache.maxCacheSize = 10 * 1024 * 1024;
+    sdImageCache.maxMemoryCost = 2 * 1024 * 1024;
+    
+    DataCache* dataCache = [DataCache sharedDataCache];
+    dataCache.maxCacheAge = 7 * 24 * 60 * 60;
+    dataCache.maxCacheSize = 5 * 1024 * 1024;
+    dataCache.maxMemoryCost = 1024 * 1024;
+    
+    //Default NSURLCache :disk:20M, memory:4M
+    
+    NSLog(@"NSURLCache diskCapacity:%lu, memoryCapacity:%lu", (unsigned long)sharedCache.diskCapacity, (unsigned long)sharedCache.memoryCapacity);
+    
+    /////////////////////////////////////////////////////////////
+    
     NetClient *netClient = [[NetClient alloc] init];    
     [netClient downloadThemesWithCompletionHandler:^(NSError* error){
         if (error) {
@@ -41,26 +66,7 @@
          nil]];
     
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:YES];
-    
-    //////////////////////////////////////////////////////////
-    NSURLCache* urlCache = [NSURLCache sharedURLCache];
-    urlCache.diskCapacity = 5 * 1024 * 1024;
-    urlCache.memoryCapacity = 1024 * 1024;
-    
-    SDImageCache* sdImageCache = [SDImageCache sharedImageCache];
-    sdImageCache.maxCacheAge = 7 * 24 * 60 * 60;
-    sdImageCache.maxCacheSize = 10 * 1024 * 1024;
-    sdImageCache.maxMemoryCost = 2 * 1024 * 1024;
-    
-    DataCache* dataCache = [DataCache sharedDataCache];
-    dataCache.maxCacheAge = 7 * 24 * 60 * 60;
-    dataCache.maxCacheSize = 5 * 1024 * 1024;
-    dataCache.maxMemoryCost = 1024 * 1024;
-    
-    //Default NSURLCache :disk:20M, memory:4M
-    
-    NSLog(@"NSURLCache diskCapacity:%lu, memoryCapacity:%lu", (unsigned long)urlCache.diskCapacity, (unsigned long)urlCache.memoryCapacity);
-    
+
     return YES;
 }
 
@@ -89,6 +95,11 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     // Saves changes in the application's managed object context before the application terminates.
     [self saveContext];
+}
+
+-(void)applicationDidReceiveMemoryWarning:(UIApplication *)application
+{
+     [[NSURLCache sharedURLCache] removeAllCachedResponses];
 }
 
 #pragma mark - Core Data stack
