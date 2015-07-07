@@ -25,37 +25,55 @@
 +(void)loadFromArray:(NSArray *)storyArray withDate:(NSString *)date intoManagedObjectContext:(NSManagedObjectContext *)context
 {
     Story* story = nil;
-    NSError *error = nil;
-    NSFetchRequest *request = [[NSFetchRequest alloc] init];
-    NSEntityDescription* description = [NSEntityDescription entityForName:@"Story" inManagedObjectContext:context];
-    [request setEntity:description];
+    LoadManagerObjectResultType resultType = LOAD_ERROR;
+    Date* dateObject = [Date loadFromString:date inManagedObjectContext:context withLoadManagerObjectResult:&resultType];
     
     UInt32 sortId = 0;
-    for (NSDictionary* dic in storyArray) {
-        NSPredicate* predicate = [NSPredicate predicateWithFormat:@"id = %@", dic[@"id"]];
-        [request setPredicate:predicate];
-        
-        NSArray* result = [context executeFetchRequest:request error:&error];
-        
-        if (!result || error || [result count] > 1) {
-             NSLog(@"Error in %s", __FUNCTION__);
-        }
-        else if([result count] <= 0){
+    if (LOAD_BY_ADD == resultType) {
+        for (NSDictionary* dic in storyArray) {
             story = [NSEntityDescription insertNewObjectForEntityForName:@"Story" inManagedObjectContext:context];
             story.id = dic[@"id"];
             story.title = dic[@"title"];
             story.images = dic[@"images"][0];
-            story.date = [Date loadFromString:date inManagedObjectContext:context];
+            story.date = dateObject;
             story.sortId = [NSNumber numberWithUnsignedInt:sortId];
+            sortId++;
         }
-        else{
-            story = result[0];
-            story.title = dic[@"title"];
-            story.images = dic[@"images"][0];
-            story.date = [Date loadFromString:date inManagedObjectContext:context];
-            story.sortId = [NSNumber numberWithUnsignedInt:sortId];
+    }
+    else if(LOAD_BY_GET == resultType){
+        NSError *error = nil;
+        NSFetchRequest *request = [[NSFetchRequest alloc] init];
+        NSEntityDescription* description = [NSEntityDescription entityForName:@"Story" inManagedObjectContext:context];
+        [request setEntity:description];
+        
+        for (NSDictionary* dic in storyArray) {
+            NSPredicate* predicate = [NSPredicate predicateWithFormat:@"id = %@", dic[@"id"]];
+            [request setPredicate:predicate];
+            
+            NSArray* result = [context executeFetchRequest:request error:&error];
+            
+            if (!result || error || [result count] > 1){
+                 NSLog(@"Error in %s", __FUNCTION__);
+            }
+            else if([result count] <= 0){//说明更新时有增加
+                story = [NSEntityDescription insertNewObjectForEntityForName:@"Story" inManagedObjectContext:context];
+                story.id = dic[@"id"];
+                story.title = dic[@"title"];
+                story.images = dic[@"images"][0];
+                story.date = dateObject;
+                story.sortId = [NSNumber numberWithUnsignedInt:sortId];
+            }
+            else{
+                story = result[0];
+                if ([story.sortId unsignedIntegerValue] != sortId) {
+                    story.title = dic[@"title"];
+                    story.images = dic[@"images"][0];
+                    story.date = dateObject;
+                    story.sortId = [NSNumber numberWithUnsignedInt:sortId];
+                }
+            }
+            sortId++;
         }
-        sortId++;
     }
 }
 

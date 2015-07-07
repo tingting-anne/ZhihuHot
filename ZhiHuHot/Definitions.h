@@ -44,4 +44,10 @@ typedef enum AlertErrorType{
     MOC_SAVE_ERROR,
 }AlertErrorType;
 
+typedef enum LoadManagerObjectResultType{
+    LOAD_BY_ADD,
+    LOAD_BY_GET,
+    LOAD_ERROR,
+}LoadManagerObjectResultType;
+
 #endif

@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
+#import "Definitions.h"
 
 @class NSManagedObject, Story;
 
@@ -28,6 +29,6 @@
 
 @interface Date(Load)
 
-+ (Date *)loadFromString:(NSString *)dateString inManagedObjectContext:(NSManagedObjectContext *)context;
++ (Date *)loadFromString:(NSString *)dateString inManagedObjectContext:(NSManagedObjectContext *)context withLoadManagerObjectResult:(LoadManagerObjectResultType *)resultType;
 
 @end

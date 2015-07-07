@@ -19,7 +19,7 @@
 
 @implementation Date(Load)
 
-+(Date *)loadFromString:(NSString *)dateString inManagedObjectContext:(NSManagedObjectContext *)context
++ (Date *)loadFromString:(NSString *)dateString inManagedObjectContext:(NSManagedObjectContext *)context withLoadManagerObjectResult:(LoadManagerObjectResultType *)resultType
 {
     Date* date = nil;
     NSFetchRequest* request = [[NSFetchRequest alloc] init];
@@ -30,14 +30,18 @@
     [request setPredicate:predicte];
 
     NSError* error = nil;
+    *resultType = LOAD_ERROR;
+    
     NSArray* result = [context executeFetchRequest:request error:&error];
     if (!result || error || [result count] > 1) {
         NSLog(@"Error in %s", __FUNCTION__);
     } else if([result count] <= 0){
         date = [NSEntityDescription insertNewObjectForEntityForName:@"Date" inManagedObjectContext:context];
         date.date = dateString;
+        *resultType = LOAD_BY_ADD;
     }else{
-         date = result.firstObject;
+        date = result.firstObject;
+        *resultType = LOAD_BY_GET;
     }
     return date;
 }

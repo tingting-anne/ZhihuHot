@@ -24,13 +24,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
-    NetClient *netClient = [[NetClient alloc] init];
-    [netClient downloadLatestStoriesWithCompletionHandler:^(NSError* error, NSArray* topStories){
-        if (error) {
-            NSLog(@"ERROR downloadStories : %s", __FUNCTION__);
-        }
-    }];
-    
+    NetClient *netClient = [[NetClient alloc] init];    
     [netClient downloadThemesWithCompletionHandler:^(NSError* error){
         if (error) {
             NSLog(@"ERROR downloadThemes : %s", __FUNCTION__);

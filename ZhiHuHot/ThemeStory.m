@@ -54,10 +54,12 @@
         }
         else{
             story = matchedResult[0];
-            story.title = storyDictionary[@"title"];
-            story.images = storyDictionary[@"images"][0];
-            story.them = theme;
-            story.sortId = [NSNumber numberWithUnsignedInt:sortId];
+            if ([story.sortId unsignedIntegerValue] != sortId) {
+                story.title = storyDictionary[@"title"];
+                story.images = storyDictionary[@"images"][0];
+                story.them = theme;
+                story.sortId = [NSNumber numberWithUnsignedInt:sortId];
+            }
         }
         sortId++;
     }

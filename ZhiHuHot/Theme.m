@@ -44,9 +44,11 @@
         }
         else{
             theme = resultArray[0];
-            theme.name = themeDic[@"name"];
-            theme.thumbnail = themeDic[@"thumbnail"];
-            theme.sortId = [NSNumber numberWithUnsignedInt:sortId];
+            if ([theme.sortId unsignedIntegerValue] != sortId) {
+                theme.name = themeDic[@"name"];
+                theme.thumbnail = themeDic[@"thumbnail"];
+                theme.sortId = [NSNumber numberWithUnsignedInt:sortId];
+            }
         }
         sortId++;
     }
