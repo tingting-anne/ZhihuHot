@@ -180,7 +180,9 @@
         NSSortDescriptor *sortID = [[NSSortDescriptor alloc] initWithKey:@"sortId" ascending:YES];
         [request setSortDescriptors:[NSArray arrayWithObjects:sortDate, sortID, nil]];
         
-        self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:self.managedObjectContext sectionNameKeyPath:@"date.date" cacheName:nil];
+        [request setFetchBatchSize:20];
+        
+        self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:self.managedObjectContext sectionNameKeyPath:@"date.date" cacheName:@"DailyCache"];
         
         self.fetchedResultsController.delegate = self;
     }

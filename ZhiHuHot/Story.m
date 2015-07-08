@@ -46,6 +46,14 @@
         NSEntityDescription* description = [NSEntityDescription entityForName:@"Story" inManagedObjectContext:context];
         [request setEntity:description];
         
+        NSPredicate* predicateChage = [NSPredicate predicateWithFormat:@"date.date = %@", date];
+        [request setPredicate:predicateChage];
+        NSArray* resultChage = [context executeFetchRequest:request error:&error];
+        if ([resultChage count] == [storyArray count]) {
+            resultChage = nil;
+            return;
+        }
+        
         for (NSDictionary* dic in storyArray) {
             NSPredicate* predicate = [NSPredicate predicateWithFormat:@"id = %@", dic[@"id"]];
             [request setPredicate:predicate];

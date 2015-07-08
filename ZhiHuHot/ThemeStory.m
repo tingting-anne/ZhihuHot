@@ -35,6 +35,14 @@
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"ThemeStory"];
     NSError *error = nil;
     
+    NSPredicate* predicateChage = [NSPredicate predicateWithFormat:@"them.id = %ul", themeID];
+    [fetchRequest setPredicate:predicateChage];
+    NSArray* resultChage = [context executeFetchRequest:fetchRequest error:&error];
+    if ([resultChage count] == [array count]) {
+        resultChage = nil;
+        return;
+    }
+    
     UInt32 sortId = 0;
     for (NSDictionary *storyDictionary in array) {
         fetchRequest.predicate = [NSPredicate predicateWithFormat:@"id = %@", storyDictionary[@"id"]];

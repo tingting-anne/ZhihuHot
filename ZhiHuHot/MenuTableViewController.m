@@ -56,7 +56,7 @@
         NSSortDescriptor *sortDescription = [[NSSortDescriptor alloc] initWithKey:@"sortId" ascending:YES];
         [request setSortDescriptors:@[sortDescription]];
         
-        self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:self.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
+        self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:self.managedObjectContext sectionNameKeyPath:nil cacheName:@"MenueCache"];
         
         self.fetchedResultsController.delegate = self;
     }

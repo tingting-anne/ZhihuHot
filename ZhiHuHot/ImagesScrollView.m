@@ -60,7 +60,7 @@ static CGFloat const chageImageTime = 5.0;//轮训时间
     }
 
     label.text = title;
-    [label sizeToFit];
+   // [label sizeToFit];
     label.numberOfLines = 0;
     //label.font = [UIFont systemFontOfSize:20.0f];
     label.font = [UIFont fontWithName:@"Arial Rounded MT Bold" size:20.0f];

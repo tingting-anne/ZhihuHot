@@ -60,7 +60,12 @@
     NSSortDescriptor *sortDescription = [[NSSortDescriptor alloc] initWithKey:@"sortId" ascending:YES];
     [request setSortDescriptors:@[sortDescription]];
     
-    self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:self.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
+    [request setFetchBatchSize:20];
+    
+    //每个主题都是一个TableViewController对象，不能公用一个cache，否则计算错误导致死机
+    NSString* cacheName = [NSString stringWithFormat:@"SubjectCache%@", _themeID];
+    
+    self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:self.managedObjectContext sectionNameKeyPath:nil cacheName:cacheName];
     
     self.fetchedResultsController.delegate = self;
     

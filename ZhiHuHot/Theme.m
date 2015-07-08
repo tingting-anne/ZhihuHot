@@ -28,6 +28,12 @@
     NSError *error = nil;
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Theme"];
     
+    NSArray* resultChage = [context executeFetchRequest:request error:&error];
+    if ([resultChage count] == [array count]) {
+        resultChage = nil;
+        return;
+    }
+    
     UInt32 sortId = 0;
     for (NSDictionary *themeDic in array) {
         request.predicate = [NSPredicate predicateWithFormat:@"id = %@", themeDic[@"id"]];
