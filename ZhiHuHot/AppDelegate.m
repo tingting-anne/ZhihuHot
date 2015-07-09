@@ -7,7 +7,6 @@
 //
 
 #import "AppDelegate.h"
-#import "NetClient.h"
 #import "AppHelper.h"
 #import "SDWebImage/SDImageCache.h"
 #import "DataCache.h"
@@ -48,14 +47,6 @@
     NSLog(@"NSURLCache diskCapacity:%lu, memoryCapacity:%lu", (unsigned long)sharedCache.diskCapacity, (unsigned long)sharedCache.memoryCapacity);
     
     /////////////////////////////////////////////////////////////
-    
-    NetClient *netClient = [[NetClient alloc] init];    
-    [netClient downloadThemesWithCompletionHandler:^(NSError* error){
-        if (error) {
-            NSLog(@"ERROR downloadThemes : %s", __FUNCTION__);
-        }
-    }];
-    
     [[UINavigationBar appearance] setBarTintColor:[[AppHelper shareAppHelper] backgroundColor]];
     [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
     

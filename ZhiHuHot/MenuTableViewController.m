@@ -11,6 +11,7 @@
 #import "Theme.h"
 #import "SubjectTableViewController.h"
 #import "AppHelper.h"
+#import "NetClient.h"
 
 @interface MenuTableViewController ()
 
@@ -28,14 +29,6 @@
    
     AppDelegate * appDelegate = [[UIApplication sharedApplication] delegate];
     self.managedObjectContext = [appDelegate managedObjectContext];
-    
-    NSError *error;
-    BOOL success = [self.fetchedResultsController performFetch:&error];
-    if (!success) NSLog(@"[%@ %@] performFetch: failed", NSStringFromClass([self class]), NSStringFromSelector(_cmd));
-    if (error) {
-        NSLog(@"[%@ %@] %@ (%@)", NSStringFromClass([self class]), NSStringFromSelector(_cmd), [error localizedDescription], [error localizedFailureReason]);
-    }
-    [self.tableView reloadData];
 }
 
 - (void)setManagedObjectContext:(NSManagedObjectContext *)managedObjectContext {
@@ -70,7 +63,22 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-
+    
+    NetClient *netClient = [[NetClient alloc] init];
+    [netClient downloadThemesWithCompletionHandler:^(NSError* error){
+        if (error) {
+            NSLog(@"ERROR downloadThemes : %s", __FUNCTION__);
+        }
+    }];
+    
+    
+    NSError *error;
+    BOOL success = [self.fetchedResultsController performFetch:&error];
+    if (!success) NSLog(@"[%@ %@] performFetch: failed", NSStringFromClass([self class]), NSStringFromSelector(_cmd));
+    if (error) {
+        NSLog(@"[%@ %@] %@ (%@)", NSStringFromClass([self class]), NSStringFromSelector(_cmd), [error localizedDescription], [error localizedFailureReason]);
+    }
+    [self.tableView reloadData];
 }
 
 -(void)viewWillAppear:(BOOL)animated

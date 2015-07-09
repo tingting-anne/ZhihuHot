@@ -271,6 +271,13 @@
     [_refreshHeaderView setOriginContentOffset:CGPointMake(0.0f, -64.0f) insets:UIEdgeInsetsMake(64.0f, 0.0f, 0.0f, 0.0f)];
 }
 
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    [self.scrollView stopScrollTimer];
+}
+
 #pragma mark -
 
 - (void)resetMoreFrame
@@ -718,14 +725,12 @@
         else{
             lastCell = FALSE;
             [self resetMoreFrame];
-            
-            //[NSTimer scheduledTimerWithTimeInterval:0.3f target:self selector:@selector(updateOffset:) userInfo:nil repeats:NO];
-            [self updateOffset:nil];
+            [self updateOffset];
         }
     }];
 }
 
--(void) updateOffset:(NSTimer*)timer
+-(void) updateOffset
 {
     self.tableView.contentOffset = CGPointMake(self.tableView.contentOffset.x, self.tableView.contentOffset.y + 90.0f);
 }

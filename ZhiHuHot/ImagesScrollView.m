@@ -128,6 +128,11 @@ static CGFloat const chageImageTime = 5.0;//轮训时间
     _centerImageView.userInteractionEnabled = enable;
 }
 
+-(void)stopScrollTimer
+{
+    [_moveTime invalidate];
+}
+
 - (instancetype)initWithFrame:(CGRect)frame
 {
     return [self initWithFrame:frame withShowStyle:NSTextAlignmentLeft];

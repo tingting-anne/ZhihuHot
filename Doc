@@ -8,4 +8,5 @@
 7、UIWebView不现实UIActivityIndicatorView
     1)UIActivityIndicatorView是view的subView，被webView遮挡，需要bringSubviewToFront;
     2)UIActivityIndicatorView的style是large white,颜色白色，看不出；
+8、NSFetchedResultsController每个对象设置的cache路径都不能一样，否则异常；
 
