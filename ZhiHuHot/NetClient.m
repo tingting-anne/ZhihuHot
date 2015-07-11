@@ -62,6 +62,10 @@
         NSArray *storiesArray = storiesDictionary[@"stories"];
         NSArray *topStoriesArray = storiesDictionary[@"top_stories"];
         
+        if (completionHandler) {
+            completionHandler(nil, topStoriesArray);
+        }
+        
         [self.context performBlock:^{
             [Story loadFromArray:storiesArray withDate:dateString intoManagedObjectContext:self.context];
             
@@ -70,10 +74,6 @@
             }
             
             [self.appDelegate saveContext];
-            
-            if (completionHandler) {
-                completionHandler(nil, topStoriesArray);
-            }
         }];
     }failure:^(NSURLSessionDataTask *task, NSError *error) {
         NSLog(@"%s %@",__FUNCTION__,error);

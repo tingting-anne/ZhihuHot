@@ -37,13 +37,11 @@
                 <constraint firstAttribute="bottom" secondItem="z95-Zv-ghe" secondAttribute="bottom" id="NQA-aQ-wmD"/>
                 <constraint firstAttribute="trailing" secondItem="CBp-2L-ibc" secondAttribute="trailing" constant="10" id="Oyn-BJ-SjF"/>
                 <constraint firstItem="CBp-2L-ibc" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="WW8-x6-ttl"/>
-                <constraint firstAttribute="centerY" secondItem="z95-Zv-ghe" secondAttribute="centerY" id="Waq-nW-5Kj"/>
                 <constraint firstItem="3DR-3h-eKq" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="XCo-iZ-ON5"/>
                 <constraint firstItem="z95-Zv-ghe" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="aLH-MO-JQN"/>
                 <constraint firstItem="z95-Zv-ghe" firstAttribute="bottom" secondItem="CBp-2L-ibc" secondAttribute="bottom" constant="8" id="dOG-E2-LCD"/>
                 <constraint firstItem="z95-Zv-ghe" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="htb-La-SiO"/>
                 <constraint firstItem="CBp-2L-ibc" firstAttribute="top" secondItem="3DR-3h-eKq" secondAttribute="bottom" constant="8" id="kbU-1b-qo7"/>
-                <constraint firstAttribute="centerX" secondItem="z95-Zv-ghe" secondAttribute="centerX" id="lhY-h3-iXj"/>
             </constraints>
             <connections>
                 <outlet property="imageSourceLabel" destination="CBp-2L-ibc" id="GC5-CB-4Jt"/>
