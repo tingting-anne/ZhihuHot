@@ -170,12 +170,16 @@
         isFirstLoad = FALSE;
     }
     else{
-        ret = FALSE;
-        
-        self.linkViewController = [[LinkViewController alloc] init];
-        self.linkViewController.url = request.URL;
-        
-        [self.navigationController pushViewController:self.linkViewController animated:YES];
+        if (navigationType == UIWebViewNavigationTypeLinkClicked) {
+            ret = FALSE;
+            
+            self.linkViewController = [[LinkViewController alloc] init];
+            self.linkViewController.url = request.URL;
+            
+            [self.navigationController pushViewController:self.linkViewController animated:YES];
+            
+
+        }
     }
     return ret;
 }

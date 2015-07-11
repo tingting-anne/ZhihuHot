@@ -17,6 +17,27 @@
 
 @implementation LinkViewController
 
+-(instancetype)init
+{
+    if(self = [super init])
+    {
+        UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStyleBordered target:self action:@selector(back:)];
+        self.navigationItem.leftBarButtonItem = backItem;
+    }
+    return self;
+}
+
+-(void)back:(id)sender
+{
+    if ([self.webView canGoBack]) {
+        [self.webView goBack];
+    }
+    else
+    {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     

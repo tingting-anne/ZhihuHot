@@ -14,4 +14,5 @@
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activity;
 @property (weak, nonatomic) NSURL* url;
 
+- (void)back:(id)sender;
 @end

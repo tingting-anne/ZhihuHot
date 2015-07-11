@@ -42,7 +42,6 @@
 		EAAFDBD11B3BF612007DA451 /* whiteArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EAAFDBBF1B3BF612007DA451 /* whiteArrow@2x.png */; };
 		EAAFDBD21B3BF612007DA451 /* whiteArrowLoadMore.png in Resources */ = {isa = PBXBuildFile; fileRef = EAAFDBC01B3BF612007DA451 /* whiteArrowLoadMore.png */; };
 		EAAFDBD31B3BF612007DA451 /* whiteArrowLoadMore@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EAAFDBC11B3BF612007DA451 /* whiteArrowLoadMore@2x.png */; };
-		EABAA8C31B3D3B540056D242 /* 知乎日报-API-分析.md in Sources */ = {isa = PBXBuildFile; fileRef = EABAA8C21B3D3B540056D242 /* 知乎日报-API-分析.md */; };
 		EABAA8D21B3D4CA60056D242 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = EABAA8D01B3D4CA60056D242 /* Localizable.strings */; };
 		EABAA8D61B3D4CB30056D242 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = EABAA8D41B3D4CB30056D242 /* Localizable.strings */; };
 		EABE31901B38FC730004BB69 /* Doc in Resources */ = {isa = PBXBuildFile; fileRef = EABE318F1B38FC730004BB69 /* Doc */; };
@@ -61,6 +60,7 @@
 		EAFD51D91B396D59007307BE /* ContentHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = EAFD51D81B396D59007307BE /* ContentHeaderView.m */; };
 		EAFD51DD1B39A6F1007307BE /* LinkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EAFD51DB1B39A6F1007307BE /* LinkViewController.m */; };
 		EAFD51DE1B39A6F1007307BE /* LinkViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EAFD51DC1B39A6F1007307BE /* LinkViewController.xib */; };
+		EAFE2B261B5119D9002D416C /* 知乎日报-API-分析 in Resources */ = {isa = PBXBuildFile; fileRef = EAFE2B251B5119D9002D416C /* 知乎日报-API-分析 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -126,7 +126,6 @@
 		EAAFDBBF1B3BF612007DA451 /* whiteArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "whiteArrow@2x.png"; sourceTree = "<group>"; };
 		EAAFDBC01B3BF612007DA451 /* whiteArrowLoadMore.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = whiteArrowLoadMore.png; sourceTree = "<group>"; };
 		EAAFDBC11B3BF612007DA451 /* whiteArrowLoadMore@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "whiteArrowLoadMore@2x.png"; sourceTree = "<group>"; };
-		EABAA8C21B3D3B540056D242 /* 知乎日报-API-分析.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = "知乎日报-API-分析.md"; sourceTree = "<group>"; };
 		EABAA8D11B3D4CA60056D242 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Localizable.strings; sourceTree = "<group>"; };
 		EABAA8D51B3D4CB30056D242 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = Localizable.strings; sourceTree = "<group>"; };
 		EABE318F1B38FC730004BB69 /* Doc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Doc; sourceTree = "<group>"; };
@@ -160,6 +159,7 @@
 		EAFD51DA1B39A6F1007307BE /* LinkViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LinkViewController.h; sourceTree = "<group>"; };
 		EAFD51DB1B39A6F1007307BE /* LinkViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LinkViewController.m; sourceTree = "<group>"; };
 		EAFD51DC1B39A6F1007307BE /* LinkViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LinkViewController.xib; sourceTree = "<group>"; };
+		EAFE2B251B5119D9002D416C /* 知乎日报-API-分析 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "知乎日报-API-分析"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -341,9 +341,9 @@
 		EAC2882B1B30459600390CFB = {
 			isa = PBXGroup;
 			children = (
-				EABAA8CE1B3D4BF60056D242 /* Resources */,
+				EAFE2B251B5119D9002D416C /* 知乎日报-API-分析 */,
 				EABE318F1B38FC730004BB69 /* Doc */,
-				EABAA8C21B3D3B540056D242 /* 知乎日报-API-分析.md */,
+				EABAA8CE1B3D4BF60056D242 /* Resources */,
 				EAC288361B30459600390CFB /* ZhiHuHot */,
 				EAC288531B30459700390CFB /* ZhiHuHotTests */,
 				EAC288351B30459600390CFB /* Products */,
@@ -542,6 +542,7 @@
 				EABAA8D21B3D4CA60056D242 /* Localizable.strings in Resources */,
 				EAAFDBCF1B3BF612007DA451 /* grayArrowLoadMore@2x.png in Resources */,
 				EABE31901B38FC730004BB69 /* Doc in Resources */,
+				EAFE2B261B5119D9002D416C /* 知乎日报-API-分析 in Resources */,
 				EAC288481B30459700390CFB /* Images.xcassets in Resources */,
 				EAAFDBCB1B3BF612007DA451 /* blueArrowLoadMore@2x.png in Resources */,
 				EAAFDBCC1B3BF612007DA451 /* grayArrow.png in Resources */,
@@ -601,7 +602,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EABAA8C31B3D3B540056D242 /* 知乎日报-API-分析.md in Sources */,
 				EAAFDBC21B3BF612007DA451 /* EGORefreshTableHeaderView.m in Sources */,
 				EAFBECE21B4688C500BCD5E4 /* DataCache.m in Sources */,
 				EAFD51CF1B392F9B007307BE /* ListTableViewCell.m in Sources */,
@@ -758,6 +758,7 @@
 			baseConfigurationReference = 602AD774374D7FD2A394DF34 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Jianghua Ynag (VJ5RGMS3J5)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jianghua Ynag (VJ5RGMS3J5)";
 				INFOPLIST_FILE = ZhiHuHot/Info.plist;
@@ -774,6 +775,7 @@
 			baseConfigurationReference = D2DB723098B3D2807A3403B1 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Jianghua Ynag (GHW3937Z5U)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Jianghua Ynag (GHW3937Z5U)";
 				INFOPLIST_FILE = ZhiHuHot/Info.plist;

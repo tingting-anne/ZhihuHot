@@ -549,6 +549,10 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
     if ([segue.destinationViewController isKindOfClass:[ContentViewController class]]) {
+        UIBarButtonItem* back = [[UIBarButtonItem alloc] init];
+        back.title = self.navigationItem.title;
+        self.navigationItem.backBarButtonItem = back;
+        
         ContentViewController *contentViewController = segue.destinationViewController;
         NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
         
