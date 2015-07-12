@@ -143,6 +143,13 @@
     
     headerView.titleLable.text = dic[@"title"];
     headerView.imageSourceLabel.text = dic[@"image_source"];
+    
+    headerView.titleLable.shadowColor = [UIColor blackColor];
+    headerView.titleLable.shadowOffset = CGSizeMake(0.5, 0.5);
+    
+    headerView.imageSourceLabel.shadowColor = [UIColor blackColor];
+    headerView.imageSourceLabel.shadowOffset = CGSizeMake(0.5, 0.5);
+    
   //  [self.webView.scrollView addSubview:headerView];
 }
 

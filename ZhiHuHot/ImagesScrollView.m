@@ -66,6 +66,8 @@ static CGFloat const chageImageTime = 5.0;//轮训时间
     label.font = [UIFont fontWithName:@"Arial Rounded MT Bold" size:20.0f];
    // NSLog(@"%@, %@", [UIFont familyNames], [UIFont fontNamesForFamilyName:@"System"]);
     label.textColor = [UIColor whiteColor];
+    label.shadowColor = [UIColor blackColor];
+    label.shadowOffset = CGSizeMake(0.5, 0.5);
     label.textAlignment = titleStyle;
     label.translatesAutoresizingMaskIntoConstraints = NO;
     
