@@ -24,6 +24,7 @@ static CGFloat const chageImageTime = 5.0;//轮训时间
     NSTextAlignment titleStyle;
     
     NSUInteger currentImage;//记录中间图片的下标,开始总是为0
+    int loadCount;//已经下载成功的图片数，防止没有成功就轮训
 }
 @property (retain,nonatomic,readwrite) NSArray * imageNameArray;
 @property (retain,nonatomic,readonly) NSArray * adTitleArray;
@@ -44,6 +45,7 @@ static CGFloat const chageImageTime = 5.0;//轮训时间
 -(void)setLabel:(UILabel*)label withTitle:(NSString *)title onImageView:(UIImageView*)imageView;
 -(void)createImageAndLabel;
 -(void)createPageControll;
+-(void)startTimer;
 
 -(NSUInteger)nextImageIndex;
 -(NSUInteger)preImageIndex;
@@ -158,6 +160,7 @@ static CGFloat const chageImageTime = 5.0;//轮训时间
         
         _isTimeUp = NO;
         currentImage = 0;
+        loadCount = 0;
         
         dailyImagePlacehold = [NSString stringWithFormat:@"dailyImagePlacehold%d",(int)UISCREENWIDTH];
         NSLog(@"dailyImagePlacehold %@", dailyImagePlacehold);
@@ -179,6 +182,7 @@ static CGFloat const chageImageTime = 5.0;//轮训时间
     currentImage = 0;
     _pageControl.currentPage = currentImage;
     _isTimeUp = NO;
+    loadCount = 0;
     
     [self setImageNameArray:imageArray];
     [self setAdTitleArray:titleArray];
@@ -187,25 +191,29 @@ static CGFloat const chageImageTime = 5.0;//轮训时间
     if(reDrawPageControll){
         [self createPageControll];
     }
-    
-    if(!_moveTime){
-        _moveTime = [NSTimer scheduledTimerWithTimeInterval:chageImageTime target:self selector:@selector(animalMoveImage) userInfo:nil repeats:YES];
-        //NSLog(@"%lf", [[_moveTime fireDate] timeIntervalSinceDate:[NSDate date]]);
-    }
-    else{
-        [_moveTime setFireDate:[NSDate dateWithTimeIntervalSinceNow:chageImageTime]];
-    }
 }
 
 - (void)setImageNameArray:(NSArray *)imageNameArray
 {
     _imageNameArray = imageNameArray;
     
-    [_leftImageView sd_setImageWithURL:[NSURL URLWithString:_imageNameArray[[self preImageIndex]]] placeholderImage:[UIImage imageNamed:dailyImagePlacehold] options:SDWebImageHighPriority];
+    [_leftImageView sd_setImageWithURL:[NSURL URLWithString:_imageNameArray[[self preImageIndex]]] placeholderImage:[UIImage imageNamed:dailyImagePlacehold] options:SDWebImageHighPriority completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        if (++loadCount >= 3) {
+            [self startTimer];
+        }
+    }];
     
-    [_centerImageView sd_setImageWithURL:[NSURL URLWithString:_imageNameArray[currentImage%_imageNameArray.count]] placeholderImage:[UIImage imageNamed:dailyImagePlacehold] options:SDWebImageHighPriority];
+    [_centerImageView sd_setImageWithURL:[NSURL URLWithString:_imageNameArray[currentImage%_imageNameArray.count]] placeholderImage:[UIImage imageNamed:dailyImagePlacehold] options:SDWebImageHighPriority completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        if (++loadCount >= 3) {
+            [self startTimer];
+        }
+    }];
     
-    [_rightImageView sd_setImageWithURL:[NSURL URLWithString:_imageNameArray[[self nextImageIndex]]] placeholderImage:[UIImage imageNamed:dailyImagePlacehold] options:SDWebImageHighPriority];
+    [_rightImageView sd_setImageWithURL:[NSURL URLWithString:_imageNameArray[[self nextImageIndex]]] placeholderImage:[UIImage imageNamed:dailyImagePlacehold] options:SDWebImageHighPriority completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        if (++loadCount >= 3) {
+            [self startTimer];
+        }
+    }];
 }
 
 - (void)setAdTitleArray:(NSArray *)adTitleArray
@@ -216,6 +224,17 @@ static CGFloat const chageImageTime = 5.0;//轮训时间
     [self setLabel:_leftAdLabel withTitle:_adTitleArray[[self preImageIndex]] onImageView:_leftImageView];
     [self setLabel:_centerAdLabel withTitle:_adTitleArray[currentImage%_adTitleArray.count] onImageView:_centerImageView];
     [self setLabel:_rightAdLabel withTitle:_adTitleArray[[self nextImageIndex]] onImageView:_rightImageView];
+}
+
+-(void)startTimer
+{
+    if(!_moveTime){
+        _moveTime = [NSTimer scheduledTimerWithTimeInterval:chageImageTime target:self selector:@selector(animalMoveImage) userInfo:nil repeats:YES];
+        //NSLog(@"%lf", [[_moveTime fireDate] timeIntervalSinceDate:[NSDate date]]);
+    }
+    else{
+        [_moveTime setFireDate:[NSDate dateWithTimeIntervalSinceNow:chageImageTime]];
+    }
 }
 
 -(void)createPageControll
