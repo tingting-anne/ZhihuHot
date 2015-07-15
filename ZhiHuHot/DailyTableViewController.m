@@ -46,7 +46,8 @@
     
     //判断拉动方向
     CGFloat startContentOffsetY;
-
+    SCROLL_DIRECTION_ENUM direction;
+    CGSize originContentSize;
 }
 
 @property(strong,nonatomic)NSFetchedResultsController* fetchedResultsController;
@@ -181,6 +182,7 @@
         [request setSortDescriptors:[NSArray arrayWithObjects:sortDate, sortID, nil]];
         
         [request setFetchBatchSize:20];
+        request.returnsObjectsAsFaults = NO; //CoreData: annotation: fault fulfilled from database for
         
         self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:self.managedObjectContext sectionNameKeyPath:@"date.date" cacheName:@"DailyCache"];
         
@@ -289,7 +291,7 @@
 {
    //lastestSectionView=nil说明没用拉动
     if (lastestSectionView){
-        SCROLL_DIRECTION_ENUM direction = SCROLL_DIRECTION_NUM;
+        direction = SCROLL_DIRECTION_NUM;
         if (endOffsetY < startContentOffsetY) { //下拉
             direction = SCROLL_DIRECTION_DOWN;
         } else if (endOffsetY > startContentOffsetY) {//上拉
@@ -421,7 +423,6 @@
     else{
         return HEIGHT_OF_SECTION_HEADER;
     }
-        
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
@@ -455,11 +456,70 @@
     NSUInteger sectionNum = [self.fetchedResultsController.sections count];
     id<NSFetchedResultsSectionInfo> sectionInfo = [self.fetchedResultsController.sections objectAtIndex:indexPath.section];
     NSUInteger rowNumOfSection = sectionInfo.numberOfObjects;
-    if (indexPath.section == (sectionNum -1) && indexPath.row == (rowNumOfSection - 1)) {
+    
+    if (indexPath.row == (rowNumOfSection - 1)){ //当前section最后一个cell
         
-        lastCell = TRUE;
+        static NSDateFormatter *dateFormatter = nil;
+        
+        if (!dateFormatter)
+        {
+            dateFormatter = [[NSDateFormatter alloc] init];
+            dateFormatter.dateStyle = NSDateFormatterFullStyle;
+            dateFormatter.dateFormat = @"yyyyMMdd";
+        }
+        
         Story *story = [self.fetchedResultsController objectAtIndexPath:indexPath];
         currentDateString = story.date.date;
+        
+        if(indexPath.section == (sectionNum -1)){ //最后一个section
+            lastCell = TRUE;
+        }
+        else{
+            NSDate *currentDate = [dateFormatter dateFromString:currentDateString];
+            
+            if (SCROLL_DIRECTION_UP == direction) {
+                NSIndexPath* nextIndexPath = [NSIndexPath indexPathForRow:0 inSection:indexPath.section+1];
+                Story *nextStory = [self.fetchedResultsController objectAtIndexPath:nextIndexPath];
+                
+                if (!nextStory.date.isLatest) {//不是最新数据
+                    [self.netClient downloadBeforeDate:currentDateString withCompletionHandler:nil];
+                }
+                else{
+                    NSTimeInterval interval = -60*60*24;
+                    NSDate *shouldDate = [NSDate dateWithTimeInterval:interval sinceDate:currentDate];
+                    NSDate *nextDate = [dateFormatter dateFromString:nextStory.date.date];
+                    
+                    if([shouldDate compare:nextDate] != NSOrderedSame){//日期不连续
+                        lastCell = TRUE;
+                        
+                        originContentSize = self.tableView.contentSize;//便于出措时还原
+                        CGSize contentSize = self.tableView.contentSize;
+                        contentSize.height  = cell.frame.origin.y + cell.frame.size.height;
+                        self.tableView.contentSize = contentSize;
+                        [self resetMoreFrame];
+                    }
+                    else if (lastCell) {//还原
+                        lastCell = FALSE;
+                    }
+                }
+            }
+            else if(SCROLL_DIRECTION_DOWN == direction){
+                NSIndexPath* nextIndexPath = [NSIndexPath indexPathForRow:0 inSection:indexPath.section-1];
+                Story *nextStory = [self.fetchedResultsController objectAtIndexPath:nextIndexPath];
+            
+                NSTimeInterval interval = 60*60*24;
+                NSDate *shouldDate = [NSDate dateWithTimeInterval:interval sinceDate:currentDate];
+                NSDate *nextDate = [dateFormatter dateFromString:nextStory.date.date];
+                
+                if([shouldDate compare:nextDate] != NSOrderedSame //日期不连续
+                   || !nextStory.date.isLatest) {//不是最新数据
+    
+                    NSDate* dateAfterShouldDate = [NSDate dateWithTimeInterval:interval sinceDate:shouldDate];
+                    NSString* dateAfterShouldDateStr = [dateFormatter stringFromDate:dateAfterShouldDate];
+                    [self.netClient downloadBeforeDate:dateAfterShouldDateStr withCompletionHandler:nil];
+                }
+            }
+        }
     }
     
     if (self.tableView.contentSize.height > self.view.bounds.size.height
@@ -657,6 +717,7 @@
     
     if(lastCell)
     {
+        [self.tableView bringSubviewToFront:loadMoreTableFooterView];
         [loadMoreTableFooterView loadMoreScrollViewDidScroll:scrollView];
     }
     
@@ -725,6 +786,7 @@
         
         if(error){
             [[AppHelper shareAppHelper] showAlertViewWithError:error type:NET_DOWNLOAD_ERROR];
+            self.tableView.contentSize = originContentSize;
         }
         else{
             lastCell = FALSE;

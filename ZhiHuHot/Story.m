@@ -22,11 +22,11 @@
 
 @implementation Story(Load)
 
-+(void)loadFromArray:(NSArray *)storyArray withDate:(NSString *)date intoManagedObjectContext:(NSManagedObjectContext *)context
++(void)loadFromArray:(NSArray *)storyArray withDate:(NSString *)date latest:(BOOL)isLatest intoManagedObjectContext:(NSManagedObjectContext *)context
 {
     Story* story = nil;
     LoadManagerObjectResultType resultType = LOAD_ERROR;
-    Date* dateObject = [Date loadFromString:date inManagedObjectContext:context withLoadManagerObjectResult:&resultType];
+    Date* dateObject = [Date loadFromString:date latest:isLatest inManagedObjectContext:context withLoadManagerObjectResult:&resultType];
     
     UInt32 sortId = 0;
     if (LOAD_BY_ADD == resultType) {

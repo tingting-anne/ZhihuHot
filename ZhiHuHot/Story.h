@@ -23,7 +23,7 @@
 
 @interface Story(Load)
 
-+ (void)loadFromArray:(NSArray *)storyArray withDate:(NSString *)date intoManagedObjectContext:(NSManagedObjectContext *)context;
++ (void)loadFromArray:(NSArray *)storyArray withDate:(NSString *)date latest:(BOOL)isLatest intoManagedObjectContext:(NSManagedObjectContext *)context;
 
 + (void)deleteStoriesBeforeDays:(NSUInteger)days inManagedObjectContext:(NSManagedObjectContext *)context;
 @end

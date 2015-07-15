@@ -13,12 +13,12 @@
 		EA06DF551B423C1800E30733 /* dailyImagePlacehold414.png in Resources */ = {isa = PBXBuildFile; fileRef = EA06DF521B423C1800E30733 /* dailyImagePlacehold414.png */; };
 		EA29D7141B33134F002DCCAF /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA29D7131B33134F002DCCAF /* CoreData.framework */; };
 		EA29D7261B3315F1002DCCAF /* Story.m in Sources */ = {isa = PBXBuildFile; fileRef = EA29D7251B3315F1002DCCAF /* Story.m */; };
-		EA29D7291B3315F2002DCCAF /* Date.m in Sources */ = {isa = PBXBuildFile; fileRef = EA29D7281B3315F2002DCCAF /* Date.m */; };
 		EA29D72C1B3315F2002DCCAF /* Theme.m in Sources */ = {isa = PBXBuildFile; fileRef = EA29D72B1B3315F2002DCCAF /* Theme.m */; };
 		EA29D72F1B3315F2002DCCAF /* ThemeStory.m in Sources */ = {isa = PBXBuildFile; fileRef = EA29D72E1B3315F2002DCCAF /* ThemeStory.m */; };
 		EA43A6FF1B369A2700FF3FF0 /* DailyTableSectionHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA43A6FE1B369A2700FF3FF0 /* DailyTableSectionHeader.xib */; };
 		EA43A7021B369F7900FF3FF0 /* DailyTableSectionHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = EA43A7011B369F7900FF3FF0 /* DailyTableSectionHeader.m */; };
 		EA82B5921B4564AA004042AA /* TopStory.m in Sources */ = {isa = PBXBuildFile; fileRef = EA82B5911B4564AA004042AA /* TopStory.m */; };
+		EA9738541B561320004301CE /* Date.m in Sources */ = {isa = PBXBuildFile; fileRef = EA9738531B561320004301CE /* Date.m */; };
 		EAA74EF41B31A7E100EE9360 /* MenuTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EAA74EF31B31A7E100EE9360 /* MenuTableViewController.m */; };
 		EAA74EFD1B31AF0D00EE9360 /* ContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EAA74EFC1B31AF0D00EE9360 /* ContentViewController.m */; };
 		EAA74F0B1B31B9B300EE9360 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EAA74F0A1B31B9B300EE9360 /* Main.storyboard */; };
@@ -85,8 +85,6 @@
 		EA29D7131B33134F002DCCAF /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		EA29D7241B3315F1002DCCAF /* Story.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Story.h; sourceTree = "<group>"; };
 		EA29D7251B3315F1002DCCAF /* Story.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Story.m; sourceTree = "<group>"; };
-		EA29D7271B3315F2002DCCAF /* Date.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Date.h; sourceTree = "<group>"; };
-		EA29D7281B3315F2002DCCAF /* Date.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Date.m; sourceTree = "<group>"; };
 		EA29D72A1B3315F2002DCCAF /* Theme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Theme.h; sourceTree = "<group>"; };
 		EA29D72B1B3315F2002DCCAF /* Theme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Theme.m; sourceTree = "<group>"; };
 		EA29D72D1B3315F2002DCCAF /* ThemeStory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThemeStory.h; sourceTree = "<group>"; };
@@ -97,6 +95,10 @@
 		EA82B5901B4564AA004042AA /* TopStory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopStory.h; sourceTree = "<group>"; };
 		EA82B5911B4564AA004042AA /* TopStory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopStory.m; sourceTree = "<group>"; };
 		EA82B5931B457AE7004042AA /* ZhiHuHot 4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "ZhiHuHot 4.xcdatamodel"; sourceTree = "<group>"; };
+		EA9738501B5611A7004301CE /* ZhiHuHot 7.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "ZhiHuHot 7.xcdatamodel"; sourceTree = "<group>"; };
+		EA9738511B56130C004301CE /* ZhiHuHot 8.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "ZhiHuHot 8.xcdatamodel"; sourceTree = "<group>"; };
+		EA9738521B561320004301CE /* Date.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Date.h; sourceTree = "<group>"; };
+		EA9738531B561320004301CE /* Date.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Date.m; sourceTree = "<group>"; };
 		EAA74EF21B31A7E100EE9360 /* MenuTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuTableViewController.h; sourceTree = "<group>"; };
 		EAA74EF31B31A7E100EE9360 /* MenuTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuTableViewController.m; sourceTree = "<group>"; };
 		EAA74EFB1B31AF0D00EE9360 /* ContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentViewController.h; sourceTree = "<group>"; };
@@ -414,14 +416,14 @@
 			isa = PBXGroup;
 			children = (
 				EAC2883E1B30459600390CFB /* ZhiHuHot.xcdatamodeld */,
+				EA9738521B561320004301CE /* Date.h */,
+				EA9738531B561320004301CE /* Date.m */,
 				EA82B5901B4564AA004042AA /* TopStory.h */,
 				EA82B5911B4564AA004042AA /* TopStory.m */,
 				EA29D72D1B3315F2002DCCAF /* ThemeStory.h */,
 				EA29D72E1B3315F2002DCCAF /* ThemeStory.m */,
 				EA29D72A1B3315F2002DCCAF /* Theme.h */,
 				EA29D72B1B3315F2002DCCAF /* Theme.m */,
-				EA29D7271B3315F2002DCCAF /* Date.h */,
-				EA29D7281B3315F2002DCCAF /* Date.m */,
 				EA29D7241B3315F1002DCCAF /* Story.h */,
 				EA29D7251B3315F1002DCCAF /* Story.m */,
 			);
@@ -609,6 +611,7 @@
 				EAC288401B30459600390CFB /* ZhiHuHot.xcdatamodeld in Sources */,
 				EAC880CA1B41623600946EC9 /* ImagesScrollView.m in Sources */,
 				EAC2883D1B30459600390CFB /* AppDelegate.m in Sources */,
+				EA9738541B561320004301CE /* Date.m in Sources */,
 				EADD2F161B3417F40087C1CA /* AppHelper.m in Sources */,
 				EA29D72F1B3315F2002DCCAF /* ThemeStory.m in Sources */,
 				EAAFDBC31B3BF612007DA451 /* LoadMoreTableFooterView.m in Sources */,
@@ -617,7 +620,6 @@
 				EAFD51DD1B39A6F1007307BE /* LinkViewController.m in Sources */,
 				EA29D72C1B3315F2002DCCAF /* Theme.m in Sources */,
 				EAA74EFD1B31AF0D00EE9360 /* ContentViewController.m in Sources */,
-				EA29D7291B3315F2002DCCAF /* Date.m in Sources */,
 				EAC2883A1B30459600390CFB /* main.m in Sources */,
 				EAFD51D91B396D59007307BE /* ContentHeaderView.m in Sources */,
 				EAA74EF41B31A7E100EE9360 /* MenuTableViewController.m in Sources */,
@@ -857,6 +859,8 @@
 		EAC2883E1B30459600390CFB /* ZhiHuHot.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				EA9738511B56130C004301CE /* ZhiHuHot 8.xcdatamodel */,
+				EA9738501B5611A7004301CE /* ZhiHuHot 7.xcdatamodel */,
 				EA16E5D21B4660D80034A6ED /* ZhiHuHot 6.xcdatamodel */,
 				EA16E5D11B464F720034A6ED /* ZhiHuHot 5.xcdatamodel */,
 				EA82B5931B457AE7004042AA /* ZhiHuHot 4.xcdatamodel */,

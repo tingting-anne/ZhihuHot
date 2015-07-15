@@ -11,6 +11,7 @@
 #import "SDWebImage/SDImageCache.h"
 #import "DataCache.h"
 #import "Story.h"
+#import "NetClient.h"
 
 @interface AppDelegate ()
 
@@ -23,9 +24,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
-    //NSURLCache* urlCache = [NSURLCache sharedURLCache];
-//    urlCache.diskCapacity = 5 * 1024 * 1024;
-//    urlCache.memoryCapacity = 1024 * 1024;
+    NetClient *netClient = [[NetClient alloc] init];
+    [netClient downloadThemesWithCompletionHandler:nil];
     
     NSUInteger memoryCapacity = 1024 * 1024;
     NSUInteger diskCapacity = 5 * 1024 * 1024;
@@ -57,7 +57,7 @@
          nil]];
     
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:YES];
-
+    
     return YES;
 }
 

@@ -2,7 +2,7 @@
 //  Date.h
 //  ZhiHuHot
 //
-//  Created by ltt.fly on 15/6/18.
+//  Created by ltt.fly on 15/7/15.
 //  Copyright (c) 2015年 ltt.fly. All rights reserved.
 //
 
@@ -10,11 +10,12 @@
 #import <CoreData/CoreData.h>
 #import "Definitions.h"
 
-@class NSManagedObject, Story;
+@class Story;
 
 @interface Date : NSManagedObject
 
 @property (nonatomic, retain) NSString * date;
+@property (nonatomic, retain) NSNumber * isLatest;
 @property (nonatomic, retain) NSSet *stories;
 @end
 
@@ -29,6 +30,6 @@
 
 @interface Date(Load)
 
-+ (Date *)loadFromString:(NSString *)dateString inManagedObjectContext:(NSManagedObjectContext *)context withLoadManagerObjectResult:(LoadManagerObjectResultType *)resultType;
++ (Date *)loadFromString:(NSString *)dateString latest:(BOOL)isLatest inManagedObjectContext:(NSManagedObjectContext *)context withLoadManagerObjectResult:(LoadManagerObjectResultType *)resultType;
 
 @end

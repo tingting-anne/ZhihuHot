@@ -51,6 +51,8 @@
 
 -(void)getAndSaveStoriesWithUrl:(NSString *)urlString today:(BOOL) isToday withCompletionHandler:(void(^)(NSError *error, NSArray *topStories))completionHandler
 {
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+    
     NSDictionary *dict = @{@"format": @"json"};
     [self.smanager GET:urlString parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
         
@@ -67,7 +69,7 @@
         }
         
         [self.context performBlock:^{
-            [Story loadFromArray:storiesArray withDate:dateString intoManagedObjectContext:self.context];
+            [Story loadFromArray:storiesArray withDate:dateString latest:!isToday intoManagedObjectContext:self.context];
             
             if (isToday) {
                 [TopStory loadFromArray:topStoriesArray intoManagedObjectContext:self.context];
@@ -75,12 +77,16 @@
             
             [self.appDelegate saveContext];
         }];
+        
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
     }failure:^(NSURLSessionDataTask *task, NSError *error) {
+        
         NSLog(@"%s %@",__FUNCTION__,error);
         
         if (completionHandler) {
             completionHandler(error, nil);
         }
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
     }];
 }
 
@@ -103,13 +109,18 @@
     else{
         NSString *urlString = [NSString stringWithFormat:[NSString stringWithFormat:@"%s", BEFORESTORIES], dateString];
         [self getAndSaveStoriesWithUrl:urlString today:NO withCompletionHandler:^(NSError *error, NSArray *topStories){
-            completionHandler(error);
+            
+            if (completionHandler) {
+                completionHandler(error);
+            }
         }];
     }
 }
 
 - (void)downloadThemesWithCompletionHandler:(void(^)(NSError *error))completionHandler
 {
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+    
     NSString *urlString = [NSString stringWithFormat:@"%s", THEMES];
     
     NSDictionary *dict = @{@"format": @"json"};
@@ -128,17 +139,22 @@
                 completionHandler(nil);
             }
         }];
+        
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
     }failure:^(NSURLSessionDataTask *task, NSError *error) {
         NSLog(@"%s %@",__FUNCTION__,error);
         
         if (completionHandler) {
             completionHandler(error);
         }
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
     }];
 }
 
 - (void)downloadThemeStoriesWithThemeID:(NSUInteger)themeID withCompletionHandler:(void(^)(NSError *error))completionHandler
 {
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+    
     NSString *urlString = [NSString stringWithFormat:[NSString stringWithFormat:@"%s", THEMESTORIES],
                            [NSNumber numberWithUnsignedLong:themeID]];
     
@@ -159,12 +175,15 @@
                 completionHandler(nil);
             }
         }];
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+        
     }failure:^(NSURLSessionDataTask *task, NSError *error) {
         NSLog(@"%s %@",__FUNCTION__,error);
         
         if (completionHandler) {
             completionHandler(error);
         }
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
     }];
 }
 
