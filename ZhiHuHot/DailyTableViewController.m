@@ -182,7 +182,14 @@
         [request setSortDescriptors:[NSArray arrayWithObjects:sortDate, sortID, nil]];
         
         [request setFetchBatchSize:20];
-        request.returnsObjectsAsFaults = NO; //CoreData: annotation: fault fulfilled from database for
+        
+        //CoreData: annotation: fault fulfilled from database for
+        
+        //pre-fetch the relationship, since otherwise it would have to hit the persistent store every time, which is slower
+        [request setRelationshipKeyPathsForPrefetching:[NSArray arrayWithObject:@"date"]];
+        
+        //tell fetch request to return full objects
+        [request setReturnsObjectsAsFaults:NO];
         
         self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:self.managedObjectContext sectionNameKeyPath:@"date.date" cacheName:@"DailyCache"];
         
@@ -503,7 +510,7 @@
                     }
                 }
             }
-            else if(SCROLL_DIRECTION_DOWN == direction){
+            else if(SCROLL_DIRECTION_DOWN == direction && indexPath.section > 0){
                 NSIndexPath* nextIndexPath = [NSIndexPath indexPathForRow:0 inSection:indexPath.section-1];
                 Story *nextStory = [self.fetchedResultsController objectAtIndexPath:nextIndexPath];
             
