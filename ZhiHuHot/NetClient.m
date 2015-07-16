@@ -24,7 +24,7 @@
 @property(readonly, strong, nonatomic)NSManagedObjectContext* context;
 @property(readonly, strong, nonatomic)AFHTTPSessionManager * smanager;
 
--(void)getAndSaveStoriesWithUrl:(NSString *)urlString today:(BOOL) isToday withCompletionHandler:(void(^)(NSError *error, NSArray *topStories))completionHandler;
+-(void)getAndSaveStoriesWithUrl:(NSString *)urlString today:(BOOL) isToday withCompletionHandler:(void(^)(NSError *error))completionHandler topStoriesCompletionHandler:(void(^)(NSArray *topStories))topStories;
 
 @end
 
@@ -49,7 +49,7 @@
     return self;
 }
 
--(void)getAndSaveStoriesWithUrl:(NSString *)urlString today:(BOOL) isToday withCompletionHandler:(void(^)(NSError *error, NSArray *topStories))completionHandler
+-(void)getAndSaveStoriesWithUrl:(NSString *)urlString today:(BOOL) isToday withCompletionHandler:(void(^)(NSError *error))completionHandler topStoriesCompletionHandler:(void(^)(NSArray *topStories))topStoriescompletionHandler
 {
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     
@@ -64,8 +64,8 @@
         NSArray *storiesArray = storiesDictionary[@"stories"];
         NSArray *topStoriesArray = storiesDictionary[@"top_stories"];
         
-        if (completionHandler) {
-            completionHandler(nil, topStoriesArray);
+        if (topStoriescompletionHandler) {
+            topStoriescompletionHandler(topStoriesArray);
         }
         
         [self.context performBlock:^{
@@ -76,24 +76,31 @@
             }
             
             [self.appDelegate saveContext];
+            
+            if (completionHandler) {
+                completionHandler(nil);
+            }
         }];
         
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
     }failure:^(NSURLSessionDataTask *task, NSError *error) {
         
         NSLog(@"%s %@",__FUNCTION__,error);
+        if (topStoriescompletionHandler) {
+            topStoriescompletionHandler(nil);
+        }
         
         if (completionHandler) {
-            completionHandler(error, nil);
+            completionHandler(error);
         }
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
     }];
 }
 
-- (void)downloadLatestStoriesWithCompletionHandler:(void(^)(NSError *error, NSArray *topStories))completionHandler
+- (void)downloadLatestStoriesWithCompletionHandler:(void(^)(NSError *error))completionHandler topStoriesCompletionHandler:(void(^)(NSArray *topStories))topStories
 {
     NSString *urlString = [NSString stringWithFormat:@"%s", LATESTSTORIES];
-    [self getAndSaveStoriesWithUrl:urlString today:YES withCompletionHandler:completionHandler];
+    [self getAndSaveStoriesWithUrl:urlString today:YES withCompletionHandler:completionHandler topStoriesCompletionHandler:topStories];
 }
 
 - (void)downloadBeforeDate:(NSString *)dateString withCompletionHandler:(void(^)(NSError *error))completionHandler
@@ -108,12 +115,7 @@
     }
     else{
         NSString *urlString = [NSString stringWithFormat:[NSString stringWithFormat:@"%s", BEFORESTORIES], dateString];
-        [self getAndSaveStoriesWithUrl:urlString today:NO withCompletionHandler:^(NSError *error, NSArray *topStories){
-            
-            if (completionHandler) {
-                completionHandler(error);
-            }
-        }];
+        [self getAndSaveStoriesWithUrl:urlString today:NO withCompletionHandler:completionHandler topStoriesCompletionHandler:nil];
     }
 }
 

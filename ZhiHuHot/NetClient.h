@@ -11,7 +11,7 @@
 
 @interface NetClient : NSObject
 
-- (void)downloadLatestStoriesWithCompletionHandler:(void(^)(NSError *error, NSArray *topStories))completionHandler;
+- (void)downloadLatestStoriesWithCompletionHandler:(void(^)(NSError *error))completionHandler topStoriesCompletionHandler:(void(^)(NSArray *topStories))topStories;
 
 - (void)downloadBeforeDate:(NSString *)dateString withCompletionHandler:(void(^)(NSError *error))completionHandler;
 

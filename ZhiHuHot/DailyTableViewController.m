@@ -159,6 +159,7 @@
     }
     latestSection = 0;
     lastestSectionView = nil;
+    memset(&originContentSize, 0, sizeof(CGSize));
 }
 
 - (void)setManagedObjectContext:(NSManagedObjectContext *)managedObjectContext {
@@ -310,9 +311,7 @@
             
             NSIndexPath *objectIndexPath = [NSIndexPath indexPathForRow:0 inSection:latestSection-1];
             Story *story = [self.fetchedResultsController objectAtIndexPath:objectIndexPath];
-            if(story.date.date != self.navigationItem.title){
-                self.navigationItem.title = [self headerStringFormateWithDate:story.date.date];
-            }
+            self.navigationItem.title = [self headerStringFormateWithDate:story.date.date];
         }
         else if (direction == SCROLL_DIRECTION_UP && (lastestSectionView.frame.origin.y - (headerHieght - HEIGHT_OF_SECTION_HEADER)) <= self.tableView.contentOffset.y) {
             if(lastestSectionView.headerString.text != self.navigationItem.title){
@@ -340,13 +339,13 @@
     BOOL ret = FALSE;
     if (interval >= UPDATECONTENTINTERVAL) {
         ret = TRUE;
-        [self.netClient downloadLatestStoriesWithCompletionHandler:^(NSError* error, NSArray* topStories){
-            //为空也要设置，会根据数据库的值显示
-            [self setTopStories:topStories];
-            
+        [self.netClient downloadLatestStoriesWithCompletionHandler:^(NSError* error){
             if(error){
                 [[AppHelper shareAppHelper] showAlertViewWithError:error type:NET_DOWNLOAD_ERROR];
             }
+        } topStoriesCompletionHandler:^(NSArray* topStories){
+            //为空也要设置，会根据数据库的值显示
+            [self setTopStories:topStories];
         }];
     }
     return ret;
@@ -381,7 +380,7 @@
 - (void)reloadTableViewDataSource{
     _reloading = YES;
     
-    [self.netClient downloadLatestStoriesWithCompletionHandler:^(NSError* error, NSArray* topStories){
+    [self.netClient downloadLatestStoriesWithCompletionHandler:^(NSError* error){
         
         _reloading = NO;
         
@@ -390,7 +389,8 @@
         if(error){
             [[AppHelper shareAppHelper] showAlertViewWithError:error type:NET_DOWNLOAD_ERROR];
         }
-        else{
+    } topStoriesCompletionHandler:^(NSArray* topStories){
+        if (topStories) {
             [self setTopStories:topStories];
         }
     }];
@@ -793,7 +793,10 @@
         
         if(error){
             [[AppHelper shareAppHelper] showAlertViewWithError:error type:NET_DOWNLOAD_ERROR];
-            self.tableView.contentSize = originContentSize;
+            if (originContentSize.height > self.tableView.contentSize.height && originContentSize.width > 0) {//由于不连续日期的更新
+                self.tableView.contentSize = originContentSize;
+                memset(&originContentSize, 0, sizeof(CGSize));
+            }
         }
         else{
             lastCell = FALSE;

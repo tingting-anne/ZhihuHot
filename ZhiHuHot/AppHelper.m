@@ -70,8 +70,14 @@ static AppHelper *sharesingleton=nil;
 
 - (NSString *)stringOfToday
 {
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"yyyyMMdd"];
+    static NSDateFormatter *dateFormatter = nil;
+    
+    if(!dateFormatter)
+    {
+        dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"yyyyMMdd"];
+    }
+    
     return [dateFormatter stringFromDate:[NSDate date]];
 }
 
