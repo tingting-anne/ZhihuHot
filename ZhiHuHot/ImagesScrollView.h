@@ -32,6 +32,8 @@ typedef NS_ENUM(NSUInteger, UIPageControlShowStyle)
 - (void)setImageArray:(NSArray *)imageArray titleArray:(NSArray *)titleArray newsID:(NSArray *)newsID;
 -(void)setImageViewUserInteractionEnabled:(BOOL)enable;
 -(void)stopScrollTimer;
+-(void)pauseScrollTimer;
+-(void)resumeScrollTimer;
 
 @end
 

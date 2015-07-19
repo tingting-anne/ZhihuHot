@@ -65,6 +65,11 @@
     //每个主题都是一个TableViewController对象，不能公用一个cache，否则计算错误导致死机
     NSString* cacheName = [NSString stringWithFormat:@"SubjectCache%@", _themeID];
     
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        [NSFetchedResultsController deleteCacheWithName:cacheName];//删掉老的，防止不匹配导致异常
+    });
+    
     self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:self.managedObjectContext sectionNameKeyPath:nil cacheName:cacheName];
     
     self.fetchedResultsController.delegate = self;

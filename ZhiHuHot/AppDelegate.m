@@ -23,9 +23,6 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-
-    NetClient *netClient = [[NetClient alloc] init];
-    [netClient downloadThemesWithCompletionHandler:nil];
     
     NSUInteger memoryCapacity = 1024 * 1024;
     NSUInteger diskCapacity = 5 * 1024 * 1024;
@@ -58,6 +55,9 @@
     
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:YES];
     
+    [NSFetchedResultsController deleteCacheWithName:@"DailyCache"];
+    [NSFetchedResultsController deleteCacheWithName:@"MenueCache"];
+
     return YES;
 }
 
@@ -172,23 +172,25 @@
 - (void)saveContext {
     NSManagedObjectContext *managedObjectContext = self.managedObjectContext;
     if (managedObjectContext != nil) {
-        NSError *error = nil;
-        if ([managedObjectContext hasChanges] && ![managedObjectContext save:&error]) {
-            // Replace this implementation with code to handle the error appropriately.
-            // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-            [[AppHelper shareAppHelper] showAlertViewWithError:error type:MOC_SAVE_ERROR];
-        }
-    }
-    
-    if (_writeManagedObjectContext != nil) {
-        [_writeManagedObjectContext performBlock:^{
+        [managedObjectContext performBlock:^{
             NSError *error = nil;
-            if ([_writeManagedObjectContext hasChanges] && ![_writeManagedObjectContext save:&error]) {
+            if ([managedObjectContext hasChanges] && ![managedObjectContext save:&error]) {
                 // Replace this implementation with code to handle the error appropriately.
                 // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
                 NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-                [[AppHelper shareAppHelper] showAlertViewWithError:error type:PSC_STORE_ERROR];
+                [[AppHelper shareAppHelper] showAlertViewWithError:error type:MOC_SAVE_ERROR];
+            }
+            
+            if (_writeManagedObjectContext != nil) {
+                [_writeManagedObjectContext performBlock:^{
+                    NSError *error = nil;
+                    if ([_writeManagedObjectContext hasChanges] && ![_writeManagedObjectContext save:&error]) {
+                        // Replace this implementation with code to handle the error appropriately.
+                        // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+                        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+                        [[AppHelper shareAppHelper] showAlertViewWithError:error type:PSC_STORE_ERROR];
+                    }
+                }];
             }
         }];
     }

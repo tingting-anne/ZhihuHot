@@ -25,6 +25,8 @@ static CGFloat const chageImageTime = 5.0;//轮训时间
     
     NSUInteger currentImage;//记录中间图片的下标,开始总是为0
     int loadCount;//已经下载成功的图片数，防止没有成功就轮训
+    
+    BOOL isTimerPause;
 }
 @property (retain,nonatomic,readwrite) NSArray * imageNameArray;
 @property (retain,nonatomic,readonly) NSArray * adTitleArray;
@@ -137,6 +139,20 @@ static CGFloat const chageImageTime = 5.0;//轮训时间
     [_moveTime invalidate];
 }
 
+-(void)pauseScrollTimer{
+    if (self.moveTime && [self.moveTime isValid] && !isTimerPause) {
+        [self.moveTime setFireDate:[NSDate distantFuture]];
+        isTimerPause = TRUE;
+    }
+}
+
+-(void)resumeScrollTimer{
+    if (self.moveTime && [self.moveTime isValid] && isTimerPause) {
+        [self.moveTime setFireDate:[NSDate date]];
+        isTimerPause = FALSE;
+    }
+}
+
 - (instancetype)initWithFrame:(CGRect)frame
 {
     return [self initWithFrame:frame withShowStyle:NSTextAlignmentLeft];
@@ -197,19 +213,21 @@ static CGFloat const chageImageTime = 5.0;//轮训时间
 {
     _imageNameArray = imageNameArray;
     
-    [_leftImageView sd_setImageWithURL:[NSURL URLWithString:_imageNameArray[[self preImageIndex]]] placeholderImage:[UIImage imageNamed:dailyImagePlacehold] options:SDWebImageHighPriority completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-        if (++loadCount >= 3) {
-            [self startTimer];
-        }
-    }];
-    
     [_centerImageView sd_setImageWithURL:[NSURL URLWithString:_imageNameArray[currentImage%_imageNameArray.count]] placeholderImage:[UIImage imageNamed:dailyImagePlacehold] options:SDWebImageHighPriority completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        [self setNeedsDisplay];
+        
         if (++loadCount >= 3) {
             [self startTimer];
         }
     }];
     
     [_rightImageView sd_setImageWithURL:[NSURL URLWithString:_imageNameArray[[self nextImageIndex]]] placeholderImage:[UIImage imageNamed:dailyImagePlacehold] options:SDWebImageHighPriority completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        if (++loadCount >= 3) {
+            [self startTimer];
+        }
+    }];
+    
+    [_leftImageView sd_setImageWithURL:[NSURL URLWithString:_imageNameArray[[self preImageIndex]]] placeholderImage:[UIImage imageNamed:dailyImagePlacehold] options:SDWebImageHighPriority completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         if (++loadCount >= 3) {
             [self startTimer];
         }
@@ -235,6 +253,7 @@ static CGFloat const chageImageTime = 5.0;//轮训时间
     else{
         [_moveTime setFireDate:[NSDate dateWithTimeIntervalSinceNow:chageImageTime]];
     }
+    isTimerPause = FALSE;
 }
 
 -(void)createPageControll

@@ -730,6 +730,13 @@
     
     [self resetForNavItemTitle:scrollView.contentOffset.y];
     
+    
+    if(self.tableView.contentOffset.y > HEIGHT_OF_FIRST_SECTION_HEADER){
+        [self.scrollView pauseScrollTimer];
+    }
+    else{
+        [self.scrollView resumeScrollTimer];
+    }
 //    NSLog(@"insert:[%lf, %lf, %lf, %lf], offset:[%lf, %lf]", scrollView.contentInset.top,
 //          scrollView.contentInset.left, scrollView.contentInset.bottom,scrollView.contentInset.right,scrollView.contentOffset.x, scrollView.contentOffset.y);
 }

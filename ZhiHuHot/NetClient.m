@@ -25,7 +25,7 @@
 @property(readonly, strong, nonatomic)AFHTTPSessionManager * smanager;
 
 -(void)getAndSaveStoriesWithUrl:(NSString *)urlString today:(BOOL) isToday withCompletionHandler:(void(^)(NSError *error))completionHandler topStoriesCompletionHandler:(void(^)(NSArray *topStories))topStories;
-
+- (void)saveContext;
 @end
 
 @implementation NetClient
@@ -35,7 +35,8 @@
     if ((self = [super init])){
         
         _appDelegate = [[UIApplication sharedApplication] delegate];
-        _context = [_appDelegate managedObjectContext];
+        _context = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+        _context.parentContext = [_appDelegate managedObjectContext];
         
         static dispatch_once_t onceToken;
         static AFHTTPSessionManager *aFHTTPSessionManager = nil;
@@ -75,11 +76,13 @@
                 [TopStory loadFromArray:topStoriesArray intoManagedObjectContext:self.context];
             }
             
-            [self.appDelegate saveContext];
+            [self saveContext];
             
-            if (completionHandler) {
-                completionHandler(nil);
-            }
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (completionHandler) {
+                    completionHandler(nil);
+                }
+            });
         }];
         
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
@@ -135,11 +138,13 @@
         [self.context performBlock:^{
             
             [Theme loadFromArray:themeArray intoManagedObjectContext:self.context];
-            [self.appDelegate saveContext];
+            [self saveContext];
             
-            if (completionHandler) {
-                completionHandler(nil);
-            }
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (completionHandler) {
+                    completionHandler(nil);
+                }
+            });
         }];
         
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
@@ -171,11 +176,13 @@
         [self.context performBlock:^{
             
             [ThemeStory loadFromArray:themeStoriesArray withThemeID:themeID intoManagedObjectContext:self.context];
-            [self.appDelegate saveContext];
+            [self saveContext];
 
-            if (completionHandler) {
-                completionHandler(nil);
-            }
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (completionHandler) {
+                    completionHandler(nil);
+                }
+            });
         }];
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
         
@@ -252,4 +259,19 @@
         }
     }];
 }
+
+- (void)saveContext {
+    if (self.context != nil) {
+        NSError *error = nil;
+        if ([self.context hasChanges] && ![self.context save:&error]) {
+            // Replace this implementation with code to handle the error appropriately.
+            // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+            [[AppHelper shareAppHelper] showAlertViewWithError:error type:MOC_SAVE_ERROR];
+        }
+    }
+    
+    [self.appDelegate saveContext];
+}
+
 @end
