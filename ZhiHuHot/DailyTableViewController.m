@@ -209,6 +209,7 @@
                                              selector:@selector(localeChanged:)
                                                  name:NSCurrentLocaleDidChangeNotification
                                                object:nil];
+    [self.tableView registerClass:[DailyTableSectionHeader class] forHeaderFooterViewReuseIdentifier:@"dailyTableSectionHeader"];
     
     AppDelegate * appDelegate = [[UIApplication sharedApplication] delegate];
     self.managedObjectContext = [appDelegate managedObjectContext];
@@ -301,8 +302,8 @@
             self.navigationItem.title = [self headerStringFormateWithDate:story.date.date];
         }
         else if (direction == SCROLL_DIRECTION_UP && (lastestSectionView.frame.origin.y - (headerHieght - HEIGHT_OF_SECTION_HEADER)) <= self.tableView.contentOffset.y) {
-            if(lastestSectionView.headerString.text != self.navigationItem.title){
-                self.navigationItem.title = lastestSectionView.headerString.text;
+            if(lastestSectionView.headerTitle != self.navigationItem.title){
+                self.navigationItem.title = lastestSectionView.headerTitle;
             }
         }
     }
@@ -431,23 +432,17 @@
         return self.firstSectionView;
     }
     
+    DailyTableSectionHeader* sectionHeaderView = [self.tableView dequeueReusableHeaderFooterViewWithIdentifier:@"dailyTableSectionHeader"];
     CGRect headerRect = {{0,0}, {self.tableView.frame.size.width, HEIGHT_OF_SECTION_HEADER}};
-    
-    NSArray *bundleSource = [[NSBundle mainBundle] loadNibNamed:@"DailyTableSectionHeader" owner:self options:nil];
-    DailyTableSectionHeader *sectionHeaderView = [bundleSource firstObject];
     sectionHeaderView.frame = headerRect;
     
     NSString *dateString = [[[self.fetchedResultsController sections] objectAtIndex:section] name];
     NSString *headerString = [self headerStringFormateWithDate:dateString];
-    sectionHeaderView.headerString.text = headerString;
+    sectionHeaderView.headerTitle = headerString;
     
     lastestSectionView = sectionHeaderView;
     latestSection = section;
 
-    sectionHeaderView.backgroundColor = [UIColor colorWithRed:0.3f green:0.6f blue:1.0f alpha:0.9f];
-    sectionHeaderView.headerString.font = [UIFont fontWithName:@"Arial Rounded MT Bold" size:19.0f];
-    sectionHeaderView.headerString.textColor = [UIColor whiteColor];
-    
     return sectionHeaderView;
 }
 

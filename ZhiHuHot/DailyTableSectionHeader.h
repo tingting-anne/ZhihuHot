@@ -8,8 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface DailyTableSectionHeader : UIView
+@interface DailyTableSectionHeader : UITableViewHeaderFooterView
 
-@property (weak, nonatomic) IBOutlet UILabel *headerString;
+@property(strong, nonatomic)NSString *headerTitle;
 
 @end
