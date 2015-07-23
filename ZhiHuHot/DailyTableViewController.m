@@ -63,6 +63,8 @@
 - (void)resetMoreFrame;
 - (void)resetForNavItemTitle:(CGFloat)endOffsetY;
 - (void)createScrollView;
+-(void)createSubViews;
+
 - (void)setTopStories:(NSArray*) topStories;
 - (void)didSelectedNewsID:(NSNumber*)newsID;
 
@@ -134,12 +136,9 @@
     }
 }
 
--(void)awakeFromNib
+-(void)createSubViews
 {
-    [super awakeFromNib];
-    
-    AppDelegate * appDelegate = [[UIApplication sharedApplication] delegate];
-    self.managedObjectContext = [appDelegate managedObjectContext];
+    [self createScrollView];
     
     if (_refreshHeaderView == nil) {
         
@@ -201,7 +200,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self createScrollView];
+    [self createSubViews];
     
     // if the local changes behind our back, we need to be notified so we can update the date
     // format in the table view cells
@@ -211,20 +210,8 @@
                                                  name:NSCurrentLocaleDidChangeNotification
                                                object:nil];
     
-#ifdef DEBUG
-    //[self notification];
-#endif
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    
-//    self.menuBarButtonItem.target = self.revealViewController;//SWRevealViewController
-//    self.menuBarButtonItem.action = @selector(revealToggle:);
-    
-    //[self.view addGestureRecognizer:self.revealViewController.panGestureRecognizer];
-    //[self.view addGestureRecognizer:self.revealViewController.tapGestureRecognizer];
+    AppDelegate * appDelegate = [[UIApplication sharedApplication] delegate];
+    self.managedObjectContext = [appDelegate managedObjectContext];
     
     if(![self updateLatestStories])
     {
@@ -432,9 +419,15 @@
     }
 }
 
+-(void)redraw
+{
+    [self.firstSectionView setNeedsDisplay];
+}
+
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     if (section == 0) {
+        [self performSelector:@selector(redraw) withObject:nil afterDelay:1.0f];
         return self.firstSectionView;
     }
     

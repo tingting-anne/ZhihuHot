@@ -33,6 +33,7 @@
     sdImageCache.maxCacheAge = 7 * 24 * 60 * 60;
     sdImageCache.maxCacheSize = 10 * 1024 * 1024;
     sdImageCache.maxMemoryCost = 2 * 1024 * 1024;
+    sdImageCache.shouldDecompressImages = NO;
     
     DataCache* dataCache = [DataCache sharedDataCache];
     dataCache.maxCacheAge = 7 * 24 * 60 * 60;

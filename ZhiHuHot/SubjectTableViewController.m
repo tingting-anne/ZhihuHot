@@ -29,25 +29,14 @@
 
 -(void)updateThemeStories;
 - (void)reloadTableViewDataSource;
+-(void)doFetch;
 
 @end
 
 @implementation SubjectTableViewController
 
--(void)awakeFromNib
+-(void)doFetch
 {
-    [super awakeFromNib];
-    
-    AppDelegate * appDelegate = [[UIApplication sharedApplication] delegate];
-    self.managedObjectContext = [appDelegate managedObjectContext];
-    
-    self.netClient = [[NetClient alloc] init];
-}
-
--(void)setThemeID:(NSNumber*)themeID
-{
-    _themeID = themeID;
-    
     [self updateThemeStories];
     
     NSFetchRequest* request = [[NSFetchRequest alloc] init];
@@ -147,20 +136,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
+    AppDelegate * appDelegate = [[UIApplication sharedApplication] delegate];
+    self.managedObjectContext = [appDelegate managedObjectContext];
     
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    self.netClient = [[NetClient alloc] init];
     
-//    self.menuBarButtonItem.target = self.revealViewController;//SWRevealViewController
-//    self.menuBarButtonItem.action = @selector(revealToggle:);
-//
-//    
-//    if(self.revealViewController)
-//    {
-//        [self.view addGestureRecognizer:self.revealViewController.panGestureRecognizer];
-//    }
+    [self doFetch];
     
     if(_refreshHeaderView == nil) {
         
@@ -176,6 +157,7 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated

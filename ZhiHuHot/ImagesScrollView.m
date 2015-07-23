@@ -214,20 +214,20 @@ static CGFloat const chageImageTime = 5.0;//轮训时间
     _imageNameArray = imageNameArray;
     
     [_centerImageView sd_setImageWithURL:[NSURL URLWithString:_imageNameArray[currentImage%_imageNameArray.count]] placeholderImage:[UIImage imageNamed:dailyImagePlacehold] options:SDWebImageHighPriority completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-        [self setNeedsDisplay];
+        [self.superview setNeedsDisplay];
         
         if (++loadCount >= 3) {
             [self startTimer];
         }
     }];
     
-    [_rightImageView sd_setImageWithURL:[NSURL URLWithString:_imageNameArray[[self nextImageIndex]]] placeholderImage:[UIImage imageNamed:dailyImagePlacehold] options:SDWebImageHighPriority completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+    [_rightImageView sd_setImageWithURL:[NSURL URLWithString:_imageNameArray[[self nextImageIndex]]] placeholderImage:[UIImage imageNamed:dailyImagePlacehold] options:0 completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         if (++loadCount >= 3) {
             [self startTimer];
         }
     }];
     
-    [_leftImageView sd_setImageWithURL:[NSURL URLWithString:_imageNameArray[[self preImageIndex]]] placeholderImage:[UIImage imageNamed:dailyImagePlacehold] options:SDWebImageHighPriority completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+    [_leftImageView sd_setImageWithURL:[NSURL URLWithString:_imageNameArray[[self preImageIndex]]] placeholderImage:[UIImage imageNamed:dailyImagePlacehold] options:0 completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         if (++loadCount >= 3) {
             [self startTimer];
         }

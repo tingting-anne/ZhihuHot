@@ -32,18 +32,11 @@
 
 @implementation ContentViewController
 
--(void)awakeFromNib
-{
-    [super awakeFromNib];
+- (void)viewDidLoad{
+    [super viewDidLoad];
     
     self.netClient = [[NetClient alloc] init];
     isFirstLoad = TRUE;
-    
-    //Long story short, the view may be loaded in awakeFromNib, but its contents are loaded lazily, which is why you should use viewDidLoad instead of awakeFromNib for what you are trying to achieve.
-}
-
-- (void)viewDidLoad{
-    [super viewDidLoad];
     
     self.webView.delegate = self;//放在awakeFromNib中没有调用成功
     self.activity.hidden = NO;

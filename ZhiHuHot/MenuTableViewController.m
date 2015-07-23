@@ -23,14 +23,6 @@
 
 @implementation MenuTableViewController
 
--(void)awakeFromNib
-{
-    [super awakeFromNib];
-   
-    AppDelegate * appDelegate = [[UIApplication sharedApplication] delegate];
-    self.managedObjectContext = [appDelegate managedObjectContext];
-}
-
 - (void)setManagedObjectContext:(NSManagedObjectContext *)managedObjectContext {
     
     _managedObjectContext = managedObjectContext;
@@ -47,22 +39,13 @@
         [request setEntity:entityDescription];
         
         NSSortDescriptor *sortDescription = [[NSSortDescriptor alloc] initWithKey:@"sortId" ascending:YES];
-        [request setSortDescriptors:@[sortDescription]];
+        NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescription, nil];
+        [request setSortDescriptors:sortDescriptors];
         
         self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:self.managedObjectContext sectionNameKeyPath:nil cacheName:@"MenueCache"];
         
         self.fetchedResultsController.delegate = self;
     }
-}
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
     NetClient *netClient = [[NetClient alloc] init];
     [netClient downloadThemesWithCompletionHandler:^(NSError* error){
@@ -70,7 +53,13 @@
             NSLog(@"ERROR downloadThemes : %s", __FUNCTION__);
         }
     }];
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
     
+    AppDelegate * appDelegate = [[UIApplication sharedApplication] delegate];
+    self.managedObjectContext = [appDelegate managedObjectContext];
     
     NSError *error;
     BOOL success = [self.fetchedResultsController performFetch:&error];
@@ -78,6 +67,7 @@
     if (error) {
         NSLog(@"[%@ %@] %@ (%@)", NSStringFromClass([self class]), NSStringFromSelector(_cmd), [error localizedDescription], [error localizedFailureReason]);
     }
+    
     [self.tableView reloadData];
 }
 
@@ -113,7 +103,7 @@
 
 #pragma mark - Table view data source
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
+{    
     //主要是去掉选择后再返回界面时，会出现多个cell选中的状态,这里选择后将上次的选择恢复
     if (self.lastSelectIndexPath && [self.lastSelectIndexPath compare:indexPath] != NSOrderedSame) {
         UITableViewCell* cellLast = [self.tableView cellForRowAtIndexPath:self.lastSelectIndexPath];
@@ -130,8 +120,7 @@
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    //return [[self.fetchedResultsController sections] count];
-    return 1;
+    return [[self.fetchedResultsController sections] count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -140,7 +129,7 @@
         id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:section];
         rows = [sectionInfo numberOfObjects];
     }
-    return rows + 1;
+    return rows;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -161,7 +150,7 @@
     if (indexPath.row == 0) {
         cell.textLabel.text = @"首页";
     } else {
-        NSIndexPath *objectIndexPath = [NSIndexPath indexPathForRow:indexPath.row-1 inSection:indexPath.section];
+        NSIndexPath *objectIndexPath = [NSIndexPath indexPathForRow:indexPath.row inSection:indexPath.section];
         Theme *theme = [self.fetchedResultsController objectAtIndexPath:objectIndexPath];
         cell.textLabel.text = theme.name;
     }
@@ -220,7 +209,7 @@
     
     Theme *theme = nil;
     if (indexPath.row > 0) {
-        NSIndexPath *objectIndexPath = [NSIndexPath indexPathForRow:indexPath.row-1 inSection:indexPath.section];
+        NSIndexPath *objectIndexPath = [NSIndexPath indexPathForRow:indexPath.row inSection:indexPath.section];
         theme = [self.fetchedResultsController objectAtIndexPath:objectIndexPath];
     }
     

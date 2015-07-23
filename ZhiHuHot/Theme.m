@@ -34,7 +34,15 @@
         return;
     }
     
-    UInt32 sortId = 0;
+    if ([resultChage count] == 0) {
+        theme = [NSEntityDescription insertNewObjectForEntityForName:@"Theme" inManagedObjectContext:context];
+        theme.id = [NSNumber numberWithInteger:0];
+        theme.name = @"首页";
+        theme.thumbnail = nil;
+        theme.sortId = [NSNumber numberWithUnsignedInt:0];
+    }
+    
+    UInt32 sortId = 1;
     for (NSDictionary *themeDic in array) {
         request.predicate = [NSPredicate predicateWithFormat:@"id = %@", themeDic[@"id"]];
         NSArray *resultArray = [context executeFetchRequest:request error:&error];
