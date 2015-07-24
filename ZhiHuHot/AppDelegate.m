@@ -11,11 +11,14 @@
 #import "SDWebImage/SDImageCache.h"
 #import "DataCache.h"
 #import "Story.h"
+#import "Date.h"
 #import "NetClient.h"
 
 @interface AppDelegate ()
 
 @property (readonly, strong, nonatomic) NSManagedObjectContext *writeManagedObjectContext;
+//@property (assign, nonatomic) UIBackgroundTaskIdentifier backgroundUpdateTask;
+@property (strong, nonatomic)NSLock* lock;
 
 @end
 
@@ -58,6 +61,12 @@
     
     [NSFetchedResultsController deleteCacheWithName:@"DailyCache"];
     [NSFetchedResultsController deleteCacheWithName:@"MenueCache"];
+    
+    self.lock = [[NSLock alloc] init];
+    if([Story deleteStoriesBeforeDays:3*30 inManagedObjectContext:self.managedObjectContext]){
+        [Date deleteDateBeforeDays:3*30 inManagedObjectContext:self.managedObjectContext];
+        [self saveContext];
+    }
 
     return YES;
 }
@@ -70,9 +79,6 @@
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-    
-    [Story deleteStoriesBeforeDays:30 inManagedObjectContext:self.managedObjectContext];
-    [self saveContext];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
@@ -171,6 +177,7 @@
 #pragma mark - Core Data Saving support
 
 - (void)saveContext {
+    
     NSManagedObjectContext *managedObjectContext = self.managedObjectContext;
     if (managedObjectContext != nil) {
         [managedObjectContext performBlock:^{
@@ -184,6 +191,9 @@
             
             if (_writeManagedObjectContext != nil) {
                 [_writeManagedObjectContext performBlock:^{
+                    
+                    [self.lock lock];
+                    
                     NSError *error = nil;
                     if ([_writeManagedObjectContext hasChanges] && ![_writeManagedObjectContext save:&error]) {
                         // Replace this implementation with code to handle the error appropriately.
@@ -191,10 +201,25 @@
                         NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
                         [[AppHelper shareAppHelper] showAlertViewWithError:error type:PSC_STORE_ERROR];
                     }
+                    
+                    [self.lock unlock];
                 }];
             }
         }];
     }
 }
+
+//- (void)beingBackgroundUpdateTask
+//{
+//    self.backgroundUpdateTask = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
+//        [self endBackgroundUpdateTask];
+//    }];
+//}
+//
+//- (void)endBackgroundUpdateTask
+//{
+//    [[UIApplication sharedApplication] endBackgroundTask: self.backgroundUpdateTask];
+//    self.backgroundUpdateTask = UIBackgroundTaskInvalid;
+//}
 
 @end

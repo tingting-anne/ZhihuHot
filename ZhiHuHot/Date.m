@@ -49,4 +49,38 @@
     return date;
 }
 
++ (BOOL)deleteDateBeforeDays:(NSUInteger)days inManagedObjectContext:(NSManagedObjectContext *)context
+{
+    NSError *error = nil;
+    NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"Date"];
+    
+    NSTimeInterval timeInterval = days * 24 * 60 * 60 * -1.0f;
+    NSDate *dateDelete = [NSDate dateWithTimeIntervalSinceNow:timeInterval];
+
+    static NSDateFormatter *dateFormatter = nil;
+    if (!dateFormatter) {
+        dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateStyle:NSDateFormatterFullStyle];
+        dateFormatter.dateFormat = @"yyyyMMdd";
+    }
+
+    NSString *dateDeleteString = [dateFormatter stringFromDate:dateDelete];
+    NSPredicate* predicate = [NSPredicate predicateWithFormat:@"date < %@", dateDeleteString];
+    [request setPredicate:predicate];
+    
+    BOOL ret = FALSE;
+    NSArray* result = [context executeFetchRequest:request error:&error];
+    if (result && !error && [result count] > 0) {
+        ret = TRUE;
+#ifdef DEBUG
+        NSLog(@"%s, dateDelete %@",__FUNCTION__, dateDelete);
+#endif
+        
+        for (Date *date in result) {
+            [context deleteObject:date];
+        }
+    }
+    return ret;
+}
+
 @end

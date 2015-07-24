@@ -26,17 +26,17 @@
         
         [self.contentView addSubview:_headerLabel];
         
-        NSLayoutConstraint *Leading = [NSLayoutConstraint constraintWithItem:_headerLabel attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeLeading multiplier:1.0f constant:0.0f];
-        [self.contentView addConstraint:Leading];
-        
-        NSLayoutConstraint *Trailing = [NSLayoutConstraint constraintWithItem:_headerLabel attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeTrailing multiplier:1.0f constant:0.0f];
-        [self.contentView addConstraint:Trailing];
-        
-        NSLayoutConstraint *Bottom = [NSLayoutConstraint constraintWithItem:_headerLabel attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeBottom multiplier:1.0f constant:0.0f];
-        [self.contentView addConstraint:Bottom];
-        
-        NSLayoutConstraint *Top = [NSLayoutConstraint constraintWithItem:_headerLabel attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeBottom multiplier:1.0f constant:0.0f];
-        [self.contentView addConstraint:Top];
+//        NSLayoutConstraint *Leading = [NSLayoutConstraint constraintWithItem:_headerLabel attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeLeading multiplier:1.0f constant:0.0f];
+//        [self.contentView addConstraint:Leading];
+//        
+//        NSLayoutConstraint *Trailing = [NSLayoutConstraint constraintWithItem:_headerLabel attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeTrailing multiplier:1.0f constant:0.0f];
+//        [self.contentView addConstraint:Trailing];
+//        
+//        NSLayoutConstraint *Bottom = [NSLayoutConstraint constraintWithItem:_headerLabel attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeBottom multiplier:1.0f constant:0.0f];
+//        [self.contentView addConstraint:Bottom];
+//        
+//        NSLayoutConstraint *Top = [NSLayoutConstraint constraintWithItem:_headerLabel attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeBottom multiplier:1.0f constant:0.0f];
+//        [self.contentView addConstraint:Top];
     }
     
     return self;

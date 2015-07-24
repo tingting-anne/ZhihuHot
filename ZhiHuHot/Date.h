@@ -32,4 +32,5 @@
 
 + (Date *)loadFromString:(NSString *)dateString latest:(BOOL)isLatest inManagedObjectContext:(NSManagedObjectContext *)context withLoadManagerObjectResult:(LoadManagerObjectResultType *)resultType;
 
++ (BOOL)deleteDateBeforeDays:(NSUInteger)days inManagedObjectContext:(NSManagedObjectContext *)context;
 @end

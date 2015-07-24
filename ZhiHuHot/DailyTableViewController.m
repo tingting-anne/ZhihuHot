@@ -440,12 +440,6 @@
     
     lastestSectionView = sectionHeaderView;
     latestSection = section;
-
-    if (section > 0 && section%10 == 0) {
-        for (NSManagedObject *obj in [self.managedObjectContext registeredObjects]) {
-            [self.managedObjectContext refreshObject:obj mergeChanges:NO];
-        }
-    }
     
     return sectionHeaderView;
 }
