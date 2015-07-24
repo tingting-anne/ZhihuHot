@@ -189,7 +189,7 @@
         [request setRelationshipKeyPathsForPrefetching:[NSArray arrayWithObject:@"date"]];
         
         //tell fetch request to return full objects
-        [request setReturnsObjectsAsFaults:NO];
+       // [request setReturnsObjectsAsFaults:NO];
         
         self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:self.managedObjectContext sectionNameKeyPath:@"date.date" cacheName:@"DailyCache"];
         
@@ -239,7 +239,11 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+
+    [self.managedObjectContext reset];
+    NSError* error = nil;
+    [self.fetchedResultsController performFetch:&error];
+    [self.tableView reloadData];
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -420,15 +424,9 @@
     }
 }
 
--(void)redraw
-{
-    [self.firstSectionView setNeedsDisplay];
-}
-
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     if (section == 0) {
-        [self performSelector:@selector(redraw) withObject:nil afterDelay:1.0f];
         return self.firstSectionView;
     }
     
@@ -443,6 +441,12 @@
     lastestSectionView = sectionHeaderView;
     latestSection = section;
 
+    if (section > 0 && section%10 == 0) {
+        for (NSManagedObject *obj in [self.managedObjectContext registeredObjects]) {
+            [self.managedObjectContext refreshObject:obj mergeChanges:NO];
+        }
+    }
+    
     return sectionHeaderView;
 }
 

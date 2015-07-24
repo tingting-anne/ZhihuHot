@@ -38,14 +38,9 @@
         _context = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
         _context.parentContext = [_appDelegate managedObjectContext];
         
-        static dispatch_once_t onceToken;
-        static AFHTTPSessionManager *aFHTTPSessionManager = nil;
-        dispatch_once(&onceToken, ^{
-            aFHTTPSessionManager = [AFHTTPSessionManager manager];
-            aFHTTPSessionManager.responseSerializer = [AFHTTPResponseSerializer serializer]; //告诉manager只下载原始数据, 不要解析数据
-        });
+        _smanager = [AFHTTPSessionManager manager];
+        _smanager.responseSerializer = [AFHTTPResponseSerializer serializer]; //告诉manager只下载原始数据, 不要解析数据
         
-        _smanager = aFHTTPSessionManager;
     }
     return self;
 }
@@ -55,6 +50,8 @@
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     
     NSDictionary *dict = @{@"format": @"json"};
+    
+    NetClient* __weak weakSelf = self;
     [self.smanager GET:urlString parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
         
         //主线程
@@ -65,20 +62,20 @@
         NSArray *storiesArray = storiesDictionary[@"stories"];
         NSArray *topStoriesArray = storiesDictionary[@"top_stories"];
         
-        if (topStoriescompletionHandler) {
-            topStoriescompletionHandler(topStoriesArray);
-        }
-        
-        [self.context performBlock:^{
+        [weakSelf.context performBlock:^{
             [Story loadFromArray:storiesArray withDate:dateString latest:!isToday intoManagedObjectContext:self.context];
             
             if (isToday) {
                 [TopStory loadFromArray:topStoriesArray intoManagedObjectContext:self.context];
             }
             
-            [self saveContext];
+            [weakSelf saveContext];
             
             dispatch_async(dispatch_get_main_queue(), ^{
+                if (topStoriescompletionHandler) {
+                    topStoriescompletionHandler(topStoriesArray);
+                }
+                
                 if (completionHandler) {
                     completionHandler(nil);
                 }
@@ -129,16 +126,17 @@
     NSString *urlString = [NSString stringWithFormat:@"%s", THEMES];
     
     NSDictionary *dict = @{@"format": @"json"};
+    NetClient* __weak weakSelf = self;
     [self.smanager GET:urlString parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
         
         NSData *data = responseObject;
         NSDictionary* themesDictionary = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
         NSArray *themeArray = themesDictionary[@"others"];
         
-        [self.context performBlock:^{
+        [weakSelf.context performBlock:^{
             
             [Theme loadFromArray:themeArray intoManagedObjectContext:self.context];
-            [self saveContext];
+            [weakSelf saveContext];
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 if (completionHandler) {
@@ -166,6 +164,7 @@
                            [NSNumber numberWithUnsignedLong:themeID]];
     
     NSDictionary *dict = @{@"format": @"json"};
+    NetClient* __weak weakSelf = self;
     [self.smanager GET:urlString parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
 #ifdef DEBUG
         NSLog(@"%s netclient ok", __FUNCTION__);
@@ -173,10 +172,10 @@
         NSData *data = responseObject;
         NSDictionary* themeStoriesDictionary = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
         NSArray *themeStoriesArray = themeStoriesDictionary[@"stories"];
-        [self.context performBlock:^{
+        [weakSelf.context performBlock:^{
             
             [ThemeStory loadFromArray:themeStoriesArray withThemeID:themeID intoManagedObjectContext:self.context];
-            [self saveContext];
+            [weakSelf saveContext];
 
             dispatch_async(dispatch_get_main_queue(), ^{
                 if (completionHandler) {

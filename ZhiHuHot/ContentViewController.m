@@ -152,7 +152,7 @@
 
 -(void)loadErrorWithError:(NSError *)error
 {
-    if (self.webView.loading) {
+   if ([self isViewLoaded] && [self.view window] != nil) {
         [[AppHelper shareAppHelper] showAlertViewWithError:error type:NET_DOWNLOAD_ERROR];
     }
     
@@ -200,6 +200,6 @@
 
 -(void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
 {
-    [self loadErrorWithError:error];
+    [self.activity stopAnimating];
 }
 @end

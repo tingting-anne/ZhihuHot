@@ -105,8 +105,6 @@ static AppHelper *sharesingleton=nil;
             break;
     }
     
-//    UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"ERROR", nil) message:NSLocalizedString(errorMessage, nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"CANCEL", nil)  otherButtonTitles:nil, nil];
-    
      UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(errorMessage, nil) message:[error localizedFailureReason] delegate:nil cancelButtonTitle:NSLocalizedString(@"CANCEL", nil)  otherButtonTitles:nil, nil];
     [alertView show];
 }
