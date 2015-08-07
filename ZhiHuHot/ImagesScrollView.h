@@ -19,6 +19,7 @@ typedef NS_ENUM(NSUInteger, UIPageControlShowStyle)
 @protocol ImagesScrollViewDelegate <NSObject>
 
 - (void)didSelectedNewsID:(NSNumber*)newsID;
+- (void)finishLoading;
 
 @end
 

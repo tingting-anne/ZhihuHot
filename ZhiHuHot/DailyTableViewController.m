@@ -67,6 +67,7 @@
 
 - (void)setTopStories:(NSArray*) topStories;
 - (void)didSelectedNewsID:(NSNumber*)newsID;
+- (void)finishLoading;
 
 - (void)revealController:(SWRevealViewController *)revealController didMoveToPosition:(FrontViewPosition)position;
 
@@ -400,6 +401,12 @@
     contentViewController.contentType = DAILY_STORY_CONTENT;
     contentViewController.newsID = newsID;
     [self.navigationController pushViewController:contentViewController animated:YES];
+}
+
+- (void)finishLoading
+{
+    [self.tableView reloadData];
+    //[self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationNone];
 }
 
 - (void)revealController:(SWRevealViewController *)revealController didMoveToPosition:(FrontViewPosition)position

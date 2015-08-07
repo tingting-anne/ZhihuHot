@@ -214,8 +214,7 @@ static CGFloat const chageImageTime = 5.0;//轮训时间
     _imageNameArray = imageNameArray;
     
     [_centerImageView sd_setImageWithURL:[NSURL URLWithString:_imageNameArray[currentImage%_imageNameArray.count]] placeholderImage:[UIImage imageNamed:dailyImagePlacehold] options:SDWebImageHighPriority completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-        [self.superview setNeedsDisplay];
-        
+       
         if (++loadCount >= 3) {
             [self startTimer];
         }
@@ -246,6 +245,10 @@ static CGFloat const chageImageTime = 5.0;//轮训时间
 
 -(void)startTimer
 {
+    if (self.imageScrolldelegate && [self.imageScrolldelegate respondsToSelector:@selector(finishLoading)]) {
+        [self.imageScrolldelegate finishLoading];
+    }
+    
     if(!_moveTime){
         _moveTime = [NSTimer scheduledTimerWithTimeInterval:chageImageTime target:self selector:@selector(animalMoveImage) userInfo:nil repeats:YES];
         //NSLog(@"%lf", [[_moveTime fireDate] timeIntervalSinceDate:[NSDate date]]);

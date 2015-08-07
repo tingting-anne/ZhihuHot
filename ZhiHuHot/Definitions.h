@@ -32,7 +32,7 @@ typedef enum SCROLL_DIRECTION_ENUM{
     SCROLL_DIRECTION_NUM,
 }SCROLL_DIRECTION_ENUM;
 
-#define ZHHErrorDomain @"FakeZhihuDailyDomain"
+#define ZHHErrorDomain @"ZhihuHotDomain"
 
 typedef enum : NSUInteger {
     ZHHInvalidDateString,
